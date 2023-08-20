@@ -1,0 +1,40 @@
+body {
+ background-color: silver;
+ background-image: linear-gradient(335deg, #853c01 23px, transparent 23px),
+ linear-gradient(155deg, #a55515 23px, transparent 23px),
+ linear-gradient(335deg, #853c01 23px, transparent 23px),
+ linear-gradient(155deg, #ab540f 23px, transparent 23px);
+ background-size: 58px 58px;
+ background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+}
+
+.labels {
+font-variant: small-caps;
+color: white;
+ text-shadow: 2px 2px #ab540f;
+ font-size: 20px;
+ float: left;
+}
+
+.infobox, #spielbereich {
+	border: 10px solid transparent;
+	background-color: #212529;
+ padding: 10px;
+ border-image: linear-gradient(rgb(248 249 243), rgb(140 139 135)) 1;
+ outline: 1px solid black;
+ margin-top: 30px;
+ margin-left: 10px;
+ float:left;
+}
+
+.karte{
+	height:66px;
+	width:66px;
+	background-image:url(../pics/memoryBg.png);
+	float:left;
+	margin:2px;
+}
+
+#spielbereich {
+	overflow: auto;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Einfacher Taschenrechner</title>
+		<style>
+			input, button {
+				height: 60px;
+				font-size: 40px;
+				font-family: Arial, sans-serif;
+			}
+			
+			#output {
+				height: 60px;
+				font-size: 40px;
+				font-family: Arial, sans-serif;
+			}
+			
+			#history {
+				font-size: 30px;
+				font-family: Arial, sans-serif;
+			}
+			
+			label {
+				font-size: 20px;
+				font-family: Arial, sans-serif;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<label for="in1">Erste Zahl:</label>
+		<input type="text" id="in1" ><br><br><br>
+		
+		<label for="in2">Zweite Zahl:</label>
+		<input type="text" id="in2" ><br><br><br>
+		
+		<button onclick="berechne('+')">+</button>
+		<button onclick="berechne('-')">-</button>
+		<button onclick="berechne('*')">*</button>
+		<button onclick="berechne('/')">/</button><br><br><br>
+		
+		<label> Ergebnis:</label>
+		<input type="text" id="output" readonly><br><br><br>
+		
+		<label for="history">Verlauf:</label>
+		<ul id="history"></ul>
+		
+		
+		<script src="calculator.js"></script>
+	</body>
+</html>
