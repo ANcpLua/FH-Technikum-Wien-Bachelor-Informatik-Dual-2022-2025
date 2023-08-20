@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1685888408 source:c:\users\alex_\desktop\robo fh\crawler mit klassen\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<assert.h>
+	<limits>
+	<stdexcept>
+
