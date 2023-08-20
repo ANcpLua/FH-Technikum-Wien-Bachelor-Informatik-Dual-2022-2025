@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1677095208 source:c:\users\alex_\desktop\robo fh\oasencrawler ohne klassen\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+
