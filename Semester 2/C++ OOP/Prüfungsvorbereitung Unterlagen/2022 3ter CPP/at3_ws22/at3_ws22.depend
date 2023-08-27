@@ -1,0 +1,72 @@
+# depslib dependency file v1.0
+1584209020 source:e:\work\cbp\at3_ws22\main.cpp
+	<iostream>
+
+1665943392 source:e:\work\cbp\at3_ws22\src\exam.cpp
+	"Exam.h"
+
+1665944317 e:\work\cbp\at3_ws22\include\exam.h
+	<vector>
+	"Question.h"
+
+1665948413 e:\work\cbp\at3_ws22\include\question.h
+	<string>
+
+1665948413 source:e:\work\cbp\at3_ws22\src\question.cpp
+	"Question.h"
+	<iostream>
+
+1666019831 source:c:\projekte\cpp\oos\ss22\wiederholungspruefung03\moodle\at3_ws22_example\at3_ws22_example\src\exam.cpp
+	"Exam.h"
+
+1666019928 c:\projekte\cpp\oos\ss22\wiederholungspruefung03\moodle\at3_ws22_example\at3_ws22_example\include\exam.h
+	<vector>
+	"Question.h"
+
+1666019899 c:\projekte\cpp\oos\ss22\wiederholungspruefung03\moodle\at3_ws22_example\at3_ws22_example\include\question.h
+	<string>
+
+1666019859 source:c:\projekte\cpp\oos\ss22\wiederholungspruefung03\moodle\at3_ws22_example\at3_ws22_example\main.cpp
+	<iostream>
+	"Exam.h"
+
+1668847156 source:c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\main.cpp
+	<iostream>
+	"Exam.h"
+	"SingleChoiceQuestion.h"
+	"MultipleChoiceQuestion.h"
+
+1668809436 c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\include\exam.h
+	<vector>
+	"Question.h"
+
+1668809889 c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\include\question.h
+	<iostream>
+	<vector>
+	"Answer.h"
+
+1668809948 source:c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\src\question.cpp
+	"Question.h"
+	<iostream>
+
+1668847275 source:c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\src\exam.cpp
+	"Exam.h"
+
+1668847586 source:c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\src\singlechoicequestion.cpp
+	"SingleChoiceQuestion.h"
+
+1668806451 c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\include\singlechoicequestion.h
+	"Question.h"
+
+1668965655 source:c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\src\multiplechoicequestion.cpp
+	"MultipleChoiceQuestion.h"
+
+1668806847 c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\include\multiplechoicequestion.h
+	"Question.h"
+
+1668809830 source:c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\src\answer.cpp
+	"Answer.h"
+
+1668806445 c:\users\felix\onedrive - fh technikum wien\bif\2_semester\progr\_projekte\2022-10-17_-_kommissionellepruefung\codeblocks\include\answer.h
+	<iostream>
+

@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1687985167 source:c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+	"Race.h"
+	"Rabbit.h"
+	"Turtle.h"
+
+1687988526 c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\include\race.h
+	"Animal.h"
+
+1687987688 c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\include\animal.h
+	<iostream>
+	<string>
+	<vector>
+
+1687986712 c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\include\rabbit.h
+	"Animal.h"
+
+1687987042 c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\include\turtle.h
+	"Animal.h"
+
+1687989020 source:c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\src\race.cpp
+	"Race.h"
+
+1687987158 source:c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\src\turtle.cpp
+	"Turtle.h"
+
+1687989202 source:c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\src\animal.cpp
+	"Animal.h"
+
+1687988289 source:c:\users\jasmi\onedrive\dokumente\fh technikum - lernunterlagen\2. semester\oop_prüfungsvorbereitung\codeblocks_projects\animalrace_wdh5\src\rabbit.cpp
+	"Rabbit.h"
+
