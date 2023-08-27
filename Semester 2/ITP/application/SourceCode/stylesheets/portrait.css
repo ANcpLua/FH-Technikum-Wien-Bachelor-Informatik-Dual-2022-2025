@@ -1,0 +1,63 @@
+@media only screen and (max-width: 600px) {
+  .background-img {
+    width: 90vw;
+  }
+}
+
+@media only screen and (max-width: 361px) {
+  .portrait-name {
+    font-size: calc(30px + 1.5vw) !important;
+  }
+}
+
+.background-img {
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 509px; /*really important, do not change*/
+  border-radius: 10px;
+}
+
+.bi-calculator-fill ,.bi-bank, .bi-search, .bi-rocket-takeoff, .bi-wifi {
+  color: var(--color-tertiary);
+  font-size: 1.4em;
+}
+
+.portrait-name {
+  font-family: var(--font-family-heading);
+  font-size: calc(40px + 1.5vw);
+  color: #fff;
+
+  text-align: right;
+  margin: 0 0 0 0;
+  position: relative; /*to move the font relative to its original position*/
+  top: calc(10px + max(2vw, 2vh));
+  text-transform: uppercase;
+  max-width: 500px;
+  width:90vw;
+
+}
+
+.left-side {
+  /*to move the symbol to the left and into the image*/
+  position: relative;
+  left: -1rem;
+}
+
+.right-side {
+  /*to move the symbol to the right and into the image*/
+  position: relative;
+  right: -1rem;
+}
+
+.bottom-symbols {
+  max-width: 509px;
+  color: var(--color-tertiary);
+}
+
+.symbol-container {
+  width: 100%;
+}
+
+.portrait-container{
+  margin-top:10%;
+}

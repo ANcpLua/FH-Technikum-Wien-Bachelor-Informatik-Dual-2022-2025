@@ -1,0 +1,541 @@
+.question-text,.options label 
+{
+    color: #feffff;
+}
+
+
+.single-choice-quiz-container {
+    background-color: var(--color-primary);
+    font-family: var(--font-family-text);
+    font-size: calc(10px + 1vw);
+    border: 2px solid white;
+    width: 90%;
+    max-width: 800px;
+    height: fit-content;
+    position: relative;
+    margin-bottom: 5rem;
+    margin-top:7rem;
+
+}
+
+.single-choice-question-container {
+    width: 80%;
+    margin-top: 4rem;
+    line-height: 1.5rem;
+}
+
+
+
+.single-choice-question-container input {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+.single-choice-question-container button {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-family: var(--font-family-text);
+    border-radius: 3px !important;
+    background-color: white;
+    color: var(--color-primary);
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    font-size: 1rem;
+    margin-bottom: 5%;
+    text-decoration: rgb(255, 255, 255);
+    border: none;
+}
+
+.single-choice-question-container button:hover {
+
+    background-color: var(--color-tertiary);
+}
+
+
+.question-box {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    padding-right: 2rem;
+    font-family: var(--font-family-text);
+    color: white;
+    font-size: calc(10px + 1vw);
+    margin-bottom: 5%;
+    min-height: 150px;
+    font-family: Poppins;
+    text-decoration: rgb(255, 255, 255);
+    line-height: 2rem;
+    position: relative;
+    z-index: 100;
+}
+
+
+
+
+.single-choice-question-container::before {
+    content: '';
+    display: inline-block;
+    width: 15vw;
+    height: 15vw;
+    max-width: 150px;
+    max-height: 160px;
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 100 100'><line x1='0%' y1='80' x2='65' y2='100' stroke='%236eacd8' stroke-width='2' /><line x1='100' y1='0' x2='100' y2='65' stroke='%236eacd8' stroke-width='4' /><line x1='20' y1='20' x2='70' y2='70' stroke='%236eacd8' stroke-width='2' /></svg>");
+    position: absolute;
+    background-repeat: no-repeat;
+    top: -3rem;
+    left: -3rem;
+
+
+}
+
+.single-choice-question-container::after {
+    content: "";
+    position: absolute;
+    width: calc(200px + 40vw);
+    height: calc(200px + 40vw);
+    left: 14vw;
+    top: -11vw;
+    pointer-events: none;
+
+
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='visible' viewBox='0 0 20 20'%3E%3Cg%3E%3Cpath xmlns:default='http://www.w3.org/2000/svg' d='M13.4,15.47c-0.08-0.08-0.18-0.12-0.29-0.12h-2.5c-0.23,0.01-0.41,0.19-0.42,0.42v2.5c0.01,0.23,0.19,0.41,0.42,0.42h2.5c0.23-0.01,0.41-0.19,0.42-0.42v-2.5C13.53,15.66,13.48,15.55,13.4,15.47z M16.81,9.47c0-0.58-0.15-1.15-0.43-1.65c-0.27-0.51-0.65-0.97-1.1-1.33c-0.46-0.36-0.97-0.65-1.52-0.86c-0.54-0.21-1.11-0.32-1.68-0.32C10.07,5.26,8.2,6.35,7.25,8.12C7.19,8.21,7.17,8.31,7.19,8.41c0.02,0.1,0.07,0.2,0.16,0.26l1.71,1.34c0.08,0.05,0.17,0.08,0.26,0.08c0.13,0,0.25-0.07,0.32-0.17c0.32-0.44,0.7-0.84,1.11-1.2c0.34-0.21,0.73-0.31,1.12-0.3c0.4-0.02,0.79,0.09,1.13,0.3c0.28,0.16,0.46,0.45,0.48,0.77c0.01,0.29-0.08,0.57-0.26,0.79c-0.25,0.25-0.54,0.45-0.87,0.58c-0.57,0.27-1.07,0.66-1.48,1.15c-0.42,0.44-0.67,1.02-0.68,1.63v0.47c0,0.14,0.04,0.27,0.11,0.39c0.05,0.11,0.15,0.18,0.27,0.19h2.5c0.12,0,0.23-0.06,0.29-0.16c0.08-0.1,0.12-0.22,0.12-0.34c0.03-0.26,0.13-0.5,0.29-0.7c0.18-0.28,0.42-0.52,0.71-0.68l0.64-0.37c0.21-0.14,0.41-0.29,0.6-0.45c0.22-0.18,0.41-0.39,0.57-0.62c0.35-0.56,0.53-1.2,0.53-1.85l0,0L16.81,9.46z' style='fill: rgb(110, 172, 216);'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+}
+
+
+.single-choice-answer-container {
+    display: none;
+    background-color: var(--color-primary);
+    font-family: var(--font-family-text);
+    font-size: calc(10px + 1vw);
+    border: 2px solid white;
+    width: 90%;
+    max-width: 800px;
+    height: fit-content;
+    position: relative;
+    margin-bottom: 5rem;
+    min-height: 150px;
+}
+
+
+/* blockt display bis antwort kommmt Modul 1  */
+
+.single-choice-answer-container.show {  
+    display: block;
+}
+
+
+
+.single-choice-answer-deco {
+    content: '';
+    display: inline-block;
+    width: 15vw;
+    height: 15vw;
+    max-width: 150px;
+    max-height: 160px;
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 100 100'><line x1='0%' y1='80' x2='65' y2='100' stroke='%236eacd8' stroke-width='2' /><line x1='100' y1='0' x2='100' y2='65' stroke='%236eacd8' stroke-width='4' /><line x1='20' y1='20' x2='70' y2='70' stroke='%236eacd8' stroke-width='2' /></svg>");
+    position: absolute;
+    background-repeat: no-repeat;
+    top: -7rem;
+    left: 11rem;
+    transform: rotate(90deg);
+    transform-origin: center;
+}
+
+.single-choice-answer-text {
+    margin-left: 10%;
+    margin-top: 7%;
+    font-size: 120%;
+}
+
+.single-choice-explanation {
+    font-size: calc(8px + 1vw);
+    padding: 3%;
+    font-family: var(--font-family-text);
+}
+
+
+
+@media only screen and (max-width: 1280px) {
+
+    .single-choice-question-container::after,
+    .single-choice-answer-deco {
+        left: 19vw;
+        top: -18vw;
+    }
+
+
+}
+
+@media only screen and (max-width: 1120px) {
+    .single-choice-question-container::after {
+        left: 22vw;
+        top: -20vw;
+    }
+
+    .single-choice-answer-deco {
+        top: -7rem  !important;
+        left: 11rem !important;
+    }
+
+}
+
+@media only screen and (max-width: 760px) {
+    .single-choice-question-container::after {
+        left: 16vw;
+        top: -27vw;
+    }
+
+    .question-box {
+        line-height: 1.5rem;
+    }
+
+    .single-choice-answer-deco {
+        top: -5rem  !important;
+        left: 8rem !important;
+    }
+
+}
+@media only screen and (max-width: 651px) {
+    .single-choice-question-container::before {
+        top: -2rem;
+        left: -2rem;
+    }
+
+    .single-choice-question-container::after {
+        left: 6vw;
+        top: -31vw;
+    }
+
+}
+
+
+@media only screen and (max-width: 580px) {
+    .single-choice-question-container::after {
+        left: 8vw;
+        top: -36vw;
+        width: 600px;
+
+    }
+    .single-choice-answer-deco {
+        top: -4rem  !important;
+        left: 6rem !important;
+    }
+
+}
+
+@media only screen and (max-width: 520px) {
+    .single-choice-question-container::after {
+        left: 8vw;
+        top: -38vw;
+        width: 550px;
+
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .single-choice-question-container::after {
+        left: 8vw;
+        top: -38vw;
+        width: 500px;
+
+    }
+    .single-choice-answer-deco {
+        top: -3rem  !important;
+        left: 6rem !important;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 420px) {
+    .single-choice-question-container::before {
+        top: -1rem;
+        left: -1rem;
+
+    }
+
+    .single-choice-question-container::after {
+        left: 8vw;
+        top: -36vw;
+        width: 400px;
+    }
+    .single-choice-answer-deco {
+        top: -3rem  !important;
+        left: 6rem !important;
+    }
+
+
+
+}
+
+
+.multiple-choice-quiz-container {
+    background-color: var(--color-primary);
+    font-family: var(--font-family-text);
+    font-size: calc(10px + 1vw);
+    border: 2px solid white;
+    width: 90%;
+    max-width: 800px;
+    height: fit-content;
+    position: relative;
+    margin-bottom: 5rem;
+    z-index: 5;
+
+}
+
+.multiple-choice-question-container {
+    width: 80%;
+    margin-top: 4rem;
+    line-height: 1.5rem;
+   
+}
+
+
+
+.multiple-choice-question-container input {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    z-index: 50;
+
+}
+
+.multiple-choice-question-container button {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-family: var(--font-family-text);
+    border-radius: 3px !important;
+    background-color: white;
+    color: var(--color-primary);
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    font-size: 1rem;
+    margin-bottom: 5%;
+    text-decoration: rgb(255, 255, 255);
+    border: none;
+    z-index: 50;
+}
+
+.multiple-choice-question-container button:hover {
+
+    background-color: var(--color-tertiary);
+}
+
+
+
+.multiple-choice-question-container::before {
+    content: '';
+    display: inline-block;
+    width: 15vw;
+    height: 15vw;
+    max-width: 150px;
+    max-height: 160px;
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 100 100'><line x1='0%' y1='80' x2='65' y2='100' stroke='%236eacd8' stroke-width='2' /><line x1='100' y1='0' x2='100' y2='65' stroke='%236eacd8' stroke-width='4' /><line x1='20' y1='20' x2='70' y2='70' stroke='%236eacd8' stroke-width='2' /></svg>");
+    position: absolute;
+    background-repeat: no-repeat;
+    top: -3rem;
+    left: -3rem;
+
+
+}
+
+.multiple-choice-question-container::after {
+    content: "";
+    position: absolute;
+    width: calc(200px + 40vw);
+    height: calc(200px + 40vw);
+    left: 14vw;
+    top: -11vw;
+    pointer-events: none;
+    z-index: -1;
+
+
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='visible' viewBox='0 0 20 20'%3E%3Cg%3E%3Cpath xmlns:default='http://www.w3.org/2000/svg' d='M13.4,15.47c-0.08-0.08-0.18-0.12-0.29-0.12h-2.5c-0.23,0.01-0.41,0.19-0.42,0.42v2.5c0.01,0.23,0.19,0.41,0.42,0.42h2.5c0.23-0.01,0.41-0.19,0.42-0.42v-2.5C13.53,15.66,13.48,15.55,13.4,15.47z M16.81,9.47c0-0.58-0.15-1.15-0.43-1.65c-0.27-0.51-0.65-0.97-1.1-1.33c-0.46-0.36-0.97-0.65-1.52-0.86c-0.54-0.21-1.11-0.32-1.68-0.32C10.07,5.26,8.2,6.35,7.25,8.12C7.19,8.21,7.17,8.31,7.19,8.41c0.02,0.1,0.07,0.2,0.16,0.26l1.71,1.34c0.08,0.05,0.17,0.08,0.26,0.08c0.13,0,0.25-0.07,0.32-0.17c0.32-0.44,0.7-0.84,1.11-1.2c0.34-0.21,0.73-0.31,1.12-0.3c0.4-0.02,0.79,0.09,1.13,0.3c0.28,0.16,0.46,0.45,0.48,0.77c0.01,0.29-0.08,0.57-0.26,0.79c-0.25,0.25-0.54,0.45-0.87,0.58c-0.57,0.27-1.07,0.66-1.48,1.15c-0.42,0.44-0.67,1.02-0.68,1.63v0.47c0,0.14,0.04,0.27,0.11,0.39c0.05,0.11,0.15,0.18,0.27,0.19h2.5c0.12,0,0.23-0.06,0.29-0.16c0.08-0.1,0.12-0.22,0.12-0.34c0.03-0.26,0.13-0.5,0.29-0.7c0.18-0.28,0.42-0.52,0.71-0.68l0.64-0.37c0.21-0.14,0.41-0.29,0.6-0.45c0.22-0.18,0.41-0.39,0.57-0.62c0.35-0.56,0.53-1.2,0.53-1.85l0,0L16.81,9.46z' style='fill: rgb(110, 172, 216);'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+}
+
+
+
+
+.multiple-choice-answer-container {
+    display: none;
+    background-color: var(--color-primary);
+    font-family: var(--font-family-text);
+    font-size: calc(10px + 1vw);
+    border: 2px solid white;
+    width: 90%;
+    max-width: 800px;
+    height: fit-content;
+    position: relative;
+    margin-bottom: 5rem;
+    min-height: 150px;
+}
+
+
+
+.multiple-choice-answer-deco {
+    content: '';
+    display: inline-block;
+    width: 15vw;
+    height: 15vw;
+    max-width: 150px;
+    max-height: 160px;
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 100 100'><line x1='0%' y1='80' x2='65' y2='100' stroke='%236eacd8' stroke-width='2' /><line x1='100' y1='0' x2='100' y2='65' stroke='%236eacd8' stroke-width='4' /><line x1='20' y1='20' x2='70' y2='70' stroke='%236eacd8' stroke-width='2' /></svg>");
+    position: absolute;
+    background-repeat: no-repeat;
+    top: -7rem;
+    left: 11rem;
+    transform: rotate(90deg);
+    transform-origin: center;
+}
+
+
+.multiple-choice-answer-text {
+    margin-left: 10%;
+    margin-top: 7%;
+    font-size: 120%;
+}
+
+
+.multiple-choice-explanation {
+    font-size: calc(8px + 1vw);
+    padding: 3%;
+    font-family: var(--font-family-text);
+}
+
+.multiple-choice-explanation {
+    font-size: calc(8px + 1vw);
+    padding: 3%;
+    font-family: var(--font-family-text);
+}
+
+
+.multiple-choice-answer-container.show {
+    display: block;
+}
+
+.multiple-choice-answer-container-2.show {
+    display: block;
+}
+
+
+@media only screen and (max-width: 1280px) {
+
+    .multiple-choice-question-container::after,
+    .multiple-choice-answer-deco {
+        left: 19vw;
+        top: -18vw;
+    }
+
+
+}
+
+@media only screen and (max-width: 1120px) {
+    .multiple-choice-question-container::after {
+        left: 22vw;
+        top: -20vw;
+    }
+
+    .multiple-choice-answer-deco {
+        top: -7rem  !important;
+        left: 11rem !important;
+    }
+
+}
+
+@media only screen and (max-width: 760px) {
+    .multiple-choice-question-container::after {
+        left: 16vw;
+        top: -27vw;
+    }
+
+    .question-box {
+        line-height: 1.5rem;
+        
+    }
+
+    .multiple-choice-answer-deco {
+        top: -5rem  !important;
+        left: 8rem !important;
+    }
+
+}
+@media only screen and (max-width: 651px) {
+    .multiple-choice-question-container::before {
+        top: -2rem;
+        left: -2rem;
+    }
+
+    .multiple-choice-question-container::after {
+        left: 6vw;
+        top: -31vw;
+    }
+
+}
+
+
+@media only screen and (max-width: 580px) {
+    .multiple-choice-question-container::after {
+        left: 8vw;
+        top: -36vw;
+        width: 600px;
+
+    }
+    .multiple-choice-answer-deco {
+        top: -4rem  !important;
+        left: 6rem !important;
+    }
+
+}
+
+@media only screen and (max-width: 520px) {
+    .multiple-choice-question-container::after {
+        left: 8vw;
+        top: -38vw;
+        width: 550px;
+
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .multiple-choice-question-container::after {
+        left: 8vw;
+        top: -38vw;
+        width: 500px;
+
+    }
+    .multiple-choice-answer-deco {
+        top: -3rem  !important;
+        left: 6rem !important;
+    }
+
+}
+
+
+@media only screen and (max-width: 420px) {
+    .multiple-choice-question-container::before {
+        top: -1rem;
+        left: -1rem;
+
+    }
+
+    .multiple-choice-question-container::after {
+        left: 8vw;
+        top: -36vw;
+        width: 400px;
+    }
+    .multiple-choice-answer-deco {
+        top: -3rem  !important;
+        left: 6rem !important;
+    }
+
+
+
+}

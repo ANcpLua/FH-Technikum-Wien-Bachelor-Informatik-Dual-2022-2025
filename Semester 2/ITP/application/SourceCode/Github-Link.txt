@@ -1,0 +1,4 @@
+# Privates github repository
+https://github.com/panda-lambda/pionierinnen.git
+
+# FH gitlab repository

@@ -1,0 +1,24 @@
+nav {
+    background-color: var(--color-tertiary);
+    color: var(--color-secondary);
+    font-family: var(--font-family-text);
+}
+
+.nav-link,
+.navbar-nav .nav-link.active, .navbar-nav .show > .nav-link {
+    color: var(--color-secondary);
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .show > .nav-link {
+    font-weight: 501;
+}
+
+#navbar.navbar-scroll-hide {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+#navbar.navbar-scroll-show {
+    transform: translateY(0%);
+    transition: transform 0.3s ease-in-out;
+}

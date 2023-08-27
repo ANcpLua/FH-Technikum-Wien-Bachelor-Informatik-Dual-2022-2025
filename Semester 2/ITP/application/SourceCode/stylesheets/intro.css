@@ -1,0 +1,82 @@
+.container-intro {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.intro-heading {
+  font-family: var(--font-family-heading);
+  width: 85%;
+  font-size: calc(40px + 3vw);
+
+  text-decoration: white;
+
+
+  max-width: 90%;
+  display: inline-block;
+  margin-left: 5%;
+
+}
+
+.intro-lead {
+  color: white;
+  font-size: min(calc(13px + 0.75vw), 25px);
+  font-family: var(--font-family-text);
+  margin: 10% 5% 15% 5%;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 85vw;
+}
+
+.intro-scroll {
+  color: var(--color-primary);
+  font-family: var(--font-family-text);
+  font-size: calc(13px + 0.75vw);
+  max-width: 90vw;
+  padding-top: 10%;
+
+}
+
+
+.intro-deco {
+  /*margin-bottom:-7%;
+      margin-left:-60%;*/
+  display: inline-block;
+  position: relative;
+  top: -10%;
+  left: -20%;
+}
+
+.heading-intro-container {
+  white-space: nowrap;
+  padding-bottom: 3rem;
+}
+
+.intro-pion {
+  display: inline-block;
+  position: relative;
+  right: min(10vw, 60px);
+}
+
+
+
+.intro-pion::before {
+  content: '';
+  display: inline-block;
+  width: 15vw;
+  height: 15vw;
+  max-width: 150px;
+  max-height: 160px;
+  background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 100 100'><line x1='0%' y1='80' x2='65' y2='100' stroke='%236eacd8' stroke-width='2' /><line x1='100' y1='0' x2='100' y2='65' stroke='%236eacd8' stroke-width='4' /><line x1='20' y1='20' x2='70' y2='70' stroke='%236eacd8' stroke-width='2' /></svg>");
+  position: relative;
+  background-repeat: no-repeat;
+  bottom: 1rem;
+  left: 1rem;
+
+}
+
+.intro-symbols {
+  max-width: 509px;
+  margin-right: 15%;
+  color: var(--color-tertiary);
+  padding-bottom: 10%;
+}

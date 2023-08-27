@@ -1,0 +1,166 @@
+.textbox {
+  border-left:2px solid var(--color-primary);
+  margin-top: 3em;
+  margin-bottom: 5em;
+  width:90%;
+  max-width:700px;
+  padding-top:5%;
+}
+
+.textbox-text-bg {
+  font-family: var(--font-family-text);
+  font-size: calc(8px + 1.5vw);
+  color: #ffffff;
+  position: relative; /*to move the font relative to its original position*/
+  margin: 0 0 0 0;
+  padding-bottom:5%;
+}
+
+.textbox-bg-img-ada {
+  position: relative; 
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* pseudo-class to adjust opacity for image but not for text */
+.textbox-bg-img-ada::before {    
+    content: "";
+    background-image: url('../images/ada_lovelace.png');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.2;
+    border-radius:5%;
+}
+
+.textbox-bg-img-grace {
+  position: relative; 
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* pseudo-class to adjust opacity for image but not for text */
+.textbox-bg-img-grace::before {    
+  content: "";
+  background-image: url('../images/p2.png');
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.2;
+  border-radius:5%;
+}
+
+.textbox-bg-img-karen {
+  position: relative; 
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* pseudo-class to adjust opacity for image but not for text */
+.textbox-bg-img-karen::before {    
+  content: "";
+  background-image: url('../images/karen.png');
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.2;
+  border-radius:5%;
+}
+
+
+.textbox-bg-img-radia {
+  position: relative; 
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* pseudo-class to adjust opacity for image but not for text */
+.textbox-bg-img-radia::before {    
+  content: "";
+  background-image: url('../images/p3.png');
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.2;
+  border-radius:5%;
+}
+
+.textbox-bg-img-radia2 {
+  position: relative; 
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* pseudo-class2 to adjust opacity for image but not for text */ 
+.textbox-bg-img-radia2::before {    
+  content: "";
+  background-image: url('../images/p3-3.png');
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.2;
+  border-radius:5%;
+}
+
+
+
+
+
+/* pseudo-class to adjust opacity for image but not for text */
+.textbox-bg-img-5 {
+  position: relative; 
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textbox-bg-img-5::before {    
+  content: "";
+  background-image: url('../images/5.png');
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.2;
+  border-radius:5%;
+}
+
+.quote-box{
+  font-family: var(--font-family-text);
+  font-size: calc(13px + 1.5vw) !important;
+  padding:2rem;
+}

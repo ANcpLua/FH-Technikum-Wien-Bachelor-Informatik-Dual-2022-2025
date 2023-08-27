@@ -1,0 +1,33 @@
+.arrow-left {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    fill: var(--color-tertiary);
+}
+
+.left-arrow-text {
+    color: var(--color-tertiary);
+    font-family: var(--font-family-text);
+    transform: rotate(-20deg);
+    position: relative;
+    bottom: 3rem;
+    font-size: 1.2rem
+}
+
+@media only screen and (max-width: 767px) {
+    .arrow-left {
+        transform: translate(-50%, 80%) scale(-1, 1) rotate(40deg);
+    }
+
+    .left-arrow-text {
+        bottom: 2rem;
+        width: 70%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .arrow-left {
+        transform: translate(-50%, 60%) scale(-1, 1) rotate(40deg);
+    }
+}

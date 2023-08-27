@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<!-- Template taken from https://getbootstrap.com/docs/4.0/getting-started/introduction/ -->
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap Icons CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- General CSS-->
+    <link rel="stylesheet" href="./stylesheets/changing-bootstrap.css" />
+    <link rel="stylesheet" href="./stylesheets/generalCss.css" />
+    <link rel="stylesheet" href="./stylesheets/animations.css" />
+    <!-- Navbar CSS-->
+    <link rel="stylesheet" href="./stylesheets/navbar.css" />
+    <!--Intro CSS-->
+    <link rel="stylesheet" href="./stylesheets/intro.css" />
+    <!-- Portrait CSS-->
+    <link rel="stylesheet" href="./stylesheets/portrait.css" />
+    <!--Quiz CSS-->
+    <link rel="stylesheet" href="./stylesheets/modul1Quiz.css" />
+    <link rel="stylesheet" href="./stylesheets/modul2Quiz.css" />
+    <link rel="stylesheet" href="./stylesheets/modul3Quiz.css" />
+    <link rel="stylesheet" href="./stylesheets/modul4Quiz.css" />
+    <link rel="stylesheet" href="./stylesheets/modul5Quiz.css" />
+    <!-- Single Image CSS-->
+    <link rel="stylesheet" href="./stylesheets/single-image.css" />
+    <!-- Textbox CSS -->
+    <link rel="stylesheet" href="./stylesheets/textbox.css" />
+    <!--Intro-Animations CSS-->
+    <link rel="stylesheet" href="./stylesheets/intro-animations.css" />
+    <!--Code example CSS-->
+    <link rel="stylesheet" href="./stylesheets/code-example.css" />
+    <!-- Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,900;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Title-->
+    <title>Pionierinnen</title>
+  </head>
+
+  <body id="top">
+    <!-- Navebar taken from https://getbootstrap.com/docs/5.2/components/navbar/ -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler order-first"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#top"
+                >Start</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#modul1">Ada Lovelace</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#modul2">Grace Hopper</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#modul3">Karen Späck Jones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#modul4">Radia Perlman</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#modul5">Katherine Johnson</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#quellen" class="nav-link">Referenzquellen</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Einleitungstext für ganz am Anfang-->
+    <div
+      class="container container-intro col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5"
+    >
+      <div class="col heading-intro-container mx-auto">
+        <h1 class="text-white intro-heading text-center mb-0">
+          <div class="intro-pion">Pionierinnen</div>
+          <br /><span>der Informatik</span>
+        </h1>
+      </div>
+
+      <p class="text-white intro-lead typewriter">
+        Wie ist das erste Computerprogramm entstanden? Welche Programmiersprache
+        benutzen Banken? Wie können im Internet Daten ohne Stau transportiert
+        werden? Antworten auf diese Fragen holen wenig bekannte Pionierinnen der
+        Informatik aus dem Schatten der Geschichte und zeigen den Bezug zu
+        heutigen Anwendungen. Hast du heute schon etwas benutzt, was von diesen
+        Pionierinnen entwickelt wurde?
+        <span class="intro-delay">Finde es jetzt heraus!</span>
+      </p>
+
+      <p class="cta-delay intro-scroll col-md-6 text-center mx-auto">
+        Scrolle, um dich durch<br />
+        die Stories zu bewegen.
+      </p>
+      <div class="col-md-8 mx-auto">
+        <div class="intro-symbols text-center mb-5">
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <div class="row bottom-symbols"></div>
+          <i class="bi bi-chevron-double-down ms-2"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+          <i class="bi bi-chevron-double-down"></i>
+        </div>
+      </div>
+    </div>
+    <!-- Ende Einleitungstext-->
+
+    <p style="margin-top: 800px"></p>
+
+    <!-- Modul 1-->
+    <!--portrait Ada Lovelace-->
+    <div
+      class="container col-lg-8 col-s-10 col-xxl-4 col-xl-6 col-xs-12"
+      id="modul1"
+    >
+      <div class="row">
+        <h1 class="heading-secondary mb-0 left-rotate-hidden">
+          Triff die erste Programmiererin der Welt!
+        </h1>
+        <div class="rotateY-hidden">
+          <p class="portrait-name mx-auto">Ada Lovelace</p>
+          <!--image needs to be inline, so we can change it without changing the class background-img -->
+          <div
+            class="d-flex mx-auto background-img"
+            style="background-image: url('images/ada_lovelace.png')"
+          >
+            <div class="d-flex flex-column symbol-container">
+              <!-- idea is we have 3 columns, first the left side line,
+                          then an empty container, followed by the right side line-->
+              <div class="d-flex flex-column left-side">
+                <i class="bi bi-calculator-fill bi-sm"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+              </div>
+              <div class="empty-container"></div>
+              <div class="d-flex flex-column align-items-end right-side">
+                <i class="bi bi-calculator-fill bi-sm"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+                <i class="bi bi-calculator-fill"></i>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-symbols mx-auto">
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <div class="row bottom-symbols"></div>
+            <i class="bi bi-chevron-double-down ms-2"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of the portrait code-->
+    <!-- textbox 1-->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10 mt-5">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-ada text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Als Ada Lovelace lebte (1815 - 1852), gab es keine Computer,
+                trotzdem hat sie damals schon Programme erstellt. Gemeinsam mit
+                ihrem Mentor Charles Babbage hat Ada Lovelace an der Analytical
+                Engine, einer mechanischen Rechenmaschine, gearbeitet.<br /><br />
+                Für Babbage war das eine Maschine, die Rechenaufgaben
+                durchführen konnte. Lovelace sah aber damals schon, dass die
+                Möglichkeiten mit entsprechender Programmierung vielfältiger
+                sind. So wollte sie zum Beispiel damit Musik komponieren. Ihre
+                Gedanken dazu waren damals visionär, auch wenn die Analytical
+                Engine nie fertig gebaut wurde.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+    <!--single image 1-->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row justify-content-center" style="background-color: dsf">
+        <div class="col-md-5 col-sm-10 fade-in-hidden">
+          <img
+            class="img-fluid mx-auto d-block rounded"
+            style="min-height: 3em"
+            src="images/analytical_engine.jpg"
+            alt="analytical engine"
+          />
+        </div>
+        <div
+          class="col-md-4 col-sm-10 col-s-10 mt-1 svg-container right-slide-hidden"
+        >
+          <svg
+            class="arrow-left"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="m 21.2908 34.8603 s 74.1802 6.1787 111.9052 51.2848 a 3.549 2.1 75 0 0 -0.7948 0.5644 c -35.8766 -38.598 -87.4652 -46.8286 -110.8816 -50.687 m 0.0074 -0.013 l 4.8643 4.4549 c 1.2853 1.0771 1.0739 1.7762 -0.3685 0.8483 l -5.6906 -5.7216 l 4.2732 -5.0408 c 1.0472 -1.248 2.5857 -0.7698 1.0113 0.2864 l -4.2029 4.6078"
+            ></path>
+          </svg>
+          <p class="left-arrow-text">
+            so sieht die Analytical Engine aus - zumindest ein Teil von ihr.
+          </p>
+        </div>
+      </div>
+      <div class="container"></div>
+    </div>
+    <!--end of single image code-->
+
+    <p style="margin-top: 500px"></p>
+
+    <!-- Single Choice Layout -->
+    <div
+      class="container single-choice-quiz-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+
+        <div class="single-choice-question-container mx-auto col-md-6">
+          <!-- First question -->
+
+          <div id="single-choice-question ">
+            <div class="options">
+              <p class="text-white question-box">
+                Ada Lovelace wollte Programme schaffen, die zum Beispiel
+                selbstständig Musik komponieren. Heute gibt es solche Programme,
+                sie können auch Texte schreiben oder Bilder aus Text erstellen.
+                Was kommt dabei zum Einsatz?
+              </p>
+
+              <div>
+                <input
+                  type="radio"
+                  id="option1Single"
+                  name="single-choice"
+                  value="option1"
+                />
+                <label for="option1Single">Künstliche Intelligenz.</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="option2Single"
+                  name="single-choice"
+                  value="option2"
+                />
+                <label for="option2Single">Maschinelles Lernen.</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="option3Single"
+                  name="single-choice"
+                  value="option3"
+                />
+                <label for="option3Single">Algorithmen.</label>
+              </div>
+            </div>
+            <!-- single choice 1 button -->
+
+            <button id="submit-single-choice-1" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of single Choice Layout-->
+    <!-- single choice answer layout-->
+    <div
+      class="container single-choice-answer-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="single-choice-answer-deco mx-auto col-md-6"></div>
+        <div class="text-white single-choice-answer-text">Falsch!</div>
+        <div class="my-3 text-white single-choice-explanation">
+          <!-- reasoning ins js schreiben wegen quellentex -->
+        </div>
+      </div>
+    </div>
+    <!-- end of single choice answer layout-->
+
+    <p style="margin-top: 300px"></p>
+
+    <!-- textbox 2 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-ada text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Ein Algorithmus erklärt dem Computer, was zu tun ist – ähnlich
+                wie ein Kochrezept. Während mit einem Kochrezept Schritt für
+                Schritt leckeres Essen zubereitet wird, löst ein Algorithmus
+                unterschiedliche Probleme.
+                <br /><br />
+                Das Rezept benutzt Methoden wie braten, grillen oder kochen. Der
+                Computer ist nicht unbedingt auf grillen oder kochen
+                spezialisiert, stattdessen kann er Methoden wie sortieren,
+                suchen oder zählen verwenden. Natürlich benötigt er auch
+                Zutaten: Zum Beispiel Zahlen, Buchstaben, aber auch Farben,
+                Bilder oder Töne.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+    <!--single image 2-->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10 mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-8 fade-in-hidden">
+          <img
+            class="img-fluid mx-auto d-block rounded"
+            style="min-height: 5em"
+            src="images/code.jpg"
+            alt="simple code"
+          />
+        </div>
+        <div
+          class="col-md-4 col-sm-10 col-s-10 mt-1 svg-container right-slide-hidden"
+        >
+          <svg
+            class="arrow-left"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="m 21.2908 34.8603 s 74.1802 6.1787 111.9052 51.2848 a 3.549 2.1 75 0 0 -0.7948 0.5644 c -35.8766 -38.598 -87.4652 -46.8286 -110.8816 -50.687 m 0.0074 -0.013 l 4.8643 4.4549 c 1.2853 1.0771 1.0739 1.7762 -0.3685 0.8483 l -5.6906 -5.7216 l 4.2732 -5.0408 c 1.0472 -1.248 2.5857 -0.7698 1.0113 0.2864 l -4.2029 4.6078"
+            ></path>
+          </svg>
+          <p class="left-arrow-text">
+            ein einfaches Programm, das mit einem Algorithmus die Zahlen 1 bis 5
+            addiert.
+          </p>
+        </div>
+      </div>
+      <div class="container"></div>
+    </div>
+    <!--end of single image code-->
+    <!-- interactive code example-->
+    <div
+      class="container code-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded pt-5"
+    >
+      <div class="col mx-auto inner-code-container text-center">
+        <p>
+          Und kennst du das Ergebnis? Falls nicht, kannst du es hier
+          ausprobieren:
+        </p>
+        <label class="pb-3" for="numberInput"
+          >Gib eine Zahl ein (max 100):</label
+        >
+        <input type="number" id="numberInput" max="100" value="5" /><br />
+        <button class="btn btn-primary" onclick="calculateSum()">Los</button>
+        <p class="pt-5" id="result"></p>
+        <div class="col mx-auto position-relative"></div>
+      </div>
+    </div>
+    <!-- end of interactive code example-->
+    <!-- Single Choice Box -->
+    <div
+      class="container single-choice-quiz-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded mb-5 rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+
+        <div class="single-choice-question-container mx-auto col-md-6">
+          <!-- First question -->
+
+          <div id="single-choice-question ">
+            <div class="options">
+              <p class="text-white question-box">
+                Fallen dir Probleme ein, die du gerne mit Hilfe eines
+                Computerprogramms lösen würdest?<br /><br />
+                Schreib deine Idee(n) auf und diskutiere mit deinen
+                Mitschüler*innen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end single choice box -->
+
+    <p style="margin-top: 500px"></p>
+
+    <!-- textbox 3 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-ada text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Vor fast 200 Jahren hat Ada Lovelace das erste Mal einen
+                Algorithmus in einem Computerprogramm niedergeschrieben und hat
+                die vielfältigen Einsatzmöglichkeiten erkannt.<br /><br />
+                Und: Sie sollte recht behalten. Heute, fast 200 Jahre später,
+                begegnen uns Computerprogramme und Algorithmen fast überall. Oft
+                auch dort, wo wir es nicht vermuten würden.
+
+                <br /><br />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+    <!-- Multiple Choice Layout -->
+
+    <div
+      class="container multiple-choice-quiz-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Multiple Choice Box -->
+
+        <div class="multiple-choice-question-container mx-auto col-md-6">
+          <!-- First question -->
+
+          <div id="multiple-choice-question ">
+            <div class="options">
+              <p class="text-white question-box">
+                Was meinst du, bei welchen dieser Alltagssituationen kommen
+                Algorithmen zum Einsatz?
+              </p>
+              <div>
+                <input
+                  type="checkbox"
+                  id="option1Multi"
+                  name="multiple-choice"
+                  value="option1"
+                />
+                <label for="option1Multi">Beim TikTok-Feed.</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="option2Multi"
+                  name="multiple-choice"
+                  value="option2"
+                />
+                <label for="option2Multi">Beim Entstehen von Wolken.</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="option3Multi"
+                  name="multiple-choice"
+                  value="option3"
+                />
+                <label for="option3Multi">Bei Ampeln.</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="option4Multi"
+                  name="multiple-choice"
+                  value="option4"
+                />
+                <label for="option4Multi">Beim Abheben am Bankomat.</label>
+              </div>
+            </div>
+            <!-- multiple choice 1 button -->
+            <button id="submit-multiple-choice-1" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of Multiple Choice Layout-->
+    <!-- Multiple choice answer layout-->
+    <div
+      class="container multiple-choice-answer-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="multiple-choice-answer-deco mx-auto col-md-6"></div>
+        <div class="text-white multiple-choice-answer-text">Falsch!</div>
+        <div class="my-3 text-white multiple-choice-explanation">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+    <!-- end of multiplechoice answer layout-->
+
+    <p style="margin-top: 500px"></p>
+
+    <!-- end of Module 1 quiz-->
+    <!-- Modul 2 Grace Hopper -->
+    <!--portrait-->
+    <div
+      class="container col-lg-8 col-s-10 col-xxl-4 col-xl-6 col-xs-12"
+      id="modul2"
+    >
+      <div class="row">
+        <h1 class="heading-secondary mb-0 left-rotate-hidden">
+          Erfinderin des ersten Compilers
+        </h1>
+        <div class="rotateY-hidden">
+          <p class="portrait-name mx-auto">Grace Hopper</p>
+          <!--image needs to be inline, so we can change it without changing the class background-img -->
+          <div
+            class="d-flex mx-auto background-img"
+            style="background-image: url('images/p2.png')"
+          >
+            <div class="d-flex flex-column symbol-container">
+              <!-- idea is we have 3 columns, first the left side line,
+                          then an empty container, followed by the right side line-->
+              <div class="d-flex flex-column left-side">
+                <i class="bi bi-bank bi-sm"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+              </div>
+              <div class="empty-container"></div>
+              <div class="d-flex flex-column align-items-end right-side">
+                <i class="bi bi-bank bi-sm"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+                <i class="bi bi-bank"></i>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-symbols mx-auto">
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <div class="row bottom-symbols"></div>
+            <i class="bi bi-chevron-double-down ms-2"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of the portrait code-->
+    <!-- textbox 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-grace text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Grace Hopper war eine außergewöhnliche Informatikerin und United
+                States Navy-Offizierin, die in der Welt der Computer eine
+                entscheidende Rolle spielte. Geboren im Jahr 1906, legte sie den
+                Grundstein für die moderne Computerprogrammierung und schuf
+                einige der wichtigsten Technologien, die heute noch verwendet
+                werden.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 100px"></p>
+
+    <!-- Single Choice Layout -->
+    <div
+      class="container single-choice-quiz-container-2 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+        <div class="single-choice-question-container-2 mx-auto col-md-6">
+          <!-- Second question -->
+          <div id="single-choice-question-2">
+            <div class="options-2">
+              <p class="text-white question-box-2">
+                So nennt man Grace Hopper auch „Grandma COBOL“,
+                weil sie wesentlich zur Entwicklung dieser Programmiersprache
+                beigetragen hat. Was denkst du, in welchem alltäglichen Gerät
+                finden wir diese Sprache noch heute?
+              </p>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="option1Single2"
+                  name="single-choice-2"
+                  value="option1"
+                />
+                <label for="option1Single2">
+                  In Bankautomaten für Transaktionen.</label
+                >
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="option2Single2"
+                  name="single-choice-2"
+                  value="option2"
+                />
+                <label for="option2Single2">
+                  In Digitalkameras zur Bildverarbeitung.
+                </label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="option3Single2"
+                  name="single-choice-2"
+                  value="option3"
+                />
+                <label for="option3Single2">
+                  In Mobiltelefonen zur Spracherkennung.
+                </label>
+              </div>
+            </div>
+            <!-- single choice 2 button -->
+            <button id="submit-single-choice-2" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of single Choice Layout-->
+    <!-- single choice answer layout-->
+    <div
+      class="container single-choice-answer-container-2 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="single-choice-answer-deco-2 mx-auto col-md-6"></div>
+        <div class="text-white single-choice-answer-text-2">Falsch!</div>
+        <div class="my-3 text-white single-choice-explanation-2">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+    <!-- end of single choice answer layout-->
+
+    <p style="margin-top: 100px"></p>
+    <!-- textbox 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-grace text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Bevor Grace Hopper den Compiler erfand, mussten
+                Programmierer*innen komplizierte Anweisungen in Maschinensprache
+                schreiben, die für die meisten Menschen schwer zu lesen und zu
+                verstehen ist. Mit dem Compiler wurde es viel einfacher,
+                Computerprogramme zu schreiben, da Programmierer*innen nun in
+                einer menschenverständlichen Sprache schreiben konnten, die der
+                Compiler dann in Maschinensprache übersetzte.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+    <!-- single image 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row justify-content-center" style="background-color: dsf">
+        <div class="col-md-5 col-sm-10 fade-in-hidden">
+          <img
+            class="img-fluid mx-auto d-block rounded"
+            style="min-height: 3em"
+            src="images/compiler9.png"
+            alt="analytical engine"
+          />
+        </div>
+        <div
+          class="col-md-4 col-sm-10 col-s-10 mt-1 svg-container right-slide-hidden"
+        >
+          <svg
+            class="arrow-left"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="m 21.2908 34.8603 s 74.1802 6.1787 111.9052 51.2848 a 3.549 2.1 75 0 0 -0.7948 0.5644 c -35.8766 -38.598 -87.4652 -46.8286 -110.8816 -50.687 m 0.0074 -0.013 l 4.8643 4.4549 c 1.2853 1.0771 1.0739 1.7762 -0.3685 0.8483 l -5.6906 -5.7216 l 4.2732 -5.0408 c 1.0472 -1.248 2.5857 -0.7698 1.0113 0.2864 l -4.2029 4.6078"
+            ></path>
+          </svg>
+          <p class="left-arrow-text">
+            Compiler übersetzen Quellcode in ausführbaren Maschinencode.
+          </p>
+        </div>
+      </div>
+      <div class="container"></div>
+    </div>
+    <!-- end of single image-->
+    <!-- textbox 2 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-grace text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Grace Hopper hat auch den Begriff "Debugging" geprägt, der den
+                Prozess der Identifizierung und Behebung von Fehlern in
+                Computerprogrammen beschreibt.
+                <br /><br />
+                Die Idee des Debuggings entstand, als sie und ihr Team einen
+                echten Käfer (engl. Bug) aus einem frühen Computer entfernten,
+                der einen Fehler verursachte. Seitdem hat sich der Begriff
+                "Debugging" als gängige Bezeichnung für das Lösen von
+                Programmierproblemen etabliert.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+    <!-- single image 2 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row justify-content-center" style="background-color: dsf">
+        <div class="col-md-5 col-sm-10 fade-in-hidden">
+          <img
+            class="img-fluid mx-auto d-block rounded"
+            style="min-height: 3em"
+            src="images/p2 extra.jpeg"
+            alt="analytical engine"
+          />
+        </div>
+        <div
+          class="col-md-4 col-sm-10 col-s-10 mt-1 svg-container right-slide-hidden"
+        >
+          <svg
+            class="arrow-left"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="m 21.2908 34.8603 s 74.1802 6.1787 111.9052 51.2848 a 3.549 2.1 75 0 0 -0.7948 0.5644 c -35.8766 -38.598 -87.4652 -46.8286 -110.8816 -50.687 m 0.0074 -0.013 l 4.8643 4.4549 c 1.2853 1.0771 1.0739 1.7762 -0.3685 0.8483 l -5.6906 -5.7216 l 4.2732 -5.0408 c 1.0472 -1.248 2.5857 -0.7698 1.0113 0.2864 l -4.2029 4.6078"
+            ></path>
+          </svg>
+          <p class="left-arrow-text">
+            Der legendäre Logbuch-Eintrag von Grace Hopper – mit eingeklebten
+            totem Käfer.
+          </p>
+        </div>
+      </div>
+      <div class="container"></div>
+
+      <!--end of single image code-->
+    </div>
+    <!-- end of single image-->
+
+    <p style="margin-top: 150px"></p>
+
+    <!-- Multiple Choice Layout -->
+    <!-- Multiple Choice Layout -->
+    <div
+      class="container multiple-choice-quiz-container-2 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Multiple Choice Box -->
+        <div class="multiple-choice-question-container-2 mx-auto col-md-6">
+          <!-- Second question -->
+          <div id="multiple-choice-question-2">
+            <div class="options-2">
+              <p class="text-white question-box-2">
+                Welche der folgenden Aussagen über Grace Hopper und ihre
+                Beiträge zur Informatik ist wahr?
+              </p>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option1Multi2"
+                  name="multiple-choice-2"
+                  value="option1"
+                />
+                <label for="option1Multi2"
+                  >Grace Hopper hat den ersten Computer "Debugging"
+                  genannt.</label
+                >
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option2Multi2"
+                  name="multiple-choice-2"
+                  value="option2"
+                />
+                <label for="option2Multi2">
+                  Grace Hopper hat den ersten Compiler entwickelt, der
+                  menschenverständlichen Code in Maschinensprache
+                  übersetzt.</label
+                >
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option3Multi2"
+                  name="multiple-choice-2"
+                  value="option3"
+                />
+                <label for="option3Multi2"
+                  >Vor Grace Hopper's Erfindung des Compilers mussten
+                  Programmierer*innen in einer menschenverständlichen Sprache
+                  schreiben.</label
+                >
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option4Multi2"
+                  name="multiple-choice-2"
+                  value="option4"
+                />
+                <label for="option4Multi2"
+                  >Der Begriff "Debugging" entstand, als Grace Hopper und ihr
+                  Team einen echten Käfer aus einem Computer entfernten.</label
+                >
+              </div>
+            </div>
+            <!-- multiple choice 2 button -->
+            <button id="submit-multiple-choice-2" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of Multiple Choice Layout-->
+    <!-- multiple choice answer layout-->
+    <div
+      class="container multiple-choice-answer-container-2 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="multiple-choice-answer-deco-2 mx-auto col-md-6"></div>
+        <div class="text-white multiple-choice-answer-text-2">Falsch!</div>
+        <div class="my-3 text-white multiple-choice-explanation-2">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+    <!-- end of multiple choice answer layout-->
+
+    <p style="margin-top: 500px"></p>
+
+    <!-- end of Module 2 -->
+    <!--begin of module 3-->
+    <!--portrait-->
+    <div
+      class="container col-lg-8 col-s-10 col-xxl-4 col-xl-6 col-xs-12"
+      id="modul3"
+    >
+      <div class="row">
+        <h1 class="heading-secondary mb-0 left-rotate-hidden">
+          Pionierin der Suchmaschinen
+        </h1>
+        <div class="rotateY-hidden">
+          <p
+            class="portrait-name mx-auto"
+            style="font-size: calc(30px + 1.5vw) !important"
+          >
+            Karen Spärck Jones
+          </p>
+          <!--image needs to be inline, so we can change it without changing the class background-img -->
+          <div
+            class="d-flex mx-auto background-img"
+            style="
+              background-image: url('images/karen.png');
+              background-size: cover;
+            "
+          >
+            <div class="d-flex flex-column symbol-container">
+              <!-- idea is we have 3 columns, first the left side line,
+                          then an empty container, followed by the right side line-->
+              <div class="d-flex flex-column left-side">
+                <i class="bi bi-search bi-sm"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+              </div>
+              <div class="empty-container"></div>
+              <div class="d-flex flex-column align-items-end right-side">
+                <i class="bi bi-search bi-sm"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+                <i class="bi bi-search"></i>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-symbols mx-auto">
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <div class="row bottom-symbols"></div>
+            <i class="bi bi-chevron-double-down ms-2"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of the portrait code-->
+    <!-- textbox 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-karen text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Karen Spärck Jones (1935 - 2007) war eine britische
+                Informatikerin, die sich mit der Verarbeitung natürlicher
+                Sprache beschäftigte. Sie wollte wissen, ob und wie es möglich
+                ist, dass ein Computer aus sehr vielen Dokumenten und Texten
+                genau das eine Wort findet, das man gerade sucht.
+                <br /><br />
+                Für dich ist das nichts Neues? Logisch! Alle gängigen
+                Suchmaschinen verwenden heute die von Karen Spärck Jones
+                entwickelten Methoden, um die relevantesten Ergebnisse für deine
+                Suchanfrage zu finden.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+    <!-- quote box-->
+
+    <div
+      class="container code-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded"
+    >
+      <div class="col mx-auto inner-code-container text-center">
+        <p class="text-white quote-box">
+          <i class="bi bi-quote"></i> I think it's very important to get more
+          women into computing. My slogan is:
+          <i>Computing is too important to be left to men</i
+          ><i class="bi bi-quote"></i><br /><br />
+          Karen Spärck Jones
+        </p>
+      </div>
+    </div>
+    <p style="margin-top: 200px"></p>
+    <!-- end of interactive code example-->
+    <!-- Single Choice Box -->
+    <div
+      class="container single-choice-quiz-container-3 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded mb-5 rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+
+        <div class="single-choice-question-container mx-auto col-md-6">
+          <!-- First question -->
+
+          <div id="single-choice-question ">
+            <div class="options">
+              <p class="text-white question-box p-3">
+                Bezogen auf das Zitat von Karen Spärck Jones, was denkst du,
+                warum ist es wichtig, dass ähnlich viele Frauen wie Männer in
+                der Informatik arbeiten?
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top: 300px"></p>
+    <!-- end single choice box -->
+    <!-- textbox 2 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-karen text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Wenn technische Anwendungen nur von Männern entwickelt werden,
+                dann funktionieren diese oft besser für Männer als für Frauen.
+                Ein Beispiel dafür ist die Spracherkennung.
+                <br /><br />
+                Das liegt daran, dass die Technologie von Männern entwickelt und
+                mit männlichen Stimmen trainiert wurde. Deshalb reagiert sie
+                besser auf die Stimmen von Männern. Das gilt für viele
+                Anwendungen und ist auch der Grund, wieso Frauen und Mädchen bei
+                manchen dieser Alltagsanwendungen benachteiligt werden. Um das
+                zu verhindern, braucht es mehr Frauen, die an der Entwicklung
+                von Technologien beteiligt sind - zum Beispiel als
+                Programmiererin.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+    <!-- Single Choice Layout -->
+    <div
+      class="container single-choice-quiz-container-3 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+        <div class="single-choice-question-container-3 mx-auto col-md-6">
+          <!-- Second question -->
+          <div id="single-choice-question-3">
+            <div class="options-2">
+              <p class="text-white question-box-3">
+                Meinst du, man kann auch ohne Informatikstudium Programmiererin
+                werden?
+              </p>
+              <div>
+                <input
+                  type="radio"
+                  id="option1Single3"
+                  name="single-choice-3"
+                  value="option1"
+                />
+                <label for="option1Single3"> Ja, fix.</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="option2Single3"
+                  name="single-choice-3"
+                  value="option2"
+                />
+                <label for="option2Single3">
+                  Nein, ohne Ausbildung geht nix.
+                </label>
+              </div>
+            </div>
+            <!-- single choice 2 button -->
+            <button id="submit-single-choice-3" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of single Choice Layout-->
+    <!-- single choice answer layout-->
+    <div
+      class="container single-choice-answer-container-3 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="single-choice-answer-deco-3 mx-auto col-md-6"></div>
+        <div class="text-white single-choice-answer-text-3"></div>
+        <div class="my-3 text-white single-choice-explanation-3">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+    <!-- end of single choice answer layout-->
+    <p style="margin-top: 300px"></p>
+
+    <!-- single image 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10 mt-5">
+      <div class="row justify-content-center" style="background-color: dsf">
+        <div class="col-md-5 col-sm-10 fade-in-hidden">
+          <img
+            class="img-fluid mx-auto d-block rounded"
+            style="min-height: 3em"
+            src="images/scratch.PNG"
+            alt="analytical engine"
+          />
+        </div>
+        <div
+          class="col-md-4 col-sm-10 col-s-10 mt-1 svg-container right-slide-hidden"
+        >
+          <svg
+            class="arrow-left"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="m 21.2908 34.8603 s 74.1802 6.1787 111.9052 51.2848 a 3.549 2.1 75 0 0 -0.7948 0.5644 c -35.8766 -38.598 -87.4652 -46.8286 -110.8816 -50.687 m 0.0074 -0.013 l 4.8643 4.4549 c 1.2853 1.0771 1.0739 1.7762 -0.3685 0.8483 l -5.6906 -5.7216 l 4.2732 -5.0408 c 1.0472 -1.248 2.5857 -0.7698 1.0113 0.2864 l -4.2029 4.6078"
+            ></path>
+          </svg>
+          <p class="left-arrow-text">
+            Die Oberfläche von Scratch, einer einfachen Programmiersprache für
+            Kinder und Jugendliche.
+          </p>
+        </div>
+      </div>
+      <div class="container"></div>
+    </div>
+
+    <p style="margin-top: 150px"></p>
+    <!-- end of single image-->
+
+    <!-- textbox 3 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-karen text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Coden oder Programmieren ist ein bisschen wie eine Fremdsprache
+                lernen und gleichzeitig ein Puzzle lösen. Es gibt viele
+                verschiedene Programmiersprachen, die unterschiedlich
+                kompliziert sind und für verschiedene Zwecke benutzt werden.
+
+                <br /><br />
+                Falls du programmieren möchtest, kannst du dies auch neben der
+                Schule machen, aber einige Schulen, wie zum Beispiel eine HTL,
+                bietet dir die Möglichkeit, Coden direkt in der Schule zu
+                lernen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+
+    <div
+      class="container single-choice-quiz-container-3 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded mb-5 rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+
+        <div class="mx-auto col-md-6 rounded text-white p-3">
+          Wenn du selbst mal programmieren möchtest, dann kannst du folgende
+          Sachen gratis ausprobieren:
+          <br /><br />
+          <li>
+            <a
+              href="https://scratch.mit.edu/projects/editor/?tutorial=getStarted"
+              target="_blank"
+              style="color: white; font-size: 1.25rem"
+              >Scratch</a
+            >
+            (deutsch, eher einfach mit Blöcken, aber sehr gut für den Einstieg)
+          </li>
+          <br />
+          <li>
+            <a
+              href="https://lernen.cloud/courses/pythonjunior-schule2021"
+              target="_blank"
+              style="color: white; font-size: 1.25rem"
+              >lernen.cloud</a
+            >
+            (deutsch, Python, gute Anfangssprache)
+          </li>
+          <br />
+          <li>
+            <a
+              href="https://www.sololearn.com/"
+              target="_blank"
+              style="color: white; font-size: 1.25rem"
+            >
+              Sololearn</a
+            >
+            (englisch, etwas anspruchsvoller mit richtigem Code)
+          </li>
+          <br />
+
+          <li>
+            <a
+              href="https://www.freecodecamp.org/"
+              target="_blank"
+              style="color: white; font-size: 1.25rem"
+            >
+              FreeCodeCamp</a
+            >
+            (englisch, etwas anspruchsvoller mit richtigem Code)
+          </li>
+          <br />
+          <li>
+            <a
+              href="https://studio.code.org/s/express-2021/lessons/1/levels/1"
+              target="_blank"
+              style="color: white; font-size: 1.25rem"
+            >
+              Code.org</a
+            >
+            (deutsch, eher einfach mit Blöcken, gut für den Einstieg)
+          </li>
+          <br />
+        </div>
+      </div>
+    </div>
+    <p style="margin-top: 300px"></p>
+
+    <!-- Multiple Choice Layout -->
+    <div
+      class="container multiple-choice-quiz-container-3 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Multiple Choice Box -->
+        <div class="multiple-choice-question-container-3 mx-auto col-md-6">
+          <!-- Second question -->
+          <div id="multiple-choice-question-3">
+            <div class="options-4">
+              <p class="text-white question-box-3">
+                Welche der Aussagen zum Programmieren sind richtig?
+              </p>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option1Multi3"
+                  name="multiple-choice-3"
+                  value="option1"
+                />
+                <label for="option1Multi3">
+                  Coden ist ein wenig wie Puzzle lösen.
+                </label>
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option2Multi3"
+                  name="multiple-choice-3"
+                  value="option2"
+                />
+                <label for="option2Multi3"
+                  >Programmieren kann man nur, wer viel von Computern versteht.
+                </label>
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option3Multi3"
+                  name="multiple-choice-3"
+                  value="option3"
+                />
+                <label for="option3Multi3"
+                  >Wer coden lernt, muss richtig gut in Mathe sein.
+                </label>
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option4Multi3"
+                  name="multiple-choice-3"
+                  value="option4"
+                />
+                <label for="option4Multi3">
+                  Nur Jungs können gut programmieren.</label
+                >
+              </div>
+            </div>
+            <!-- multiple choice 2 button -->
+            <button id="submit-multiple-choice-3" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of Multiple Choice Layout-->
+
+    <!-- multiple choice answer layout-->
+    <div
+      class="container multiple-choice-answer-container-3 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="multiple-choice-answer-deco-3 mx-auto col-md-6"></div>
+        <div class="text-white multiple-choice-answer-text-3">Falsch!</div>
+        <div class="my-3 text-white multiple-choice-explanation-3">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+    <!-- end of multiple choice answer layout-->
+
+    <p style="margin-top: 450px"></p>
+    <!-- end of module 3-->
+
+    <!-- Modul 4 Radia Perlman -->
+
+    <!--portrait-->
+    <div
+      class="container col-lg-8 col-s-10 col-xxl-4 col-xl-6 col-xs-12"
+      id="modul4"
+    >
+      <div class="row">
+        <h1 class="heading-secondary mb-0 left-rotate-hidden">
+          Pionierin der Netzwerktechnologien
+        </h1>
+        <div class="rotateY-hidden">
+          <p class="portrait-name mx-auto">Radia Perlman</p>
+          <!--image needs to be inline, so we can change it without changing the class background-img -->
+          <div
+            class="d-flex mx-auto background-img"
+            style="background-image: url('images/p3.png')"
+          >
+            <div class="d-flex flex-column symbol-container">
+              <!-- idea is we have 3 columns, first the left side line,
+                          then an empty container, followed by the right side line-->
+              <div class="d-flex flex-column left-side">
+                <i class="bi bi-wifi bi-sm"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+              </div>
+              <div class="empty-container"></div>
+              <div class="d-flex flex-column align-items-end right-side">
+                <i class="bi bi-wifi bi-sm"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+                <i class="bi bi-wifi"></i>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-symbols mx-auto">
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <div class="row bottom-symbols"></div>
+            <i class="bi bi-chevron-double-down ms-2"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of the portrait code-->
+    <!-- textbox 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-radia2 text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Radia Perlman, geboren 1951, ist eine beeindruckende
+                Informatikerin, die einen großen Einfluss auf die Gestaltung des
+                heutigen Internets hatte. Sie hat eine innovative Methode
+                entwickelt, die eine reibungslose Kommunikation zwischen
+                Computern ermöglicht.
+
+                <br /><br />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 100px"></p>
+
+    <div
+      class="container code-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded"
+    >
+      <div class="col mx-auto inner-code-container text-center">
+        <p class="text-white quote-box">
+          <i class="bi bi-quote"></i>Ich möchte, dass die Leute verstehen, dass
+          sie das Zeug dazu haben, die Welt zu verändern.<i
+            class="bi bi-quote"
+          ></i
+          ><br /><br />
+          Radia Pearlman
+        </p>
+      </div>
+    </div>
+    <p style="margin-top: 200px"></p>
+    <!-- end of interactive code example-->
+
+    <!-- textbox 2 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-radia text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Stell dir vor, ein Netzwerk ist wie eine große Stadt und die
+                Computer sind die Einwohner. Genau wie Menschen, die auf
+                unterschiedliche Weisen miteinander kommunizieren, müssen auch
+                Computer miteinander "sprechen", um Informationen auszutauschen
+                und Aufgaben zu erfüllen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top: 100px"></p>
+
+    <!-- Single Choice Layout -->
+    <div
+      class="container single-choice-quiz-container-4 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+        <div class="single-choice-question-container-4 mx-auto col-md-6">
+          <!-- Second question -->
+          <div id="single-choice-question-4">
+            <div class="options-4">
+              <p class="text-white question-box-4">
+                Warum glaubst du, sind Netzwerkprotokolle so wichtig?
+              </p>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="option1Single4"
+                  name="single-choice-4"
+                  value="option1"
+                />
+                <label for="option1Single4">
+                  Sie sind erforderlich, um Grafiken und Bilder in hoher
+                  Auflösung darzustellen.
+                </label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="option2Single4"
+                  name="single-choice-4"
+                  value="option2"
+                />
+                <label for="option2Single4">
+                  Sie helfen Computern, miteinander zu kommunizieren.</label
+                >
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="option3Single4"
+                  name="single-choice-4"
+                  value="option3"
+                />
+                <label for="option3Single4">
+                  Sie sorgen dafür, dass alle Computer stets die aktuellste
+                  Software haben.
+                </label>
+              </div>
+            </div>
+            <!-- single choice 2 button -->
+            <button id="submit-single-choice-4" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of single Choice Layout-->
+    <!-- single choice answer layout-->
+    <div
+      class="container single-choice-answer-container-4 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="single-choice-answer-deco-4 mx-auto col-md-6"></div>
+        <div class="text-white single-choice-answer-text-4">Falsch!</div>
+        <div class="my-3 text-white single-choice-explanation-4">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+    <!-- end of single choice answer layout-->
+
+    <p style="margin-top: 100px"></p>
+    <!-- textbox 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-radia2 text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Aber was passiert, wenn zu viele Computer gleichzeitig sprechen
+                und immer wieder dasselbe sagen? Genau, es entsteht ein riesiges
+                Durcheinander! Wenn alle Computer zur gleichen Zeit
+                Informationen senden und immer wieder die gleichen Nachrichten
+                wiederholen, könnten einige wichtige Informationen verloren
+                gehen oder nicht schnell genug ankommen. Radia Perlman hat eine
+                intelligente Lösung gefunden, um dieses Chaos zu vermeiden.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- single image 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row justify-content-center" style="background-color: dsf">
+        <div class="col-md-5 col-sm-10 fade-in-hidden">
+          <img
+            class="img-fluid mx-auto d-block rounded"
+            style="min-height: 3em"
+            src="images/STP12.gif"
+            alt="stp12"
+          />
+        </div>
+        <div
+          class="col-md-6 col-sm-10 col-s-10 mt-1 svg-container right-slide-hidden"
+        >
+          <svg
+            class="arrow-left"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="m 21.2908 34.8603 s 74.1802 6.1787 111.9052 51.2848 a 3.549 2.1 75 0 0 -0.7948 0.5644 c -35.8766 -38.598 -87.4652 -46.8286 -110.8816 -50.687 m 0.0074 -0.013 l 4.8643 4.4549 c 1.2853 1.0771 1.0739 1.7762 -0.3685 0.8483 l -5.6906 -5.7216 l 4.2732 -5.0408 c 1.0472 -1.248 2.5857 -0.7698 1.0113 0.2864 l -4.2029 4.6078"
+            ></path>
+          </svg>
+          <p class="left-arrow-text">
+            In unserem Computer-Netzwerk wird die Switch 3 von Anna blockiert,
+            um ein Daten-Chaos zu verhindern.
+          </p>
+        </div>
+      </div>
+      <div class="container"></div>
+
+      <!--end of single image code-->
+    </div>
+
+    <p style="margin-top: 20px"></p>
+    <!-- textbox -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-radia text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Diese Methode, auch als "Spanning Tree Protocol" bekannt, sorgt
+                dafür, dass die Daten geordnet und ohne Stau von einem Computer
+                zum anderen gelangen, ähnlich wie ein Verkehrsleitsystem in
+                einer Stadt.
+                <br /><br />
+                Radia Perlman hat mit ihrer beeindruckenden Arbeit das
+                Spanning-Tree-Konzept so vereinfacht, dass es auch in großen und
+                komplexen Netzwerken funktioniert. Dadurch hat sie gezeigt, wie
+                wichtig Netzwerkprotokolle für die digitale Kommunikation sind,
+                selbst in Netzwerken mit vielen Computern.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of textbox -->
+
+    <p style="margin-top: 150px"></p>
+
+    <!-- Multiple Choice Layout -->
+    <div
+      class="container multiple-choice-quiz-container-4 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Multiple Choice Box -->
+        <div class="multiple-choice-question-container-4 mx-auto col-md-6">
+          <!-- Second question -->
+          <div id="multiple-choice-question-4">
+            <div class="options-4">
+              <p class="text-white question-box-4">
+                Welche der folgenden Aussagen über Radia Perlman sind korrekt?
+              </p>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option1Multi4"
+                  name="multiple-choice-4"
+                  value="option1"
+                />
+                <label for="option1Multi4">
+                  Radia Perlman ist eine berühmte Netzwerktechnikerin.
+                </label>
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option2Multi4"
+                  name="multiple-choice-4"
+                  value="option2"
+                />
+                <label for="option2Multi4"
+                  >Sie hat das Spanning-Tree-Protokoll (STP) entwickelt.</label
+                >
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option3Multi4"
+                  name="multiple-choice-4"
+                  value="option3"
+                />
+                <label for="option3Multi4">Sie gründete Microsoft.</label>
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="option4Multi4"
+                  name="multiple-choice-4"
+                  value="option4"
+                />
+                <label for="option4Multi4"
+                  >Keine der Antwortmöglichkeiten.</label
+                >
+              </div>
+            </div>
+            <!-- multiple choice 2 button -->
+            <button id="submit-multiple-choice-4" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of Multiple Choice Layout-->
+    <!-- multiple choice answer layout-->
+    <div
+      class="container multiple-choice-answer-container-4 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="multiple-choice-answer-deco-4 mx-auto col-md-6"></div>
+        <div class="text-white multiple-choice-answer-text-4">Falsch!</div>
+        <div class="my-3 text-white multiple-choice-explanation-4">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 350px"></p>
+
+    <!-- end of Module 4 -->
+    <!-- Modul 5-->
+    <!--portrait Katherine_Johnson-->
+    <div
+      class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10"
+      id="modul5"
+    >
+      <div class="row">
+        <h1 class="heading-secondary mb-0 left-rotate-hidden">
+          "Menschliche Rechenmaschine" und Schlüsselfigur der Mondlandung!
+        </h1>
+        <div class="rotateY-hidden">
+          <p class="portrait-name mx-auto">Katherine Johnson</p>
+          <!--image needs to be inline, so we can change it without changing the class background-img -->
+          <div
+            class="d-flex mx-auto background-img"
+            style="background-image: url('images/5.png')"
+          >
+            <div class="d-flex flex-column symbol-container">
+              <!-- idea is we have 3 columns, first the left side line,
+                          then an empty container, followed by the right side line-->
+              <div class="d-flex flex-column left-side">
+                <i class="bi bi-rocket-takeoff bi-sm"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+              </div>
+              <div class="empty-container"></div>
+              <div class="d-flex flex-column align-items-end right-side">
+                <i class="bi bi-rocket-takeoff bi-sm"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+                <i class="bi bi-rocket-takeoff"></i>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-symbols mx-auto">
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <div class="row bottom-symbols"></div>
+            <i class="bi bi-chevron-double-down ms-2"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+            <i class="bi bi-chevron-double-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of the portrait code-->
+    
+    <!-- textbox 1 -->
+
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-5 text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Katherine Johnson (1918 - 2020) war eine der besten
+                Computer. Das klingt heute vielleicht etwas komisch, als Johnson
+                bei der NASA arbeitete, machte diese Aussage aber tatsächlich
+                Sinn. Denn damals wurden Menschen, die Rechenmaschinen bedienten
+                als "computer" (engl. <i>to compute -</i> berechnen)
+                bezeichnet.<br /><br /> Obwohl Sie als Woman of Color mit
+                Diskriminierungen und anderen Hürden zu kämpfen hatte, wäre ohne
+                ihre Arbeit, die Apollo-11-Mission nicht möglich gewesen.
+                Vielleicht kennst du den Satz „Ein kleiner Schritt für einen
+                Menschen, aber ein großer Schritt für die Menschheit“? Den hat
+                der Astronaut Neil Armstrong gesagt als er vom Raumschiff Apollo
+                11 seinen ersten Schritt auf den Mond machte. Möglich machte das
+                unter anderem Katherine Johnson. Mit mathematischen Modellen und
+                Algorithmen berechnete Sie nämlich die Flugbahnen des
+                Raumschiffs „Apollo 11“. Auch für sie und ihre
+                „Computer“-Kolleginnen war das damals ein wichtiger Schritt.
+                Denn: Sie öffnete den Weg für viele, die nach ihr kamen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 200px"></p>
+
+    <!-- Single Choice Layout -->
+    <div
+      class="container single-choice-quiz-container-5 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded rotateX-hidden"
+    >
+      <div class="col mx-auto">
+        <!-- Single Choice Box -->
+
+        <div class="single-choice-question-container-5 mx-auto col-md-6">
+          <!-- First question -->
+
+          <div id="single-choice-question-5">
+            <div class="options-5">
+              <p class="text-white question-box-5">
+                Als was hat Katherine Johnsons bei der NASA gearbeitet?
+              </p>
+              <div>
+                <input
+                  type="radio"
+                  id="option1Single5"
+                  name="single-choice-5"
+                  value="option1"
+                />
+                <label for="option1Single5">Mode-Designerin.</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="option2Single5"
+                  name="single-choice-5"
+                  value="option2"
+                />
+                <label for="option2Single5">Astronautin.</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="option3Single5"
+                  name="single-choice-5"
+                  value="option3"
+                />
+                <label for="option3Single5">Menschlicher "Computer".</label>
+              </div>
+            </div>
+            <!-- single choice 1 button -->
+
+            <button id="submit-single-choice-5" class="btn btn-primary">
+              Passt!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of single Choice Layout-->
+    <p style="margin-top: 250px"></p>
+
+    <!-- single choice answer layout-->
+    <div
+      class="container single-choice-answer-container-5 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+    >
+      <div class="col mx-auto position-relative">
+        <div class="single-choice-answer-deco-5 mx-auto col-md-6"></div>
+        <div class="text-white single-choice-answer-text-5">Falsch!</div>
+        <div class="my-3 text-white single-choice-explanation-5">
+          <!-- reasoning ins js schreiben/besprechen -->
+        </div>
+      </div>
+    </div>
+    <!-- end of single choice answer layout-->
+
+    <p style="margin-top: 100px"></p>
+    <!-- textbox 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row">
+        <div class="textbox mx-auto left-slide-hidden">
+          <div class="textbox-bg-img-5 text-center">
+            <div>
+              <p class="textbox-text-bg">
+                Katherine Johnson arbeitete jedoch nicht alleine.
+                Sie war Teil eines Teams von "menschlichen Computern" bei der
+                NASA, das hauptsächlich aus Women of Color bestand. Diese
+                Gruppe, oft als "Hidden Figures" bezeichnet, trug ebenfalls
+                wesentlich zu den NASA-Missionen bei. <br /><br />Sie arbeiteten
+                in einer Zeit, in der sowohl Rassendiskriminierung als auch
+                Geschlechterdiskriminierung vorherrschend waren, und ihre
+                Beiträge wurden lange Zeit übersehen. Einem breiten Publikum
+                wurden Sie durch den 2016 veröffentlichten Film „Hidden Figures
+                – Unerkannte Heldinnen“ bekannt. Wir können den Film übrigens
+                sehr empfehlen ;)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end of textbox -->
+
+    <p style="margin-top: 100px"></p>
+
+    <!-- single image 1 -->
+    <div class="container col-lg-10 col-s-12 col-xxl-6 col-xl-8 col-xs-10">
+      <div class="row justify-content-center" style="background-color: dsf">
+        <div class="col-md-5 col-sm-10 fade-in-hidden">
+          <img
+            class="img-fluid mx-auto d-block rounded"
+            style="min-height: 3em"
+            src="images/hdf.jpg"
+            alt="analytical engine"
+          />
+        </div>
+        <div
+          class="col-md-4 col-sm-10 col-s-10 mt-1 svg-container right-slide-hidden"
+        >
+          <svg
+            class="arrow-left"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="m 21.2908 34.8603 s 74.1802 6.1787 111.9052 51.2848 a 3.549 2.1 75 0 0 -0.7948 0.5644 c -35.8766 -38.598 -87.4652 -46.8286 -110.8816 -50.687 m 0.0074 -0.013 l 4.8643 4.4549 c 1.2853 1.0771 1.0739 1.7762 -0.3685 0.8483 l -5.6906 -5.7216 l 4.2732 -5.0408 c 1.0472 -1.248 2.5857 -0.7698 1.0113 0.2864 l -4.2029 4.6078"
+            ></path>
+          </svg>
+          <p class="left-arrow-text">
+            Katherine Johnson und ihr Team die als "menschliche Computer" bei
+            der NASA arbeiteten
+          </p>
+        </div>
+
+        <div class="container"></div>
+
+        <!--end of single image code-->
+      </div>
+
+      <p style="margin-top: 250px"></p>
+
+      <!-- Multiple Choice Layout -->
+      <div
+        class="container multiple-choice-quiz-container-5 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded rotateX-hidden"
+      >
+        <div class="col mx-auto">
+          <!-- Multiple Choice Box -->
+          <div class="multiple-choice-question-container-5 mx-auto col-md-6">
+            <!-- Second question -->
+            <div id="multiple-choice-question-5">
+              <div class="options-5">
+                <p class="text-white question-box-5">
+                  Welchen wichtigen Beitrag leistete Katherine Johnson zur
+                  Apollo-Mondlandung?
+                </p>
+                <div class="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="option1Multi5"
+                    name="multiple-choice-5"
+                    value="option1"
+                  />
+                  <label for="option1Multi5"
+                    >Sie entwickelte die ersten Raumfahrtanzüge.</label
+                  >
+                </div>
+                <div class="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="option2Multi5"
+                    name="multiple-choice-5"
+                    value="option2"
+                  />
+                  <label for="option2Multi5"
+                    >Sie war die erste Frau auf dem Mond.</label
+                  >
+                </div>
+                <div class="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="option3Multi5"
+                    name="multiple-choice-5"
+                    value="option3"
+                  />
+                  <label for="option3Multi5"
+                    >Sie berechnete die Flugbahnen der Raumkapseln.</label
+                  >
+                </div>
+                <div class="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="option4Multi5"
+                    name="multiple-choice-5"
+                    value="option4"
+                  />
+                  <label for="option4Multi5"
+                    >Sie entwarf das Raumschiff Apollo 11.</label
+                  >
+                </div>
+              </div>
+              <!-- multiple choice 5 button -->
+              <button id="submit-multiple-choice-5" class="btn btn-primary">
+                Passt!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- end of Multiple Choice Layout-->
+      <!-- multiple choice answer layout-->
+      <div
+        class="container multiple-choice-answer-container-5 col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5 rounded pt-5"
+      >
+        <div class="col mx-auto position-relative">
+          <div class="multiple-choice-answer-deco-5 mx-auto col-md-6"></div>
+          <div class="text-white multiple-choice-answer-text-5">Falsch!</div>
+          <div class="my-3 text-white multiple-choice-explanation-5">
+            <!-- reasoning ins js schreiben/besprechen -->
+          </div>
+        </div>
+      </div>
+      <!-- end of multiple choice answer layout-->
+
+      <p style="margin-top: 250px"></p>
+
+      <!-- quote box-->
+      <div
+        class="container code-container col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 rounded"
+      >
+        <div class="col mx-auto inner-code-container text-center">
+          <p class="text-white quote-box">
+            <i class="bi bi-quote"></i> "Hat Katherine Johnson die Berechnungen
+            überprüft, sonst steig ich nicht ein... Erst wenn sie sagt, dass es
+            passt, bin ich bereit." - John Glenn, der erste Amerikaner, der die
+            Erde umkreiste. <i class="bi bi-quote"></i><br /><br />
+          </p>
+        </div>
+      </div>
+      <p style="margin-top: 200px"></p>
+
+      <!-- end of Module 5 -->
+    </div>
+
+    <p style="margin-top: 350px"></p>
+
+    <!-- End Message -->
+    <div
+      class="container container-intro col-lg-8 col-s-10 col-xxl-5 col-xl-8 col-xs-12 mt-5"
+    >
+      <p class="text-white outro typewriter">
+        Hier endet die Reise durch die Leben der Pionnierinnen für's Erste. Wir
+        sind bemüht, hier in Zukunft noch mehr außergewöhnliche Persönlichkeiten
+        vorstellen zu können.
+      </p>
+      <p class="col-md-6 text-center mx-auto outro-end">
+        Schaut bald wieder vorbei, um zu sehen, ob sich etwas geändert hat!
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer id="quellen" class="rounded">
+      <!-- Quellen -->
+      <div class="container ">
+        <p>
+          Folgende Quellen wurden für die hier angegebenen Informationen
+          herangezogen:
+        </p>
+        <ul>
+          <li>
+            Deutsches Patent- und Markenamt. Ada Lovelace - Die erste
+            Programmiererin der Welt.
+            <a
+              href="https://www.dpma.de/dpma/veroeffentlichungen/aktuelles/patentefrauen/adalovelace/index.html"
+              >DPMA | Ada Lovelace</a
+            >
+          </li>
+          <li>
+            SWR Wissen. Erste Programmiererin: Ada Lovelace - Die Pionierin der
+            Computerwissenschaft.
+            <a
+              href="SWR Wissen. Erste Programmiererin: Ada Lovelace - Die Pionierin der Computerwissenschaft."
+              >Sie schrieb das erste Computerprogramm: Ada Lovelace</a
+            >
+          </li>
+          <li>
+            Gesellschaft für Informatik e.V. Ada Lovelace.
+            <a href="https://gi.de/persoenlichkeiten/ada-lovelace"
+              >Ada Lovelace - Gesellschaft für Informatik e.V.</a
+            >
+          </li>
+          <li>
+            Computer-Pionierin Ada Lovelace: Die Frau, die aus der Zukunft kam
+            <a
+              href="https://www.geo.de/wissen/23430-rtkl-mathematik-computer-pionierin-ada-lovelace-die-frau-die-aus-der-zukunft-kam"
+              >Computer-Pionierin Ada Lovelace: Die Frau, die aus der Zukunft
+              kam</a
+            >
+          </li>
+          <li>
+            Der Standard. (2021). Rom, Daniela. Informatikerin Grace Hopper: Die
+            Erzieherin der Computer.
+            <a
+              href="https://www.derstandard.de/story/2000134352181/informatikerin-grace-hopper-die-erzieherin-der-computer"
+              >Informatikerin Grace Hopper: Die Erzieherin der Computer</a
+            >
+          </li>
+          <li>
+            Yale University. Biography: Grace Murray Hopper.
+            <a href="https://president.yale.edu/biography-grace-murray-hopper"
+              >Biography of Grace Murry Hopper</a
+            >
+          </li>
+          <li>
+            „Lass das Mädchen die Zahlen checken“
+            <a
+              href="https://www.welt.de/wissenschaft/article158643628/Lass-das-Maedchen-die-Zahlen-checken.html"
+              >https://www.welt.de/wissenschaft/article158643628/Lass-das-Maedchen-die-Zahlen-checken.html</a
+            >
+          </li>
+          <li>
+            Katherine Johnson Biography
+            <a href="https://www.nasa.gov/content/katherine-johnson-biography"
+              >https://www.nasa.gov/content/katherine-johnson-biography</a
+            >
+          </li>
+          <li>
+            Katherine Johnson: Die Frau, der die Astronauten vertrauten
+            <a
+              href="https://www.fr.de/wissen/katherine-johnson-frau-astronauten-vertrauten-nasa-legende-tot-nachruf-zr-13558441.html"
+              >https://www.fr.de/wissen/katherine-johnson-frau-astronauten-vertrauten-nasa-legende-tot-nachruf-zr-13558441.html</a
+            >
+          </li>
+          <li>
+            Reaching for the Moon: Exclusive Excerpt from Katherine Johnson
+            Autobiography for Kids
+            <a
+              href="https://www.space.com/reaching-for-the-moon-katherine-johnson-excerpt.html"
+              >https://www.space.com/reaching-for-the-moon-katherine-johnson-excerpt.html</a
+            >
+          </li>
+          <li>
+            Labbé, C. Grace Murray Hopper.
+            <a href="https://www.labbe.de/Grace-Murray-Hopper"
+              >https://www.labbe.de/Grace-Murray-Hopper</a
+            >
+          </li>
+          <li>
+            Südwestrundfunk (SWR). (2023). Beck, David. Grace Hopper und ihr
+            Einfluss auf die IT-Branche.
+            <a
+              href="https://www.swr.de/wissen/grace-hopper-und-ihr-einfluss-auf-die-it-branche-100.html"
+              >Grace Hopper und ihr Einfluss auf die IT-Branche.</a
+            >
+          </li>
+          <li>
+            Scratch. Screenshot (24.06.2023).<a
+              href="https://scratch.mit.edu/projects/editor/?tutorial=getStarted"
+            >
+              Scratch.mit.edu</a
+            >
+          </li>
+          <li>
+            "Computing is too important to be left to men" - zum Tode von Karen
+            Spärck Jones
+            <a
+              href=" https://www.heise.de/news/Computing-is-too-important-to-be-left-to-men-zum-Tode-von-Karen-Spaerck-Jones-165160.html"
+              >"Computing is too important to be left to men" - zum Tode von
+              Karen Spärck Jones</a
+            >
+          </li>
+          <li>
+            Internet Hall of Fame. Radia Perlman.
+            <a href="https://www.internethalloffame.org/inductees/radia-perlman"
+              >Internet Hall of Fame | Radia Perlman</a
+            >
+          </li>
+          <li>
+            MIT Inventor Hall of Fame. Radia Perlman.
+            <a href="https://lemelson.mit.edu/resources/radia-perlman"
+              >Radia Perlman - MIT Inventor Hall of Fame</a
+            >
+          </li>
+          <li>
+            get in IT. Radia Perlman, die Mutter des Internets.
+            <a
+              href="https://www.get-in-it.de/magazin/arbeitswelt/it-legenden/radia-perlman"
+              >Radia Perlman - die Mutter des Internets
+            </a>
+          </li>
+          <li>
+            alle Portrait-Bilder wurden mittels des KI-Tool Midjourney erstellt
+            <a href="https://www.midjourney.com/home">midjourney.com</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Quellen? -->
+      <div class="container text-white mt-3">
+        Erstellt von Laura Engleitner, Alexander Nachtmann, Stephanie Rauscher,
+        Benjamin Storck und Tamara Wilhelm im Rahmen des IT-Projektseminars im
+        Bachelor Informatik, Betreuer: Lukas Aichbauer<br><br> SS 2023, an der FH Technikum Wien.<br>
+        Kontakt: Benjamin Storck, if22b173@technikum-wien.at<br><br>
+      </div>
+
+      <div class="text-white text-center"> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Pionierinnen der Informatik</span> ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>.</div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Other JavaScripts -->
+    <script src="script.js"></script>
+    <script src="navbar.js"></script>
+    <script src="animations.js"></script>
+    <script src="flugbahnCalc.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

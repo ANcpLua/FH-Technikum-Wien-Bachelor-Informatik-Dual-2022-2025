@@ -1,0 +1,78 @@
+.intro-delay {
+    animation: cssAnimation 2s 6s forwards;
+    opacity: 0;
+    animation-timing-function: ease-in-out;
+  
+  }
+  
+  .cta-delay {
+  
+    opacity: 0;
+    transition: 0.25s all ease-in-out;
+    animation: cssAnimation 2s 7s forwards;
+  }
+  
+  @keyframes cssAnimation {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+  
+    }
+  }
+  
+  
+  
+  .intro-symbols {
+    animation: moveUpDown 2s 8s infinite;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+  
+  @keyframes moveUpDown {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  
+    50% {
+      transform: translateY(20px);
+  
+    }
+  
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  
+  
+  .intro-lead {
+  
+    overflow: hidden;
+    /* Ensures the content is not revealed until the animation */
+    /* The typewriter cursor */
+    margin: 0 auto;
+    /* Gives that scrolling effect as the typing happens */
+  
+    letter-spacing: .15em;
+    /* Adjust as needed */
+    animation:
+      typing 5s steps(50, end);
+  
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from {
+      height: 0
+    }
+  
+    to {
+      height: 40%
+    }
+  }

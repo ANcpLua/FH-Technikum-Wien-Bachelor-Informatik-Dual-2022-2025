@@ -1,0 +1,81 @@
+/* Portrait heading */
+.left-rotate-hidden {
+    opacity: 0;
+    /*transform: rotate(-90deg) translateY(-100%);*/
+    transition: all 1s;
+}
+
+.left-rotate-show {
+    opacity: 1;
+    /*transform: rotate(0deg) translateY(0);*/
+    transition-delay: 0.5s;
+    transition-timing-function: ease-in;
+}
+
+/* Portrait */
+.rotateY-hidden {
+    opacity: -1;
+    transform: rotateY(-90deg);
+    transition: all 3s;
+}
+
+.rotateY-show {
+    transition-delay: 1.5s;
+    opacity: 1;
+    transform: rotateY(0deg);
+}
+
+/* Image */
+.fade-in-hidden {
+    opacity: 0;
+    transition: all 4s;
+}
+
+.fade-in-show {
+    opacity: 1;
+    transition-delay: 1000ms;
+    transition-timing-function: ease-out;
+}
+
+/* Image text */
+.right-slide-hidden {
+    opacity: 0;
+    transform: translateX(50%);
+    transition: all 1.5s;
+}
+
+.right-slide-show {
+    transition-delay: 1s;
+    opacity: 1;
+    transform: translateX(0);
+    transition-timing-function: ease-out;
+}
+
+/* Text */
+.left-slide-hidden {
+    opacity: 0;
+    transform: translateX(-20%);
+    transition-delay: 0.5s;
+    transition: all 2s;
+}
+
+.left-slide-show {
+    opacity: 1;
+    transform: translateX(0);
+    transition-timing-function: ease-out;
+}
+
+/* Question box */
+.rotateX-hidden {
+    opacity: 0;
+    /*transform: rotateX(-90deg);*/
+    transform: rotate(-90deg);
+    transition: all 3s;
+}
+
+.rotateX-show {
+    opacity: 1;
+    transform: rotate(0deg);
+    /*transform: rotateX(0deg);*/
+    transition-delay: 1.5s;
+}
