@@ -1,0 +1,14 @@
+﻿<div class="custom-file-input">
+    <InputFile OnChange="OnFileSelected" accept=".json" class="hidden-input" id="@Id"/>
+    <label for="@Id" class="btn import-tour-btn">Import Tour</label>
+</div>
+
+@code {
+    [Parameter] public EventCallback<InputFileChangeEventArgs> OnChange { get; set; }
+    [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        await OnChange.InvokeAsync(e);
+    }
+}

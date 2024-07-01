@@ -1,0 +1,58 @@
+﻿@using UI.ViewModel
+@inject NavigationManager NavigationManager
+
+<div class="tour-list-container-tour-card">
+    @foreach (var tour in ViewModel.Tours)
+    {
+        <div class="tour-card">
+            <div class="tour-map">
+                <div class="tour-name">
+                    Tour:
+                    @tour.Name
+                </div>
+                <img src="@tour.ImagePath" alt="Tour Map">
+            </div>
+            <div class="tour-details">
+                <div class="tour-info">
+                    <p>
+                        <strong>From:</strong> @tour.From
+                    </p>
+                    <p>
+                        <strong>To:</strong> @tour.To
+                    </p>
+                    <p>
+                        <strong>Transport Type:</strong> @tour.TransportType
+                    </p>
+                    <p><strong>Distance:</strong> @(tour.Distance?.ToString("F2") ?? "N/A") meters</p>
+                    <p><strong>Estimated Time:</strong> @(tour.EstimatedTime?.ToString("F0") ?? "N/A") minutes</p>
+                    <p>
+                        <strong>Popularity:</strong> @tour.Popularity
+                    </p>
+                    <p>
+                        <strong>Average Rating:</strong> @tour.AverageRating.ToString("F1")
+                    </p>
+                    <p>
+                        <strong>Child Friendly:</strong> @(tour.IsChildFriendly ? "Yes" : "No")
+                    </p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-success" @onclick="() => ViewModel.EditTourAsync(tour.Id)">
+                        @(ViewModel.IsFormVisible && ViewModel.SelectedTour?.Id == tour.Id ? "Hide Edit Form" : "Edit")
+                    </button>
+                    <button class="btn btn-danger" @onclick="() => ViewModel.DeleteTourAsync(tour.Id)">Delete</button>
+                    <button class="btn btn-success" @onclick="() => ViewModel.ShowTourDetailsAsync(tour.Id)">Details</button>
+                    <button class="btn btn-info" @onclick="@(() => NavigationManager.NavigateTo($"/log/list/{tour.Id}"))">TourLog</button>
+                    @if (ReportViewModel != null)
+                    {
+                        <button class="btn btn-info btn-export" @onclick="() => ReportViewModel.ExportTourToJsonAsync(tour.Id)">Export</button>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public required TourViewModel ViewModel { get; set; }
+    [Parameter] public ReportViewModel? ReportViewModel { get; set; }
+}

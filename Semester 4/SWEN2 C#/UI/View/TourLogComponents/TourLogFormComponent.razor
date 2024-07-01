@@ -1,0 +1,50 @@
+﻿@using UI.Service
+@using UI.ViewModel
+<EditForm Model="@ViewModel.SelectedTourLog" OnValidSubmit="@ThrottledSaveTourLogAsync">
+    <DataAnnotationsValidator/>
+
+    <div class="row">
+        <div class="col-12 mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <InputTextArea id="comment" class="form-control" @bind-Value="ViewModel.SelectedTourLog.Comment"/>
+            <ValidationMessage For="@(() => ViewModel.SelectedTourLog.Comment)"/>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="difficulty" class="form-label">Difficulty (1-5)</label>
+            <InputNumber id="difficulty" class="form-control" @bind-Value="ViewModel.SelectedTourLog.Difficulty"/>
+            <ValidationMessage For="@(() => ViewModel.SelectedTourLog.Difficulty)"/>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="totalDistance" class="form-label">Total Distance (meters)</label>
+            <InputNumber id="totalDistance" class="form-control" @bind-Value="ViewModel.SelectedTourLog.TotalDistance"/>
+            <ValidationMessage For="@(() => ViewModel.SelectedTourLog.TotalDistance)"/>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="totalTime" class="form-label">Total Time (hours)</label>
+            <InputNumber id="totalTime" class="form-control" @bind-Value="ViewModel.SelectedTourLog.TotalTime"/>
+            <ValidationMessage For="@(() => ViewModel.SelectedTourLog.TotalTime)"/>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="rating" class="form-label">Rating (1-5)</label>
+            <InputNumber id="rating" class="form-control" @bind-Value="ViewModel.SelectedTourLog.Rating"/>
+            <ValidationMessage For="@(() => ViewModel.SelectedTourLog.Rating)"/>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="submit" class="btn btn-primary me-md-2" disabled="@(!ViewModel.IsFormValid)">Save</button>
+        <button type="button" class="btn btn-secondary" @onclick="ViewModel.ToggleLogForm">Cancel</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter] public required TourLogViewModel ViewModel { get; set; }
+
+    private IThrottle _saveThrottle = new Throttle(300);
+
+    private Task ThrottledSaveTourLogAsync() => _saveThrottle.RunAsync(ViewModel.SaveTourLogAsync);
+}

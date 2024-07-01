@@ -1,0 +1,38 @@
+﻿@using UI.ViewModel
+<div class="modal fade" id="tourDetailsModal" tabindex="-1" aria-labelledby="tourDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tourDetailsModalLabel">Tour Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>Name:</strong> @TourViewModel.ModalTour.Name
+                </p>
+                <p>
+                    <strong>Description:</strong> @TourViewModel.ModalTour.Description
+                </p>
+                <p>
+                    <strong>From:</strong> @TourViewModel.ModalTour.From
+                </p>
+                <p>
+                    <strong>To:</strong> @TourViewModel.ModalTour.To
+                </p>
+                <p>
+                    <strong>Transport Type:</strong> @TourViewModel.ModalTour.TransportType
+                </p>
+                <p><strong>Distance:</strong> @TourViewModel.ModalTour.Distance meters</p>
+                <p><strong>Estimated Time:</strong> @TourViewModel.ModalTour.EstimatedTime minutes</p>
+                <img src="@TourViewModel.ModalTour.ImagePath" alt="Tour Image" class="img-fluid rounded"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public required TourViewModel TourViewModel { get; set; }
+}

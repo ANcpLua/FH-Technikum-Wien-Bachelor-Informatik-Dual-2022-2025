@@ -1,0 +1,89 @@
+﻿@page "/"
+@inject TourViewModel TourViewModel
+@inject MapViewModel MapViewModel
+@inject ReportViewModel ReportViewModel
+@using UI.View.SharedComponents
+@using UI.View.TourComponents
+@using UI.ViewModel
+@implements IDisposable
+
+<div class="tour-planner-app">
+    <div class="container-fluid tour-planner-container">
+        <div class="row">
+            <PageTitle>Tours</PageTitle>
+            <div class="col-12 col-lg-8 order-2 order-lg-1">
+                <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                    <button class="btn btn-primary show-map-btn" @onclick="TourViewModel.ToggleMap">
+                        @(TourViewModel.IsMapVisible ? "Hide Map" : "Show Map")
+                    </button>
+                    <CustomFileInput OnChange="ReportViewModel.ImportTourFromJsonAsync"/>
+                    <button class="btn btn-primary add-log-btn" @onclick="TourViewModel.ShowAddTourForm">
+                        @(TourViewModel.IsFormVisible ? "Hide Form" : "Add Tour")
+                    </button>
+                </div>
+
+                @if (TourViewModel.IsMapVisible)
+                {
+                    <div class="map-container mb-4">
+                        <MapComponent ViewModel="MapViewModel"/>
+                    </div>
+
+                }
+
+                <div class="tour-list-container-tour-card">
+                    @if (TourViewModel.Tours.Any())
+                    {
+                        <TourListComponent ViewModel="TourViewModel" ReportViewModel="ReportViewModel"/>
+                    }
+                    else
+                    {
+                        <p class="text-center">No tours available. Please add a tour.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 order-1 order-lg-2 mb-4">
+                @if (TourViewModel.IsFormVisible)
+                {
+                    <div class="tour-form">
+                        <TourFormComponent ViewModel="TourViewModel" MapViewModel="MapViewModel"/>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <TourDetailsModal TourViewModel="TourViewModel"/>
+</div>
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await TourViewModel.LoadToursAsync();
+        TourViewModel.PropertyChanged += OnTourViewModelPropertyChanged;
+        MapViewModel.PropertyChanged += OnMapViewModelPropertyChanged;
+        ReportViewModel.PropertyChanged += OnReportViewModelPropertyChanged;
+    }
+
+    private void OnTourViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnMapViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnReportViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        TourViewModel.PropertyChanged -= OnTourViewModelPropertyChanged;
+        MapViewModel.PropertyChanged -= OnMapViewModelPropertyChanged;
+        ReportViewModel.PropertyChanged -= OnReportViewModelPropertyChanged;
+    }
+}

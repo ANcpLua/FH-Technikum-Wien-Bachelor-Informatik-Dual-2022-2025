@@ -1,0 +1,65 @@
+﻿@using UI.Service
+@using UI.ViewModel
+<EditForm Model="@ViewModel.SelectedTour" OnValidSubmit="@ThrottledSaveTourAsync">
+    <DataAnnotationsValidator/>
+
+    <div class="row">
+        <div class="col-12 mb-3">
+            <label for="name" class="form-label">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="ViewModel.SelectedTour.Name"/>
+            <ValidationMessage For="@(() => ViewModel.SelectedTour.Name)"/>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="description" class="form-label">Description</label>
+            <InputTextArea id="description" class="form-control" @bind-Value="ViewModel.SelectedTour.Description"/>
+            <ValidationMessage For="@(() => ViewModel.SelectedTour.Description)"/>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="from" class="form-label">From</label>
+            <InputSelect id="from" class="form-select" @bind-Value="ViewModel.SelectedTour.From">
+                <option value="">Select a city</option>
+                @foreach (var city in MapViewModel.CityNames)
+                {
+                    <option value="@city">@city</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => ViewModel.SelectedTour.From)"/>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label for="to" class="form-label">To</label>
+            <InputSelect id="to" class="form-select" @bind-Value="ViewModel.SelectedTour.To">
+                <option value="">Select a city</option>
+                @foreach (var city in ViewModel.FilteredToCities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => ViewModel.SelectedTour.To)"/>
+        </div>
+        <div class="col-12 mb-3">
+            <label for="transportType" class="form-label">Transport Type</label>
+            <InputSelect id="transportType" class="form-select" @bind-Value="ViewModel.SelectedTour.TransportType">
+                <option value="Car">Car</option>
+                <option value="Bike">Bike</option>
+                <option value="Foot">Foot</option>
+            </InputSelect>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="submit" class="btn btn-primary me-md-2" disabled="@(!ViewModel.IsFormValid)">Save</button>
+        <button type="button" class="btn btn-secondary" @onclick="ViewModel.ShowAddTourForm">Cancel</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter] public required TourViewModel ViewModel { get; set; }
+    [Parameter] public required MapViewModel MapViewModel { get; set; }
+
+    private IThrottle _saveThrottle = new Throttle(300);
+
+    private Task ThrottledSaveTourAsync() => _saveThrottle.RunAsync(ViewModel.SaveTourAsync);
+}

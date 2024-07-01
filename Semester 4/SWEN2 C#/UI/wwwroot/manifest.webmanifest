@@ -1,0 +1,22 @@
+{
+  "name": "UI",
+  "short_name": "UI",
+  "id": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03173d",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "BlazorIcons/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "BlazorIcons/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}

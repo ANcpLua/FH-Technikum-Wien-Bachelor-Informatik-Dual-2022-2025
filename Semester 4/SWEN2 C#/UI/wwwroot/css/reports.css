@@ -1,0 +1,37 @@
+﻿.report-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.report-section {
+    flex: 1 1 calc(50% - 1rem);
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.report-section h2 {
+    color: var(--heading-color);
+    font-size: 1.7em;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.report-section p {
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.report-section .btn-primary {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.report-section .form-select {
+    width: 100%;
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,47 @@
+﻿@using UI.ViewModel
+@inject IJSRuntime JSRuntime
+
+
+<div class="map-container map-container-2 mb-4">
+    <div class="map-controls row">
+        <div class="col-12 col-md-6">
+            <label for="fromCity" class="form-label">From:</label>
+            <select id="fromCity" @bind="ViewModel.FromCity" class="form-select" title="Select the starting city">
+                <option value="">Select a city</option>
+                @foreach (var city in ViewModel.CityNames)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="toCity" class="form-label">To:</label>
+            <select id="toCity" @bind="ViewModel.ToCity" class="form-select" title="Select the destination city">
+                <option value="">Select a city</option>
+                @foreach (var city in ViewModel.FilteredToCities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="control-row">
+        <button class="btn btn-primary" @onclick="ViewModel.ShowMapAsync">Update Map</button>
+        <button class="btn btn-secondary" @onclick="ViewModel.ClearMapAsync">Reset Map</button>
+    </div>
+</div>
+
+<div @ref="_mapElement" id="map" style="height: 400px;"></div>
+
+@code {
+    [Parameter] public required MapViewModel ViewModel { get; set; }
+    private ElementReference _mapElement;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ViewModel.InitializeMapAsync(_mapElement);
+        }
+    }
+}

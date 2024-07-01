@@ -1,0 +1,184 @@
+﻿:root {
+    --btn-primary-background: linear-gradient(to bottom, #87ffcf, #1a6fff);
+    --btn-secondary-background: linear-gradient(to bottom, #fa4d4d, #f86d6d);
+    --btn-success-background: linear-gradient(to bottom, #28a745, #218838);
+    --btn-danger-background: linear-gradient(to bottom, #dc3545, #c82333);
+    --btn-warning-background: linear-gradient(to bottom, #ffc107, #e0a800);
+    --btn-info-background: linear-gradient(to bottom, #17a2b8, #138496);
+    --btn-light-background: linear-gradient(to bottom, #f8f9fa, #e2e6ea);
+    --btn-dark-background: linear-gradient(to bottom, #ffffff, #23272b);
+    --btn-color: #fff;
+    --btn-border: 1px solid #000000;
+    --btn-shadow: 0 5px #000000;
+    --btn-hover-shadow: 0 3px #000000;
+    --btn-transition: all 0.3s ease;
+    --btn-font-weight: 600;
+    --btn-hover-opacity: 0.85;
+    --btn-hover-scale: 1.05;
+    --btn-border-radius: 0.25rem;
+    --gradient-background: linear-gradient(45deg, #3a8eff, #1a6fff);
+}
+
+.btn-primary:disabled {
+    background-color: #6b6b6b;
+    color: #fff;
+    opacity: 0.2;
+}
+
+.report-page .btn-primary {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: var(--transition-speed);
+}
+
+body {
+    background: var(--gradient-background);
+}
+
+.btn {
+    color: var(--btn-color);
+    border: var(--btn-border);
+    box-shadow: 0 5px #000000, inset 0 1px rgba(255, 255, 255, 0.3);
+    transition: var(--btn-transition);
+    font-weight: var(--btn-font-weight);
+    border-radius: var(--btn-border-radius);
+    padding: 12px 24px;
+    position: relative;
+}
+
+.btn-primary {
+    background: var(--btn-primary-background);
+}
+
+.btn-secondary {
+    background: var(--btn-secondary-background);
+}
+
+.btn-success {
+    background: var(--btn-success-background);
+}
+
+.btn-danger {
+    background: var(--btn-danger-background);
+}
+
+.btn-warning {
+    background: var(--btn-warning-background);
+}
+
+.btn-info {
+    background: var(--btn-info-background);
+}
+
+.btn-light {
+    background: var(--btn-light-background);
+    color: #000;
+}
+
+.btn-dark {
+    background: var(--btn-dark-background);
+}
+
+.btn:hover {
+    opacity: var(--btn-hover-opacity);
+    box-shadow: 0 3px #000000, inset 0 1px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: auto;
+}
+
+.search-btn {
+    border-radius: var(--btn-border-radius);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    background: linear-gradient(to bottom, #FFA500, #FF4500);
+    transition: var(--btn-transition);
+}
+
+.add-log-btn {
+    border-radius: var(--btn-border-radius);
+    border: none;
+    padding: 0.4rem 1.5rem;
+    font-size: 0.9rem;
+    background: var(--gradient-background);
+    transition: var(--btn-transition);
+}
+
+.show-map-btn, .import-tour-btn, .add-tour-btn {
+    border-radius: var(--btn-border-radius);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    transition: var(--btn-transition);
+}
+
+.show-map-btn {
+    background: var(--bs-pink);
+}
+
+.import-tour-btn {
+    background: linear-gradient(to bottom, #9370DB, #4B0082) !important;
+    border-radius: 0 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+.add-tour-btn {
+    background-image: linear-gradient(to bottom, #42d3c2, #4682B4);
+}
+
+.btn-edit {
+    background: linear-gradient(to bottom, #ff9800, #fb8c00);
+}
+
+.btn-delete {
+    background: linear-gradient(to bottom, #f44336, #e53935);
+}
+
+.btn-details {
+    background: linear-gradient(to bottom, #4caf50, #43a047);
+}
+
+.btn-export {
+    background: linear-gradient(to bottom, #2196f3, #1e88e5);
+}
+
+.btn-edit:hover,
+.btn-delete:hover,
+.btn-details:hover,
+.btn-export:hover {
+    transform: translateY(-2px);
+}
+
+.btn-edit:disabled,
+.btn-delete:disabled,
+.btn-details:disabled,
+.btn-export:disabled {
+    background-color: #6b6b6b;
+    color: #fff;
+    opacity: 0.2;
+}
+
+.search-btn, .clear-btn {
+    padding: 10px 60px;
+    font-size: 1.25rem;
+}
+
+.hide-form-btn {
+    border-radius: var(--btn-border-radius);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    background: linear-gradient(to bottom, #DDA0DD, #800080);
+    transition: var(--btn-transition);
+}

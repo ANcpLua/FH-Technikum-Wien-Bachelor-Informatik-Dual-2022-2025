@@ -1,0 +1,64 @@
+﻿@using Blazored.Toast.Configuration
+@using Microsoft.AspNetCore.Components.Routing
+@using UI.View.SharedComponents
+@using UI.ViewModel
+@inherits LayoutComponentBase
+
+<div class="tour-planner-app">
+    <BlazoredToasts Position="ToastPosition.TopRight"
+                    Timeout="3"
+                    IconType="IconType.FontAwesome"
+                    ErrorIcon="error"
+                    InfoIcon="info"
+                    SuccessIcon="check"
+                    WarningIcon="warning"
+                    ShowProgressBar="false"
+                    ShowCloseButton="true"
+                    MaxToastCount="3">
+        <CloseButtonContent>
+            <div>
+                <span class="myCloseButtonStyleClass">&times;</span>
+            </div>
+        </CloseButtonContent>
+    </BlazoredToasts>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+
+                        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                            Tours
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/log/list">
+                            Tour Log
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/report">
+                            Tour Report
+                        </NavLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid">
+        <SearchComponent/>
+
+        @Body
+    </main>
+</div>
+
+@code {
+    [Inject] public required TourViewModel TourViewModel { get; set; }
+    [Inject] public required TourLogViewModel TourLogViewModel { get; set; }
+}

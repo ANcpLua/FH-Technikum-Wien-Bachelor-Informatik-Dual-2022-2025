@@ -1,0 +1,67 @@
+﻿@page "/report"
+@inject ReportViewModel ReportViewModel
+@using UI.ViewModel
+@implements IDisposable
+
+<div class="tour-planner-app">
+    <div class="container-fluid tour-planner-container">
+        <div class="report-page">
+            <div class="report-section">
+                <PageTitle>Report</PageTitle>
+                <h2>Summary Report</h2>
+                <p>Generate a comprehensive overview of all tours.</p>
+                <button class="btn btn-primary" @onclick="ReportViewModel.GenerateSummaryReportAsync">
+                    Generate Summary
+                </button>
+            </div>
+
+            <div class="report-section">
+                <h2>Detailed Report</h2>
+                <select @bind="ReportViewModel.SelectedDetailedTourId" class="form-select">
+                    <option value="">Select a Tour</option>
+                    @foreach (var tour in ReportViewModel.Tours)
+                    {
+                        <option value="@tour.Id">@tour.Name</option>
+                    }
+                </select>
+                <button class="btn btn-primary" @onclick="ReportViewModel.GenerateDetailedReportAsync" disabled="@(ReportViewModel.SelectedDetailedTourId == Guid.Empty)">
+                    Generate Detailed Report
+                </button>
+            </div>
+
+            @if (!string.IsNullOrEmpty(ReportViewModel.CurrentReportUrl))
+            {
+                <div class="report-section">
+                    <button class="btn btn-secondary" @onclick="ReportViewModel.ClearCurrentReport">
+                        Clear Current Report
+                    </button>
+                </div>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(ReportViewModel.CurrentReportUrl))
+        {
+            <div class="map-container">
+                <iframe src="@ReportViewModel.CurrentReportUrl" class="map-component" title="Generated Report"></iframe>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ReportViewModel.InitializeAsync();
+        ReportViewModel.PropertyChanged += OnReportViewModelPropertyChanged;
+    }
+
+    private void OnReportViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        ReportViewModel.PropertyChanged -= OnReportViewModelPropertyChanged;
+    }
+}

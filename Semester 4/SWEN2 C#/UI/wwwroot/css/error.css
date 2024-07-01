@@ -1,0 +1,43 @@
+﻿
+#blazor-error-ui {
+    background: #131313;
+    border-top: 1px solid #ff5252;
+    color: #d4d4d4;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: none;
+}
+
+.myCloseButtonStyleClass {
+    background-color: #f8f9fa;
+    border: none;
+    color: #007bff;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem;
+
+}
+
+#blazor-error-ui .reload, #blazor-error-ui .dismiss {
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+#blazor-error-ui .reload {
+    background: #ff5252;
+    color: #fff;
+}
+
+#blazor-error-ui .dismiss {
+    background: transparent;
+    color: #ff5252;
+    font-size: 1.25rem;
+}
+
+

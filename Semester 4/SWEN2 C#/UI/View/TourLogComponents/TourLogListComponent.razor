@@ -1,0 +1,39 @@
+﻿@using UI.ViewModel
+<div class="tour-list-container-tour-card">
+    @if (ViewModel.TourLogs.Any())
+    {
+        @foreach (var log in ViewModel.TourLogs)
+        {
+            <div class="tour-card">
+                <p>
+                    <strong>Date:</strong> @log.DateTime
+                </p>
+                <p>
+                    <strong>Comment:</strong> @log.Comment
+                </p>
+                <p>
+                    <strong>Difficulty:</strong> @log.Difficulty
+                </p>
+                <p><strong>Total Distance:</strong> @log.TotalDistance meters</p>
+                <p><strong>Total Time:</strong> @log.TotalTime minutes</p>
+                <p>
+                    <strong>Rating:</strong> @log.Rating
+                </p>
+                <div class="btn-group">
+                    <button class="btn btn-success" @onclick="() => ViewModel.EditHandleTourLogAction(log.Id)">
+                        @(ViewModel is { IsEditing: true, IsLogFormVisible: true } && ViewModel.SelectedTourLog.Id == log.Id ? "Hide Edit Form" : "Edit")
+                    </button>
+                    <button class="btn btn-danger" @onclick="() => ViewModel.DeleteTourLogAsync(log.Id)">Delete</button>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center">No logs available for this tour.</p>
+    }
+</div>
+
+@code {
+    [Parameter] public required TourLogViewModel ViewModel { get; set; }
+}

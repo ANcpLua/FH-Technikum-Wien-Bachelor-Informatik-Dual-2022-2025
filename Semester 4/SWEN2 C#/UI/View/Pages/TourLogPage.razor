@@ -1,0 +1,86 @@
+@page "/log/list"
+@page "/log/list/{TourId:guid?}"
+@inject TourLogViewModel TourLogViewModel
+@inject TourViewModel TourViewModel
+@using UI.View.TourLogComponents
+@using UI.ViewModel
+@implements IDisposable
+
+<div class="tour-planner-app">
+    <div class="container-fluid tour-planner-container">
+        <div class="tour-log-page">
+            <div class="tour-log-section">
+                <PageTitle>Tour Logs</PageTitle>
+                <h2>Tour Logs</h2>
+                <div class="tour-select-container">
+                    <select @bind="TourLogViewModel.SelectedTourId" class="form-select">
+                        <option value="">Select a tour</option>
+                        @foreach (var tour in TourViewModel.Tours)
+                        {
+                            <option value="@tour.Id">@tour.Name</option>
+                        }
+                    </select>
+                    <button class="btn btn-primary add-log-btn" @onclick="TourLogViewModel.ToggleLogForm" disabled="@(TourLogViewModel.SelectedTourId == null)">
+                        @(TourLogViewModel.IsLogFormVisible ? "Hide Form" : "Add New Log")
+                    </button>
+                </div>
+                <div class="tour-list-container-tour-card">
+                    @if (TourLogViewModel.TourLogs.Any())
+                    {
+                        <TourLogListComponent ViewModel="TourLogViewModel"/>
+                    }
+                    else
+                    {
+                        <p class="text-center">No logs available. Please add a log.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="tour-log-form-section">
+                @if (TourLogViewModel.IsLogFormVisible)
+                {
+                    <div class="tour-form">
+                        <h5>@(TourLogViewModel.SelectedTourLog.Id == Guid.Empty ? "Add New Log" : "Edit Log")</h5>
+                        <TourLogFormComponent ViewModel="TourLogViewModel"/>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Guid? TourId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await TourViewModel.LoadToursAsync();
+        TourLogViewModel.PropertyChanged += OnTourLogViewModelPropertyChanged;
+        TourViewModel.PropertyChanged += OnTourViewModelPropertyChanged;
+
+        if (TourId.HasValue)
+        {
+            TourLogViewModel.SelectedTourId = TourId.Value;
+            await TourLogViewModel.LoadTourLogsAsync();
+        }
+    }
+
+    private void OnTourLogViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnTourViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(TourViewModel.Tours))
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    public void Dispose()
+    {
+        TourLogViewModel.PropertyChanged -= OnTourLogViewModelPropertyChanged;
+        TourViewModel.PropertyChanged -= OnTourViewModelPropertyChanged;
+    }
+}

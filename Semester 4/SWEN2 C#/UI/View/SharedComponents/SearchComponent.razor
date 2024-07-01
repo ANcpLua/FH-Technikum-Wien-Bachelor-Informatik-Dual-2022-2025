@@ -1,0 +1,88 @@
+﻿@using UI.ViewModel
+<div class="tour-planner-app">
+    <div class="container-fluid">
+        <div class="tour-form">
+            <div class="search-container">
+                <input class="search-input" @bind="SearchViewModel.SearchText" @bind:event="oninput" @onkeyup="SearchViewModel.HandleKeyPress" placeholder="Search tours"/>
+                <div class="search-icon" @onclick="SearchViewModel.SearchToursAsync"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary search-btn" @onclick="SearchViewModel.SearchToursAsync">Search</button>
+                <button class="btn btn-secondary clear-btn" @onclick="SearchViewModel.ClearSearch">Clear</button>
+            </div>
+        </div>
+
+        @if (SearchViewModel.SearchResults.Any())
+        {
+            <div class="tour-list-container-tour-card">
+                @foreach (var tour in SearchViewModel.SearchResults)
+                {
+                    <div class="tour-search" @onclick="() => SearchViewModel.NavigateToTour(tour.Id)">
+                        <div class="tour-info">
+                            <p class="tour-name">@tour.Name</p>
+                            <p>
+                                <span class="attribute-label">From:</span> @tour.From
+                            </p>
+                            <p>
+                                <span class="attribute-label">To:</span> @tour.To
+                            </p>
+                            <p>
+                                <span class="attribute-label">Popularity:</span> @tour.Popularity
+                            </p>
+                            <p>
+                                <span class="attribute-label">Child Friendly:</span> @(tour.IsChildFriendly ? "Yes" : "No")
+                            </p>
+                            <p>
+                                <span class="attribute-label">Transport:</span> @tour.TransportType
+                            </p>
+                            <p>
+                                <span class="attribute-label">Distance:</span> @tour.Distance
+                            </p>
+                            <p>
+                                <span class="attribute-label">Est. Time:</span> @tour.EstimatedTime
+                            </p>
+                            <p>
+                                <span class="attribute-label">Avg Rating:</span> @tour.AverageRating
+                            </p>
+                            <p>
+                                <span class="attribute-label">Tour Logs:</span> @tour.TourLogs.Count
+                            </p>
+                            <p>
+                                <span class="attribute-label">Description:</span> @(string.IsNullOrEmpty(tour.Description) ? "N/A" : tour.Description)
+                            </p>
+                            <p>
+                                <span class="attribute-label">Image:</span> @(string.IsNullOrEmpty(tour.ImagePath) ? "N/A" : "Available")
+                            </p>
+                            <p>
+                                <span class="attribute-label">ID:</span> @tour.Id
+                            </p>
+                            @if (tour.TourLogs.Any())
+                            {
+                                var latestLog = tour.TourLogs.OrderByDescending(log => log.DateTime).First();
+                                <p>
+                                    <span class="attribute-label">Latest Log:</span> @latestLog.DateTime.ToShortDateString()
+                                </p>
+                                <p>
+                                    <span class="attribute-label">Log Rating:</span> @latestLog.Rating
+                                </p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+        {
+            <p class="text-center">No results found.</p>
+        }
+    </div>
+</div>
+
+@code {
+    [Inject] public required SearchViewModel SearchViewModel { get; set; }
+}
