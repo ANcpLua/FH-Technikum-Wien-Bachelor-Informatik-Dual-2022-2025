@@ -1,15 +1,5 @@
 # Hotelverwaltung-Webprojekt-BIF-DUA-1-WS2022-WEB1-DE_1-JavaScript war nicht erlaubt!
 
-Es war mir eine Freude, an diesem Projekt gemeinsam mit Panda-Lambda zu arbeiten (talentierter und kluger Kommilitone).
-
-Dank unserer hervorragenden Zusammenarbeit haben wir ein herausragend gutes Produkt bzw. eine erstklassige Website erstellt.
-
-Überprüft und bewertet von Dipl.-Ing. (FH) Christian Huber, MSc – einem erfahrenen tollen Lektor, von dem ich viel lernen konnte.
-
-Die höchstmögliche Punktzahl wurde erreicht.           ```JavaScript war nicht erlaubt```
-
-# Hotelseite des Hotels Panda Imperial
-
 1) XAMPP muss installiert werden und der gepackte Ordner in die htdocs Datei in einen Ordner namens "hotelsite" entpackt werden. 
 
 2) XAMPP muss gestartet werden, 
