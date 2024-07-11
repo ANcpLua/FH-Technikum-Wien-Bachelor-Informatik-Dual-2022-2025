@@ -1,58 +1,48 @@
-#Compiler and Linker Configurations
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -g -Isrc/server -Isrc/shared
-LDFLAGS = -lpthread -lldap -llber
+CXXFLAGS = -Wall -Wextra -std=c++17 -g
 
-#Define the directories
+INCLUDES = -I./src/client -I./src/shared -I./src/server
+
+LIBS = -lpthread -lldap -llber
+
 SRC_DIR = src
-BUILD_DIR = build
+OBJ_DIR = obj
 BIN_DIR = bin
 
-#Automatically collect all.cpp files in the SRC_DIR subdirectories
-SERVER_SOURCES = $(wildcard $(SRC_DIR)/server/*.cpp)
-CLIENT_SOURCES = $(wildcard $(SRC_DIR)/client/*.cpp)
-SHARED_SOURCES = $(wildcard $(SRC_DIR)/shared/*.cpp)
+CLIENT_SRCS = $(SRC_DIR)/client/main_client.cpp $(SRC_DIR)/client/TwMailerClient.cpp
+SERVER_SRCS = $(SRC_DIR)/server/AuthenticationService.cpp \
+              $(SRC_DIR)/server/CommandHandler.cpp \
+              $(SRC_DIR)/server/MailService.cpp \
+              $(SRC_DIR)/server/main_server.cpp \
+              $(SRC_DIR)/server/TwMailerServer.cpp \
+              $(SRC_DIR)/server/SecureString.cpp
+SHARED_SRCS = $(SRC_DIR)/shared/ClientSession.cpp \
+              $(SRC_DIR)/shared/Configuration.cpp \
+              $(SRC_DIR)/shared/Logger.cpp
 
-# Automatically generate .o files in BUILD_DIR for each .cpp file
-SERVER_OBJECTS = $(SERVER_SOURCES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
-CLIENT_OBJECTS = $(CLIENT_SOURCES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
-SHARED_OBJECTS = $(SHARED_SOURCES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
+CLIENT_OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CLIENT_SRCS))
+SERVER_OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SERVER_SRCS))
+SHARED_OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SHARED_SRCS))
 
-# Target binaries
-EXEC_SERVER = $(BIN_DIR)/twmailer-server
-EXEC_CLIENT = $(BIN_DIR)/twmailer-client
+TARGET_CLIENT = $(BIN_DIR)/twmailer-client
+TARGET_SERVER = $(BIN_DIR)/twmailer-server
 
-# Define phony targets for make commands
-.PHONY: all clean directories
+.PHONY: all clean create_dirs
 
-# Default target builds both client and server
-all: directories $(EXEC_SERVER) $(EXEC_CLIENT)
+all: create_dirs $(TARGET_CLIENT) $(TARGET_SERVER)
 
-# Create necessary directories
-directories:
-	@mkdir -p $(BUILD_DIR)/server $(BUILD_DIR)/client $(BUILD_DIR)/shared $(BIN_DIR)
+create_dirs:
+	mkdir -p $(OBJ_DIR)/client $(OBJ_DIR)/server $(OBJ_DIR)/shared $(BIN_DIR)
 
-# Rule for building the server binary
-$(EXEC_SERVER): $(SERVER_OBJECTS) $(SHARED_OBJECTS)
-	$(CXX) $^ -o $@ $(LDFLAGS)
+$(TARGET_CLIENT): $(CLIENT_OBJS) $(SHARED_OBJS) $(OBJ_DIR)/server/SecureString.o $(OBJ_DIR)/server/CommandHandler.o $(OBJ_DIR)/server/MailService.o
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
-# Rule for building the client binary
-$(EXEC_CLIENT): $(CLIENT_OBJECTS) $(filter-out $(BUILD_DIR)/shared/ClientSession.o,$(SHARED_OBJECTS))
-	$(CXX) $^ -o $@ $(LDFLAGS)
+$(TARGET_SERVER): $(SERVER_OBJS) $(SHARED_OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
-# General rule for converting .cpp files to .o files
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-# Clean up the build (remove object files and executables)
 clean:
-	@echo "Cleaning up..."
-	@rm -rf $(BUILD_DIR) $(BIN_DIR)
-
-help:
-	@echo "Usage: make [target]"
-	@echo "Targets:"
-	@echo "  all        - Builds the client and server binaries"
-	@echo "  clean      - Removes binaries and object files"
-	@echo "  help       - Displays this help message"
+	rm -rf $(OBJ_DIR) $(BIN_DIR)

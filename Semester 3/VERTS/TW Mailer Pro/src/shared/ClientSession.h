@@ -1,6 +1,7 @@
 #ifndef CLIENT_SESSION_H
 #define CLIENT_SESSION_H
 
+#include "../server/CommandHandler.h"
 #include <atomic>
 #include <memory>
 #include <string>
@@ -12,41 +13,49 @@ class ClientSession : public std::enable_shared_from_this<ClientSession>
 public:
     ClientSession (int clientSocket, const std::string &clientIp,
                    std::shared_ptr<CommandHandler> commandHandler);
-    ~ClientSession ();
 
-    void start ();
-    void stop ();
-    void sendResponse (const std::string &response);
-    std::string receiveCommand ();
+    virtual ~ClientSession ();
 
-    bool
+    virtual void start ();
+
+    virtual void stop ();
+
+    virtual void sendResponse (const std::string &response);
+
+    virtual std::string receiveCommand ();
+
+    virtual bool
     isAuthenticated () const
     {
         return authenticated_;
     }
-    void
+
+    virtual void
     setAuthenticated (bool auth)
     {
         authenticated_ = auth;
     }
-    const std::string &
+
+    virtual const std::string &
     getUsername () const
     {
         return username_;
     }
-    void
+
+    virtual void
     setUsername (const std::string &username)
     {
         username_ = username;
     }
-    const std::string &
+
+    virtual const std::string &
     getClientIp () const
     {
         return clientIp_;
     }
 
 private:
-    void processCommands ();
+    virtual void processCommands ();
 
     int clientSocket_;
     std::string clientIp_;
@@ -56,4 +65,4 @@ private:
     std::atomic<bool> running_;
 };
 
-#endif // CLIENT_SESSION_H
+#endif

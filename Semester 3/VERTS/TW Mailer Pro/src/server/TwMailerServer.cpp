@@ -1,83 +1,125 @@
 #include "../shared/ClientSession.h"
-#include "../shared/Logger.h"
+#include "../shared/Configuration.h"
+#include "../shared/TwMailerExceptions.h"
 #include "AuthenticationService.h"
 #include "CommandHandler.h"
 #include "MailService.h"
 #include "TwMailerServer.h"
-#include <algorithm>
-#include <arpa/inet.h>
+#include <iostream>
 #include <netinet/in.h>
-#include <stdexcept>
 #include <sys/socket.h>
 #include <unistd.h>
 
-TwMailerServer::TwMailerServer (uint16_t port,
-                                const std::string &mailSpoolDirectory,
-                                const std::string &ldapUri,
-                                const std::string &ldapBindDnFormat)
-        : port_ (port), mailSpoolDirectory_ (mailSpoolDirectory), running_ (false),
-          serverSocket_ (-1)
+bool TwMailerServer::suppressErrorMessages = false;
+
+TwMailerServer::TwMailerServer () : running_ (false), serverSocket_ (-1)
 {
-    authService_
-            = std::make_unique<AuthenticationService> (ldapUri, ldapBindDnFormat);
-    mailService_ = std::make_unique<MailService> (mailSpoolDirectory);
-    commandHandler_
-            = std::make_shared<CommandHandler> (*authService_, *mailService_);
+    loadConfiguration ();
 }
 
 TwMailerServer::~TwMailerServer () { stop (); }
+
+void
+TwMailerServer::loadConfiguration ()
+{
+    auto &config = Configuration::getInstance ();
+    port_ = static_cast<uint16_t> (config.getInt ("port", 8080));
+    mailSpoolDirectory_ = config.getString ("mail_spool_directory", "mail_spool");
+
+    std::string ldapUri
+            = config.getString ("ldap_uri", "ldap://ldap.technikum-wien.at");
+    std::string ldapBindDnFormat = config.getString (
+            "ldap_bind_dn_format", "uid=%s,ou=people,dc=technikum-wien,dc=at");
+
+    AuthenticationService::Config authConfig;
+    authConfig.MAX_LOGIN_ATTEMPTS = config.getInt ("max_login_attempts", 3);
+    authConfig.BLACKLIST_DURATION
+            = std::chrono::minutes (config.getInt ("blacklist_duration_minutes", 60));
+    authConfig.ATTEMPT_RESET_DURATION = std::chrono::minutes (
+            config.getInt ("attempt_reset_duration_minutes", 5));
+    authConfig.BLACKLIST_FILE_PATH
+            = config.getString ("blacklist_file_path", "data/ip_blacklist.txt");
+    authConfig.MAIL_SPOOL_DIRECTORY = mailSpoolDirectory_;
+
+    authService_ = std::make_shared<AuthenticationServiceImpl> (
+            ldapUri, ldapBindDnFormat, authConfig);
+    mailService_ = std::make_shared<MailServiceImpl> (mailSpoolDirectory_);
+    commandHandler_
+            = std::make_shared<CommandHandlerImpl> (*authService_, *mailService_);
+}
 
 void
 TwMailerServer::start ()
 {
     if (running_)
     {
-        Logger::getInstance ().log (LogLevel::WARNING,
-                                    "Server is already running.");
+        if (!suppressErrorMessages)
+        {
+            std::cerr << "Server is already running." << std::endl;
+        }
         return;
     }
 
     serverSocket_ = socket (AF_INET, SOCK_STREAM, 0);
     if (serverSocket_ == -1)
     {
-        throw std::runtime_error ("Failed to create server socket.");
+        throw std::runtime_error ("Failed to create socket");
     }
 
-    sockaddr_in serverAddr{};
+    int reuse = 1;
+    if (setsockopt (serverSocket_, SOL_SOCKET, SO_REUSEADDR, &reuse,
+                    sizeof (reuse))
+        < 0)
+    {
+        close (serverSocket_);
+        throw std::runtime_error ("Failed to set SO_REUSEADDR");
+    }
+
+    sockaddr_in serverAddr = {};
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_addr.s_addr = INADDR_ANY;
     serverAddr.sin_port = htons (port_);
 
-    if (bind (serverSocket_, (struct sockaddr *)&serverAddr, sizeof (serverAddr))
-        < 0)
+    if (bind (serverSocket_, reinterpret_cast<sockaddr *> (&serverAddr),
+              sizeof (serverAddr))
+        == -1)
     {
         close (serverSocket_);
-        throw std::runtime_error ("Failed to bind server socket.");
+        throw std::runtime_error ("Failed to bind socket");
     }
 
-    if (listen (serverSocket_, 10) < 0)
+    if (listen (serverSocket_, MAX_CONNECTIONS) == -1)
     {
         close (serverSocket_);
-        throw std::runtime_error ("Failed to listen on server socket.");
+        throw std::runtime_error ("Failed to listen on socket");
     }
 
     running_ = true;
-    Logger::getInstance ().log (LogLevel::INFO, "Server started on port "
-                                                + std::to_string (port_));
-    acceptConnections ();
+    if (!suppressErrorMessages)
+    {
+        std::cout << "Welcome" << port_ << std::endl;
+    }
+
+    std::thread (&TwMailerServer::acceptConnections, this).detach ();
 }
 
 void
 TwMailerServer::stop ()
 {
+    if (!running_)
+    {
+        return;
+    }
+
     running_ = false;
+
     if (serverSocket_ != -1)
     {
         close (serverSocket_);
         serverSocket_ = -1;
     }
+
     cleanupConnections ();
-    Logger::getInstance ().log (LogLevel::INFO, "Server stopped.");
 }
 
 bool
@@ -91,36 +133,19 @@ TwMailerServer::acceptConnections ()
 {
     while (running_)
     {
-        sockaddr_in clientAddr{};
-        socklen_t clientAddrLen = sizeof (clientAddr);
-        int clientSocket = accept (serverSocket_, (struct sockaddr *)&clientAddr,
-                                   &clientAddrLen);
-        if (clientSocket < 0)
+        int clientSocket = accept (serverSocket_, nullptr, nullptr);
+        if (clientSocket == -1)
         {
-            if (running_)
+            if (running_ && !suppressErrorMessages)
             {
-                Logger::getInstance ().log (
-                        LogLevel::ERROR, "Failed to accept client connection.");
+                std::cerr << "Failed to accept connection" << std::endl;
             }
             continue;
         }
 
-        {
-            std::lock_guard<std::mutex> lock (clientThreadsMutex_);
-            if (clientThreads_.size () >= MAX_CONNECTIONS)
-            {
-                Logger::getInstance ().log (
-                        LogLevel::WARNING,
-                        "Maximum connections reached. Rejecting new connection.");
-                close (clientSocket);
-                continue;
-            }
-
-            std::string clientIp = inet_ntoa (clientAddr.sin_addr);
-            clientThreads_.emplace_back ([this, clientSocket, clientIp] () {
-                this->handleClient (clientSocket, clientIp);
-            });
-        }
+        std::thread (&TwMailerServer::handleClient, this, clientSocket,
+                     "Client IP")
+                .detach ();
     }
 }
 
@@ -144,4 +169,10 @@ TwMailerServer::cleanupConnections ()
         }
     }
     clientThreads_.clear ();
+}
+
+void
+TwMailerServer::setSuppressErrorMessages (bool suppress)
+{
+    suppressErrorMessages = suppress;
 }

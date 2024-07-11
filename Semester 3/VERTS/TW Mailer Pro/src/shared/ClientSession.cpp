@@ -1,19 +1,18 @@
+#include "../server/CommandHandler.h"
+#include "ClientSession.h"
+#include "Logger.h"
+#include "TwMailerExceptions.h"
+#include <cstring>
+#include <sstream>
+#include <stdexcept>
 #include <sys/socket.h>
 #include <unistd.h>
-
-#include <cstring>
-#include <stdexcept>
-
-#include "../shared/Logger.h"
-#include "../shared/TwMailerExceptions.h"
-#include "ClientSession.h"
-#include "CommandHandler.h"
 
 ClientSession::ClientSession (int clientSocket, const std::string &clientIp,
                               std::shared_ptr<CommandHandler> commandHandler)
         : clientSocket_ (clientSocket), clientIp_ (clientIp),
-          commandHandler_ (std::move (commandHandler)), authenticated_ (false),
-          running_ (false)
+        commandHandler_ (std::move (commandHandler)), authenticated_ (false),
+        running_ (false)
 {
     LOG_INFO ("New client session created for IP: " + clientIp);
 }
@@ -79,7 +78,12 @@ ClientSession::receiveCommand ()
     }
     buffer[bytesRead] = '\0';
     std::string command (buffer);
-    LOG_DEBUG ("Received command from client: " + command);
+
+    std::istringstream iss (command);
+    std::string commandType;
+    iss >> commandType;
+    LOG_DEBUG ("Received command type from client: " + commandType);
+
     return command;
 }
 

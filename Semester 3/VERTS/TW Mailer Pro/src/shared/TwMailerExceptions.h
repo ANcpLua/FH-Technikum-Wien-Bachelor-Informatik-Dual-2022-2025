@@ -49,4 +49,4 @@ public:
     }
 };
 
-#endif // TWMAILER_EXCEPTIONS_H
+#endif

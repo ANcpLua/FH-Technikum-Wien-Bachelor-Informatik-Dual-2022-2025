@@ -2,8 +2,10 @@
 #include "../shared/TwMailerExceptions.h"
 #include "MailService.h"
 #include <algorithm>
+#include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <map>
 #include <sstream>
 
 namespace fs = std::filesystem;
@@ -15,33 +17,35 @@ MailService::MailService (const std::string &mailSpoolDirectory)
     LOG_INFO ("Mail spool directory set to: " + mailSpoolDirectory_.string ());
 }
 
+MailServiceImpl::MailServiceImpl (const std::string &mailSpoolDirectory)
+        : MailService (mailSpoolDirectory)
+{
+}
+
 bool
-MailService::sendMail (const std::string &sender, const std::string &receiver,
-                       const std::string &subject, const std::string &body)
+MailServiceImpl::sendMail (const std::string &sender,
+                           const std::string &receiver,
+                           const std::string &subject, const std::string &body)
 {
     try
     {
-        fs::path receiverMailbox = getUserMailbox (receiver);
-        fs::create_directories (receiverMailbox);
-        size_t mailId = getNextMailId (receiver);
-        fs::path mailPath = getMailPath (receiver, mailId);
+        fs::path senderMailbox = getUserMailbox (sender);
+        fs::create_directories (senderMailbox);
+        std::string filename = generateSequentialFilename (senderMailbox);
+        fs::path mailPath = senderMailbox / filename;
 
         LOG_INFO ("Attempting to save email at: " + mailPath.string ());
 
-        std::ofstream mailFile (mailPath);
-        if (!mailFile.is_open ())
+        if (saveEmail (mailPath, sender, receiver, subject, body))
         {
-            LOG_ERROR ("Failed to create mail file: " + mailPath.string ());
-            throw MailException ("Failed to create mail file");
+            LOG_INFO ("Mail saved successfully at: " + mailPath.string ());
+            return true;
         }
-
-        mailFile << "From: " << sender << "\n"
-                 << "To: " << receiver << "\n"
-                 << "Subject: " << subject << "\n\n"
-                 << body;
-
-        LOG_INFO ("Mail saved successfully at: " + mailPath.string ());
-        return true;
+        else
+        {
+            LOG_ERROR ("Failed to save email at: " + mailPath.string ());
+            return false;
+        }
     }
     catch (const std::exception &e)
     {
@@ -51,7 +55,7 @@ MailService::sendMail (const std::string &sender, const std::string &receiver,
 }
 
 std::vector<std::string>
-MailService::listMails (const std::string &user) const
+MailServiceImpl::listMails (const std::string &user) const
 {
     std::vector<std::string> mailList;
     fs::path userMailbox = getUserMailbox (user);
@@ -65,34 +69,31 @@ MailService::listMails (const std::string &user) const
     LOG_INFO ("Listing mails for user: " + user
               + " in directory: " + userMailbox.string ());
 
-    if (fs::exists (userMailbox) && fs::is_directory (userMailbox))
+    std::map<size_t, std::string> mailMap;
+    for (const auto &entry : fs::directory_iterator (userMailbox))
     {
-        size_t mailId = 1;
-        for (const auto &entry : fs::directory_iterator (userMailbox))
+        if (fs::is_regular_file (entry))
         {
-            if (fs::is_regular_file (entry))
+            std::string filename = entry.path ().filename ().string ();
+            size_t mailId = std::stoul (filename);
+            std::ifstream mailFile (entry.path ());
+            std::string line;
+            std::string subject;
+            while (std::getline (mailFile, line))
             {
-                LOG_INFO ("Found mail file: " + entry.path ().string ());
-                std::ifstream mailFile (entry.path ());
-                std::string line;
-                std::string subject;
-                while (std::getline (mailFile, line))
+                if (line.rfind ("Subject: ", 0) == 0)
                 {
-                    if (line.rfind ("Subject: ", 0) == 0)
-                    {
-                        subject = line.substr (9);
-                        break;
-                    }
+                    subject = line.substr (9);
+                    break;
                 }
-                mailList.push_back (std::to_string (mailId) + ". " + subject);
-                ++mailId;
             }
+            mailMap[mailId] = subject;
         }
     }
-    else
+
+    for (const auto &[id, subject] : mailMap)
     {
-        LOG_WARNING ("User mailbox not found or not a directory: "
-                     + userMailbox.string ());
+        mailList.push_back (std::to_string (id) + ". " + subject);
     }
 
     LOG_INFO ("Found " + std::to_string (mailList.size ()) + " mails for user "
@@ -101,13 +102,11 @@ MailService::listMails (const std::string &user) const
 }
 
 std::string
-MailService::readMail (const std::string &user, size_t mailId) const
+MailServiceImpl::readMail (const std::string &user, size_t mailId) const
 {
     fs::path mailPath = getMailPath (user, mailId);
 
-    LOG_INFO ("Attempting to read mail: " + mailPath.string ());
-
-    if (!fs::exists (mailPath))
+    if (mailPath.empty () || !fs::exists (mailPath))
     {
         LOG_WARNING ("Mail not found: " + mailPath.string ());
         return "";
@@ -121,13 +120,10 @@ MailService::readMail (const std::string &user, size_t mailId) const
 }
 
 bool
-MailService::deleteMail (const std::string &user, size_t mailId)
+MailServiceImpl::deleteMail (const std::string &user, size_t mailId)
 {
     fs::path mailPath = getMailPath (user, mailId);
-
-    LOG_INFO ("Attempting to delete mail: " + mailPath.string ());
-
-    if (!fs::exists (mailPath))
+    if (mailPath.empty () || !fs::exists (mailPath))
     {
         LOG_WARNING ("Mail not found for deletion: " + mailPath.string ());
         return false;
@@ -137,6 +133,7 @@ MailService::deleteMail (const std::string &user, size_t mailId)
     {
         fs::remove (mailPath);
         LOG_INFO ("Mail deleted successfully: " + mailPath.string ());
+        renumberMails (user);
         return true;
     }
     catch (const std::exception &e)
@@ -147,7 +144,7 @@ MailService::deleteMail (const std::string &user, size_t mailId)
 }
 
 fs::path
-MailService::getUserMailbox (const std::string &user) const
+MailServiceImpl::getUserMailbox (const std::string &user) const
 {
     fs::path userMailbox = mailSpoolDirectory_ / user;
     LOG_INFO ("User mailbox path: " + userMailbox.string ());
@@ -155,42 +152,90 @@ MailService::getUserMailbox (const std::string &user) const
 }
 
 fs::path
-MailService::getMailPath (const std::string &user, size_t mailId) const
-{
-    fs::path mailPath
-            = getUserMailbox (user) / (std::to_string (mailId) + ".eml");
-    LOG_INFO ("Mail path: " + mailPath.string ());
-    return mailPath;
-}
-
-size_t
-MailService::getNextMailId (const std::string &user)
+MailServiceImpl::getMailPath (const std::string &user, size_t mailId) const
 {
     fs::path userMailbox = getUserMailbox (user);
-    size_t maxId = 0;
+    std::string mailIdStr = std::to_string (mailId) + ".eml";
 
     for (const auto &entry : fs::directory_iterator (userMailbox))
+    {
+        if (fs::is_regular_file (entry) && entry.path ().filename () == mailIdStr)
+        {
+            return entry.path ();
+        }
+    }
+    LOG_WARNING ("Mail not found for user " + user + " with ID "
+                 + std::to_string (mailId));
+    return fs::path ();
+}
+
+bool
+MailServiceImpl::saveEmail (const fs::path &path, const std::string &from,
+                            const std::string &to, const std::string &subject,
+                            const std::string &body)
+{
+    std::ofstream file (path);
+    if (!file.is_open ())
+    {
+        LOG_ERROR ("Failed to open file for writing: " + path.string ());
+        return false;
+    }
+
+    file << "From: " << from << "\n"
+         << "To: " << to << "\n"
+         << "Subject: " << subject << "\n\n"
+         << body;
+
+    if (file.fail ())
+    {
+        LOG_ERROR ("Failed to write to file: " + path.string ());
+        return false;
+    }
+
+    return true;
+}
+
+std::string
+MailServiceImpl::generateSequentialFilename (const fs::path &mailboxPath) const
+{
+    size_t maxId = 0;
+    for (const auto &entry : fs::directory_iterator (mailboxPath))
     {
         if (fs::is_regular_file (entry))
         {
             std::string filename = entry.path ().filename ().string ();
-            size_t dotPos = filename.find ('.');
-            if (dotPos != std::string::npos)
+            size_t id = std::stoul (filename);
+            if (id > maxId)
             {
-                try
-                {
-                    size_t id = std::stoul (filename.substr (0, dotPos));
-                    maxId = std::max (maxId, id);
-                }
-                catch (const std::exception &e)
-                {
-                    LOG_WARNING ("Invalid mail file name: " + filename);
-                }
+                maxId = id;
             }
         }
     }
+    return std::to_string (maxId + 1) + ".eml";
+}
 
-    LOG_INFO ("Next mail ID for user " + user + ": "
-              + std::to_string (maxId + 1));
-    return maxId + 1;
+void
+MailServiceImpl::renumberMails (const std::string &user)
+{
+    fs::path userMailbox = getUserMailbox (user);
+    std::map<size_t, fs::path> mailMap;
+    for (const auto &entry : fs::directory_iterator (userMailbox))
+    {
+        if (fs::is_regular_file (entry))
+        {
+            size_t mailId = std::stoul (entry.path ().filename ().string ());
+            mailMap[mailId] = entry.path ();
+        }
+    }
+
+    size_t newId = 1;
+    for (const auto &[oldId, path] : mailMap)
+    {
+        if (oldId != newId)
+        {
+            fs::path newPath = userMailbox / (std::to_string (newId) + ".eml");
+            fs::rename (path, newPath);
+        }
+        newId++;
+    }
 }

@@ -1,35 +1,88 @@
 #ifndef COMMAND_HANDLER_H
 #define COMMAND_HANDLER_H
 
-#include <string>
-#include <vector>
-#include <unordered_map>
 #include <functional>
 #include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 class AuthenticationService;
+
 class MailService;
+
 class ClientSession;
 
 class CommandHandler
 {
 public:
-    CommandHandler(AuthenticationService& authService, MailService& mailService);
-    void handleCommand(const std::string& command, ClientSession& session);
+    CommandHandler (AuthenticationService &authService, MailService &mailService);
 
-private:
-    void handleLogin(const std::vector<std::string>& args, ClientSession& session);
-    void handleSend(const std::vector<std::string>& args, ClientSession& session);
-    void handleList(const std::vector<std::string>& args, ClientSession& session);
-    void handleRead(const std::vector<std::string>& args, ClientSession& session);
-    void handleDelete(const std::vector<std::string>& args, ClientSession& session);
-    void handleQuit(const std::vector<std::string>& args, ClientSession& session);
+    virtual ~CommandHandler () = default;
 
-    AuthenticationService& authService_;
-    MailService& mailService_;
+    virtual void handleCommand (const std::string &command,
+                                ClientSession &session)
+    = 0;
 
-    using CommandFunction = std::function<void(const std::vector<std::string>&, ClientSession&)>;
+protected:
+    virtual void handleLogin (const std::vector<std::string> &args,
+                              ClientSession &session)
+    = 0;
+
+    virtual void handleSend (const std::vector<std::string> &args,
+                             ClientSession &session)
+    = 0;
+
+    virtual void handleList (const std::vector<std::string> &args,
+                             ClientSession &session)
+    = 0;
+
+    virtual void handleRead (const std::vector<std::string> &args,
+                             ClientSession &session)
+    = 0;
+
+    virtual void handleDelete (const std::vector<std::string> &args,
+                               ClientSession &session)
+    = 0;
+
+    virtual void handleQuit (const std::vector<std::string> &args,
+                             ClientSession &session)
+    = 0;
+
+    AuthenticationService &authService_;
+    MailService &mailService_;
+    using CommandFunction
+            = std::function<void (const std::vector<std::string> &, ClientSession &)>;
     std::unordered_map<std::string, CommandFunction> commandMap_;
 };
 
-#endif // COMMAND_HANDLER_H
+class CommandHandlerImpl : public CommandHandler
+{
+public:
+    CommandHandlerImpl (AuthenticationService &authService,
+                        MailService &mailService);
+
+    void handleCommand (const std::string &command,
+                        ClientSession &session) override;
+
+protected:
+    void handleLogin (const std::vector<std::string> &args,
+                      ClientSession &session) override;
+
+    void handleSend (const std::vector<std::string> &args,
+                     ClientSession &session) override;
+
+    void handleList (const std::vector<std::string> &args,
+                     ClientSession &session) override;
+
+    void handleRead (const std::vector<std::string> &args,
+                     ClientSession &session) override;
+
+    void handleDelete (const std::vector<std::string> &args,
+                       ClientSession &session) override;
+
+    void handleQuit (const std::vector<std::string> &args,
+                     ClientSession &session) override;
+};
+
+#endif

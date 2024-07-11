@@ -1,6 +1,6 @@
-#include "Logger.h"
+#include "../shared/Logger.h"
+#include "../shared/TwMailerExceptions.h"
 #include "TwMailerClient.h"
-#include "TwMailerExceptions.h"
 #include <algorithm>
 #include <arpa/inet.h>
 #include <cctype>
@@ -9,26 +9,36 @@
 #include <netinet/in.h>
 #include <regex>
 #include <sstream>
+#include <stdexcept>
 #include <sys/socket.h>
+#include <termios.h>
 #include <unistd.h>
 
 class TwMailerClient::Impl
 {
 public:
+    int socket_;
+    std::string serverAddress_;
+    uint16_t serverPort_;
+
     Impl (const std::string &serverAddress, uint16_t serverPort)
-            : serverAddress_ (serverAddress), serverPort_ (serverPort), socket_ (-1)
+            : socket_ (-1), serverAddress_ (serverAddress), serverPort_ (serverPort)
     {
     }
 
-    std::string serverAddress_;
-    uint16_t serverPort_;
-    int socket_;
+    ~Impl ()
+    {
+        if (socket_ != -1)
+        {
+            close (socket_);
+        }
+    }
 };
 
 TwMailerClient::TwMailerClient (const std::string &serverAddress,
                                 uint16_t serverPort)
         : isAuthenticated_ (false),
-          pImpl (std::make_unique<Impl> (serverAddress, serverPort))
+        pImpl (std::make_unique<Impl> (serverAddress, serverPort))
 {
 }
 
@@ -50,8 +60,7 @@ TwMailerClient::run ()
             }
             else
             {
-                std::cout << "\nAvailable commands: SEND, LIST, "
-                             "READ, DEL, QUIT"
+                std::cout << "\nAvailable commands: SEND, LIST, READ, DEL, QUIT"
                           << std::endl;
             }
 
@@ -117,7 +126,7 @@ TwMailerClient::connect ()
     pImpl->socket_ = socket (AF_INET, SOCK_STREAM, 0);
     if (pImpl->socket_ == -1)
     {
-        throw NetworkException ("Failed to create socket");
+        throw std::runtime_error ("Connection failed");
     }
 
     sockaddr_in serverAddr{};
@@ -128,20 +137,20 @@ TwMailerClient::connect ()
                          &serverAddr.sin_addr);
     if (res == 0)
     {
-        throw NetworkException ("Invalid address format");
+        throw std::runtime_error ("Invalid address format");
     }
     else if (res < 0)
     {
-        throw NetworkException ("Address conversion error: "
-                                + std::string (strerror (errno)));
+        throw std::runtime_error ("Address conversion error: "
+                                  + std::string (strerror (errno)));
     }
 
     if (::connect (pImpl->socket_, (struct sockaddr *)&serverAddr,
                    sizeof (serverAddr))
         < 0)
     {
-        throw NetworkException ("Connection failed: "
-                                + std::string (strerror (errno)));
+        throw std::runtime_error ("Connection failed: "
+                                  + std::string (strerror (errno)));
     }
 }
 
@@ -156,9 +165,21 @@ TwMailerClient::disconnect ()
 }
 
 void
-TwMailerClient::sendCommand (const std::string &command)
+TwMailerClient::sendCommand (const std::string &command, bool debug)
 {
-    std::cout << "DEBUG: Sending command:\n" << command << std::endl;
+    if (debug)
+    {
+        if (command.find ("LOGIN") == 0)
+        {
+            std::cout << "DEBUG: Sending login command (password hidden)"
+                      << std::endl;
+        }
+        else
+        {
+            std::cout << "DEBUG: Sending command:\n" << command << std::endl;
+        }
+    }
+
     ssize_t bytesSent
             = send (pImpl->socket_, command.c_str (), command.length (), 0);
     if (bytesSent == -1)
@@ -172,7 +193,7 @@ TwMailerClient::sendCommand (const std::string &command)
 }
 
 std::string
-TwMailerClient::receiveResponse ()
+TwMailerClient::receiveResponse (bool debug)
 {
     char buffer[4096];
     std::string response;
@@ -198,7 +219,10 @@ TwMailerClient::receiveResponse ()
     }
     while (bytesReceived == sizeof (buffer) - 1);
 
-    std::cout << "DEBUG: Received response: " << response << std::endl;
+    if (debug)
+    {
+        std::cout << "DEBUG: Received response: " << response << std::endl;
+    }
     return response;
 }
 
@@ -206,140 +230,206 @@ void
 TwMailerClient::handleLogin ()
 {
     std::string username = getInput ("Username: ");
-    std::string password = getInput ("Password: ");
+    std::string password = getMaskedInput ("Password: ");
+
+    LOG_INFO ("Sending login command for user: " + username);
 
     sendCommand ("LOGIN\n" + username + "\n" + password + "\n");
     std::string response = receiveResponse ();
-    std::cout << response << std::endl;
+
+    LOG_INFO (std::string ("Received login response: ")
+              + (response.substr (0, 2) == "OK" ? "OK" : "ERR"));
 
     if (response.substr (0, 2) == "OK")
     {
-        isAuthenticated_ = true;
         std::cout << "Login successful. You can now use other commands."
                   << std::endl;
+        isAuthenticated_ = true;
     }
     else
     {
         std::cout << "Login failed. Please try again." << std::endl;
     }
+}
 
-    void TwMailerClient::handleSend ()
+void
+TwMailerClient::handleSend (bool debug)
+{
+    std::string receiver = getInput ("Receiver: ");
+    if (!validateEmail (receiver))
     {
-        std::string receiver = getInput ("Receiver: ");
-        if (!validateEmail (receiver))
-        {
-            std::cout << "Invalid email address. Please try again." << std::endl;
-            return;
-        }
+        std::cout << "Invalid email address. Please try again." << std::endl;
+        return;
+    }
 
-        std::string subject = getInput ("Subject: ");
-        if (!validateSubject (subject))
-        {
-            std::cout << "Invalid subject. Must be 80 characters or less."
-                      << std::endl;
-            return;
-        }
+    std::string subject = getInput ("Subject: ");
+    if (!validateSubject (subject))
+    {
+        std::cout << "Invalid subject. Must be 80 characters or less."
+                  << std::endl;
+        return;
+    }
 
-        std::cout << "Message (end with a line containing only '.'):" << std::endl;
-        std::string body;
-        std::string line;
-        while (std::getline (std::cin, line))
+    std::cout << "Message (end with a line containing only '.'):" << std::endl;
+    std::string body;
+    std::string line;
+    while (std::getline (std::cin, line))
+    {
+        if (line == ".")
         {
-            if (line == ".")
+            break;
+        }
+        body += line + "\n";
+    }
+
+    if (!body.empty () && body.back () == '\n')
+    {
+        body.pop_back ();
+    }
+
+    std::ostringstream command;
+    command << "SEND " << receiver << " " << subject << " " << body << "\n";
+    sendCommand (command.str (), debug);
+    std::string response = receiveResponse (debug);
+    std::cout << response << std::endl;
+}
+
+void
+TwMailerClient::handleList (bool debug)
+{
+    sendCommand ("LIST", debug);
+    std::string response = receiveResponse (debug);
+    std::cout << response << std::endl;
+}
+
+void
+TwMailerClient::handleRead (bool debug)
+{
+    std::string mailId = getInput ("Enter mail ID: ");
+    try
+    {
+        std::stoul (mailId);
+        sendCommand ("READ " + mailId, debug);
+        std::string response = receiveResponse (debug);
+        if (response.rfind ("ERR Mail not found", 0) == 0)
+        {
+            std::cout << "Mail ID " << mailId << " not found." << std::endl;
+        }
+        else if (response.rfind ("OK", 0) == 0)
+        {
+            response = response.substr (2);
+            std::cout << response << std::endl;
+        }
+        else
+        {
+            std::cout << "Unexpected response: " << response << std::endl;
+        }
+    }
+    catch (const std::invalid_argument &)
+    {
+        std::cout << "Invalid mail ID. Please enter a valid number." << std::endl;
+    }
+    catch (const std::out_of_range &)
+    {
+        std::cout << "Mail ID out of range. Please enter a valid number."
+                  << std::endl;
+    }
+}
+
+void
+TwMailerClient::handleDelete (bool debug)
+{
+    std::string mailId = getInput ("Enter mail ID to delete: ");
+    try
+    {
+        std::stoul (mailId);
+        sendCommand ("DEL " + mailId, debug);
+        std::string response = receiveResponse (debug);
+        std::cout << response << std::endl;
+    }
+    catch (const std::exception &)
+    {
+        std::cout << "Invalid mail ID. Please enter a number." << std::endl;
+    }
+}
+
+void
+TwMailerClient::handleQuit (bool debug)
+{
+    sendCommand ("QUIT", debug);
+    std::string response = receiveResponse (debug);
+    std::cout << response << std::endl;
+}
+
+std::string
+TwMailerClient::getInput (const std::string &prompt)
+{
+    std::string input;
+    std::cout << prompt;
+    std::getline (std::cin, input);
+    return input;
+}
+
+std::string
+TwMailerClient::getMaskedInput (const std::string &prompt)
+{
+    std::string input;
+    struct termios oldt, newt;
+    int ch;
+
+    std::cout << prompt;
+
+    tcgetattr (STDIN_FILENO, &oldt);
+    newt = oldt;
+
+    newt.c_lflag &= ~(ECHO | ICANON);
+    tcsetattr (STDIN_FILENO, TCSANOW, &newt);
+
+    while ((ch = getchar ()) != '\n' && ch != EOF)
+    {
+        if (ch == 127 || ch == 8)
+        {
+            if (!input.empty ())
             {
-                break;
+                input.pop_back ();
+                std::cout << "\b \b";
             }
-            body += line + "\n";
         }
-
-        if (!body.empty () && body.back () == '\n')
+        else
         {
-            body.pop_back ();
+            input.push_back (ch);
+            std::cout << '*';
         }
-
-        std::ostringstream command;
-        command << "SEND\n"
-                << receiver << "\n"
-                << subject << "\n"
-                << body << "\n.\n";
-        sendCommand (command.str ());
-        std::string response = receiveResponse ();
-        std::cout << response << std::endl;
+        std::cout.flush ();
     }
+    std::cout << std::endl;
 
-    void TwMailerClient::handleList ()
+    tcsetattr (STDIN_FILENO, TCSANOW, &oldt);
+
+    return input;
+}
+
+std::string
+TwMailerClient::getMultiLineInput (const std::string &prompt)
+{
+    std::cout << prompt << std::endl;
+    std::string input, line;
+    while (std::getline (std::cin, line) && line != ".")
     {
-        sendCommand ("LIST");
-        std::string response = receiveResponse ();
-        std::cout << response << std::endl;
+        input += line + "\n";
     }
+    return input;
+}
 
-    void TwMailerClient::handleRead ()
-    {
-        std::string mailId = getInput ("Enter mail ID: ");
-        try
-        {
-            size_t id = std::stoul (mailId);
-            sendCommand ("READ " + mailId);
-            std::string response = receiveResponse ();
-            std::cout << response << std::endl;
-        }
-        catch (const std::exception &)
-        {
-            std::cout << "Invalid mail ID. Please enter a number." << std::endl;
-        }
-    }
+bool
+TwMailerClient::validateEmail(const std::string &email)
+{
+    const std::regex pattern(R"((\w+)(\.|_)?(\w*)@(\w+)(\.(\w+))+)");
+    return std::regex_match(email, pattern);
+}
 
-    void TwMailerClient::handleDelete ()
-    {
-        std::string mailId = getInput ("Enter mail ID to delete: ");
-        try
-        {
-            size_t id = std::stoul (mailId);
-            sendCommand ("DEL " + mailId);
-            std::string response = receiveResponse ();
-            std::cout << response << std::endl;
-        }
-        catch (const std::exception &)
-        {
-            std::cout << "Invalid mail ID. Please enter a number." << std::endl;
-        }
-    }
-
-    void TwMailerClient::handleQuit ()
-    {
-        sendCommand ("QUIT");
-        std::string response = receiveResponse ();
-        std::cout << response << std::endl;
-    }
-
-    std::string TwMailerClient::getInput (const std::string &prompt)
-    {
-        std::string input;
-        std::cout << prompt;
-        std::getline (std::cin, input);
-        return input;
-    }
-
-    std::string TwMailerClient::getMultiLineInput (const std::string &prompt)
-    {
-        std::cout << prompt << std::endl;
-        std::string input, line;
-        while (std::getline (std::cin, line) && line != ".")
-        {
-            input += line + "\n";
-        }
-        return input;
-    }
-
-    bool TwMailerClient::validateEmail (const std::string &email)
-    {
-        const std::regex pattern ("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
-        return std::regex_match (email, pattern);
-    }
-
-    bool TwMailerClient::validateSubject (const std::string &subject)
-    {
-        return subject.length () <= 80;
-    }
+bool
+TwMailerClient::validateSubject (const std::string &subject)
+{
+    return subject.length () <= 80;
 }

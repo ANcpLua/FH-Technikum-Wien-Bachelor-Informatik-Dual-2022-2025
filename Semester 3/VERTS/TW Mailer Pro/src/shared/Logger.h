@@ -20,6 +20,7 @@ public:
     static Logger &getInstance ();
 
     void initialize (const std::string &logFilePath);
+
     void log (LogLevel level, const std::string &message);
 
     void
@@ -27,21 +28,25 @@ public:
     {
         log (LogLevel::DEBUG, message);
     }
+
     void
     info (const std::string &message)
     {
         log (LogLevel::INFO, message);
     }
+
     void
     warning (const std::string &message)
     {
         log (LogLevel::WARNING, message);
     }
+
     void
     error (const std::string &message)
     {
         log (LogLevel::ERROR, message);
     }
+
     void
     critical (const std::string &message)
     {
@@ -50,10 +55,13 @@ public:
 
 private:
     Logger () = default;
+
     Logger (const Logger &) = delete;
+
     Logger &operator= (const Logger &) = delete;
 
     std::string levelToString (LogLevel level) const;
+
     std::string getCurrentTimestamp () const;
 
     std::ofstream logFile_;
@@ -66,4 +74,4 @@ private:
 #define LOG_ERROR(message) Logger::getInstance ().error (message)
 #define LOG_CRITICAL(message) Logger::getInstance ().critical (message)
 
-#endif // LOGGER_H
+#endif

@@ -95,3 +95,9 @@ Configuration::getBool (const std::string &key, bool defaultValue) const
     }
     return defaultValue;
 }
+
+void
+Configuration::setString (const std::string &key, const std::string &value)
+{
+    settings_[key] = value;
+}

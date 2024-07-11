@@ -26,39 +26,22 @@ main (int argc, char *argv[])
         {
             fs::create_directories (log_dir);
         }
-
         fs::path log_file
                 = log_dir / config.getString ("log_file", "twmailer.log");
         Logger::getInstance ().initialize (log_file.string ());
 
-        uint16_t port = static_cast<uint16_t> (config.getInt ("port", 8080));
-        fs::path mail_spool_dir
-                = fs::path (config.getString ("mail_spool_directory", "./mail_spool"))
-                        .lexically_normal ();
-        if (mail_spool_dir.is_relative ())
-        {
-            mail_spool_dir = project_root / mail_spool_dir;
-        }
-
-        std::string ldapUri
-                = config.getString ("ldap_uri", "ldap://ldap.technikum-wien.at");
-        std::string ldapBindDnFormat = config.getString (
-                "ldap_bind_dn_format", "uid=%s,ou=people,dc=technikum-wien,dc=at");
-
-        if (!fs::exists (mail_spool_dir))
-        {
-            fs::create_directories (mail_spool_dir);
-        }
-
-        TwMailerServer server (port, mail_spool_dir.string (), ldapUri,
-                               ldapBindDnFormat);
+        TwMailerServer server;
         server.start ();
 
-        std::cout << "TwMailer server started on port " << port << std::endl;
-        std::cout << "Mail spool directory: " << mail_spool_dir << std::endl;
+        std::cout << "TwMailer server started on port "
+                  << config.getInt ("port", 8080) << std::endl;
+        std::cout << "Mail spool directory: "
+                  << config.getString ("mail_spool_directory", "./mail_spool")
+                  << std::endl;
         std::cout << "Press Enter to stop the server" << std::endl;
 
         std::cin.get ();
+
         server.stop ();
     }
     catch (const TwMailerException &e)

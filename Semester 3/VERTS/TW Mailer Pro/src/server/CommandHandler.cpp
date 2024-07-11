@@ -4,6 +4,7 @@
 #include "AuthenticationService.h"
 #include "CommandHandler.h"
 #include "MailService.h"
+#include "SecureString.h"
 #include <algorithm>
 #include <cctype>
 #include <sstream>
@@ -11,6 +12,12 @@
 CommandHandler::CommandHandler (AuthenticationService &authService,
                                 MailService &mailService)
         : authService_ (authService), mailService_ (mailService)
+{
+}
+
+CommandHandlerImpl::CommandHandlerImpl (AuthenticationService &authService,
+                                        MailService &mailService)
+        : CommandHandler (authService, mailService)
 {
     commandMap_["LOGIN"] = [this] (const auto &args, auto &session) {
         this->handleLogin (args, session);
@@ -33,8 +40,8 @@ CommandHandler::CommandHandler (AuthenticationService &authService,
 }
 
 void
-CommandHandler::handleCommand (const std::string &command,
-                               ClientSession &session)
+CommandHandlerImpl::handleCommand (const std::string &command,
+                                   ClientSession &session)
 {
     try
     {
@@ -77,18 +84,17 @@ CommandHandler::handleCommand (const std::string &command,
 }
 
 void
-CommandHandler::handleLogin (const std::vector<std::string> &args,
-                             ClientSession &session)
+CommandHandlerImpl::handleLogin (const std::vector<std::string> &args,
+                                 ClientSession &session)
 {
     if (args.size () != 2)
     {
-        session.sendResponse (
-                "ERR Invalid number of arguments for LOGIN\n");
+        session.sendResponse ("ERR Invalid number of arguments for LOGIN\n");
         return;
     }
 
     const std::string &username = args[0];
-    const std::string &password = args[1];
+    SecureString password (args[1]);
 
     if (authService_.authenticate (username, password, session.getClientIp ()))
     {
@@ -109,16 +115,15 @@ CommandHandler::handleLogin (const std::vector<std::string> &args,
         }
         else
         {
-            session.sendResponse (
-                    "ERR Login failed. IP has been blacklisted.\n");
+            session.sendResponse ("ERR Login failed. IP has been blacklisted.\n");
         }
         LOG_WARNING ("Login failed for user " + username);
     }
 }
 
 void
-CommandHandler::handleSend (const std::vector<std::string> &args,
-                            ClientSession &session)
+CommandHandlerImpl::handleSend (const std::vector<std::string> &args,
+                                ClientSession &session)
 {
     if (!session.isAuthenticated ())
     {
@@ -142,23 +147,20 @@ CommandHandler::handleSend (const std::vector<std::string> &args,
 
     if (mailService_.sendMail (session.getUsername (), receiver, subject, body))
     {
-        mailService_.sendMail (session.getUsername (),
-                               session.getUsername (), subject, body);
         session.sendResponse ("OK Mail sent\n");
-        LOG_INFO ("Mail sent from " + session.getUsername () + " to "
-                  + receiver);
+        LOG_INFO ("Mail sent from " + session.getUsername () + " to " + receiver);
     }
     else
     {
         session.sendResponse ("ERR Failed to send mail\n");
-        LOG_ERROR ("Failed to send mail from " + session.getUsername ()
-                   + " to " + receiver);
+        LOG_ERROR ("Failed to send mail from " + session.getUsername () + " to "
+                   + receiver);
     }
 }
 
 void
-CommandHandler::handleList (const std::vector<std::string> & /* args */,
-                            ClientSession &session)
+CommandHandlerImpl::handleList (const std::vector<std::string> &,
+                                ClientSession &session)
 {
     if (!session.isAuthenticated ())
     {
@@ -179,8 +181,8 @@ CommandHandler::handleList (const std::vector<std::string> & /* args */,
 }
 
 void
-CommandHandler::handleRead (const std::vector<std::string> &args,
-                            ClientSession &session)
+CommandHandlerImpl::handleRead (const std::vector<std::string> &args,
+                                ClientSession &session)
 {
     if (!session.isAuthenticated ())
     {
@@ -216,14 +218,14 @@ CommandHandler::handleRead (const std::vector<std::string> &args,
     else
     {
         session.sendResponse ("ERR Mail not found\n");
-        LOG_WARNING ("Mail " + std::to_string (mailId)
-                     + " not found for user " + session.getUsername ());
+        LOG_WARNING ("Mail " + std::to_string (mailId) + " not found for user "
+                     + session.getUsername ());
     }
 }
 
 void
-CommandHandler::handleDelete (const std::vector<std::string> &args,
-                              ClientSession &session)
+CommandHandlerImpl::handleDelete (const std::vector<std::string> &args,
+                                  ClientSession &session)
 {
     if (!session.isAuthenticated ())
     {
@@ -263,8 +265,8 @@ CommandHandler::handleDelete (const std::vector<std::string> &args,
 }
 
 void
-CommandHandler::handleQuit (const std::vector<std::string> & /* args */,
-                            ClientSession &session)
+CommandHandlerImpl::handleQuit (const std::vector<std::string> &,
+                                ClientSession &session)
 {
     session.sendResponse ("OK Goodbye\n");
     LOG_INFO ("User " + session.getUsername () + " disconnected");
