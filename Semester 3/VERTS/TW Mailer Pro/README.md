@@ -16,8 +16,8 @@ sudo apt-get install -y cmake git
 ```
 ### Clone the GoogleTest repository to your project directory.
 ```bash
-// cd ~/Documents/TwMailer/tests
 git clone https://github.com/google/googletest.git || (cd googletest && git pull)
+hint: cd ~/Documents/TwMailer/tests
 ```
 ### Directory Structure
 ```bash
