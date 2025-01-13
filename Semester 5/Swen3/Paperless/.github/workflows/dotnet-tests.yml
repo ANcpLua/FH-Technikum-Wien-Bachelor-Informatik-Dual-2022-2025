@@ -1,0 +1,105 @@
+name: .NET Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+        env:
+          discovery.type: single-node
+          xpack.security.enabled: false
+        ports:
+          - 9200:9200
+        options: >-
+          --health-cmd "curl http://localhost:9200/_cluster/health"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+      minio:
+        image: minio/minio
+        env:
+          MINIO_ROOT_USER: minioadmin
+          MINIO_ROOT_PASSWORD: minioadmin
+        ports:
+          - 9000:9000
+          - 9001:9001
+        options: >-
+          --health-cmd "curl http://localhost:9000/minio/health/live"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+        args: ["server", "/data", "--console-address", ":9001"]
+        
+      rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+          - 5672:5672
+          - 15672:15672
+        options: >-
+          --health-cmd "rabbitmq-diagnostics -q ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ghostscript tesseract-ocr
+        
+    - name: Install MinIO Client and create bucket
+      run: |
+        curl https://dl.min.io/client/mc/release/linux-amd64/mc \
+          --create-dirs \
+          -o $HOME/minio-binaries/mc
+        chmod +x $HOME/minio-binaries/mc
+        export PATH=$PATH:$HOME/minio-binaries/
+        
+        # Configure MinIO Client
+        mc alias set local http://localhost:9000 minioadmin minioadmin
+        
+        # Create bucket if it doesn't exist
+        mc mb local/paperless --ignore-existing
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal
+      env:
+        ASPNETCORE_ENVIRONMENT: Development
+        ElasticsearchSettings__Url: http://localhost:9200
+        MinioSettings__Endpoint: localhost:9000
+        MinioSettings__AccessKey: minioadmin
+        MinioSettings__SecretKey: minioadmin
+        MinioSettings__BucketName: paperless
+        MinioSettings__UseSSL: false
+        RabbitMQ__Host: localhost
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: |
+          **/TestResults
+          **/coverage.cobertura.xml
