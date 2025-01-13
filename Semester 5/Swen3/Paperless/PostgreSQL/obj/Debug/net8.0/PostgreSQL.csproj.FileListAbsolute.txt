@@ -1,0 +1,14 @@
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\bin\Debug\net8.0\PostgreSQL.deps.json
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\bin\Debug\net8.0\PostgreSQL.runtimeconfig.json
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\bin\Debug\net8.0\PostgreSQL.dll
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\bin\Debug\net8.0\PostgreSQL.pdb
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.csproj.AssemblyReference.cache
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.AssemblyInfoInputs.cache
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.AssemblyInfo.cs
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.csproj.CoreCompileInputs.cache
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.dll
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\refint\PostgreSQL.dll
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.pdb
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\PostgreSQL.genruntimeconfig.cache
+C:\Users\anfh2\RiderProjects\Paperless\PostgreSQL\obj\Debug\net8.0\ref\PostgreSQL.dll
