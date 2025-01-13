@@ -1,14 +1,9 @@
-
-
 <div align="center">
-  
-# Document Management System SWKOM 2024/2025
-
-## Team Members: Alexander Nachtmann - Jasmin Mondre - Stephanie Rauscher
+  <h1>Document Management System SWKOM 2024/2025 
+    
+Team: Alexander Nachtmann - Jasmin Mondre - Stephanie Rauscher</h1>
 
 </div>
-
-## Development Resources
 
 ### Documentation
 - [MinIO .NET SDK API Reference](https://min.io/docs/minio/linux/developers/dotnet/API.html)
