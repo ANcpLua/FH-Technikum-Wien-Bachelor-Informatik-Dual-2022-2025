@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\anfh2\\RiderProjects\\Paperless\\PaperlessREST\\wwwroot\\css\\index.css",
+      "PackagePath": "staticwebassets\\css\\index.css"
+    },
+    {
+      "Id": "C:\\Users\\anfh2\\RiderProjects\\Paperless\\PaperlessREST\\wwwroot\\documents.html",
+      "PackagePath": "staticwebassets\\documents.html"
+    },
+    {
+      "Id": "C:\\Users\\anfh2\\RiderProjects\\Paperless\\PaperlessREST\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\anfh2\\RiderProjects\\Paperless\\PaperlessREST\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\anfh2\\RiderProjects\\Paperless\\PaperlessREST\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\anfh2\\RiderProjects\\Paperless\\PaperlessREST\\wwwroot\\upload.html",
+      "PackagePath": "staticwebassets\\upload.html"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.PaperlessREST.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.PaperlessREST.props",
+      "PackagePath": "build\\PaperlessREST.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PaperlessREST.props",
+      "PackagePath": "buildMultiTargeting\\PaperlessREST.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.PaperlessREST.props",
+      "PackagePath": "buildTransitive\\PaperlessREST.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
