@@ -1,0 +1,25 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Database=paperless;Username=postgres;Password=postgres",
+    "Rabbit": "host=localhost;port=5672;username=guest;password=guest"
+  },
+  "RabbitMQ": {
+    "Host": "rabbitmq",
+    "Port": "5672",
+    "Username": "guest",
+    "Password": "guest"
+  },
+  "MinIO": {
+    "Endpoint": "localhost:9000",
+    "AccessKey": "minioadmin",
+    "SecretKey": "minioadmin",
+    "BucketName": "documents"
+  },
+  "Elasticsearch": {
+    "Url": "http://localhost:9200"
+  },
+  "OCR": {
+    "Language": "eng",
+    "TessDataPath": null
+  }
+}
