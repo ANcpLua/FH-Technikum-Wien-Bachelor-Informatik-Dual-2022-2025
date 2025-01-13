@@ -1,0 +1,166 @@
+﻿version: "3.9"
+
+services:
+  paperless-rest:
+    build:
+      context: .
+      dockerfile: PaperlessREST/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_URLS: "http://+:8081"
+      ConnectionStrings__DefaultConnection: "Host=host.docker.internal;Database=paperless;Username=postgres;Password=postgres"
+      RabbitMQ__Host: "rabbitmq"
+      Elasticsearch__Url: "http://elasticsearch:9200"
+      MinIO__Endpoint: "localhost:9000"
+      MinIO__BucketName: "documents"
+      MinIO__AccessKey: "minioadmin"
+      MinIO__SecretKey: "minioadmin"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - paperless-network
+
+  paperless-services:
+    build:
+      context: .
+      dockerfile: PaperlessServices/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_URLS: "http://+:8082"
+      ConnectionStrings__DefaultConnection: "Host=host.docker.internal;Database=paperless;Username=postgres;Password=postgres"
+      RabbitMQ__Host: "rabbitmq"
+      RabbitMQ__Port: "5672"
+      RabbitMQ__Username: "guest"
+      RabbitMQ__Password: "guest"
+      MinIO__Endpoint: "localhost:9000"
+      MinIO__AccessKey: "minioadmin"
+      MinIO__SecretKey: "minioadmin"
+      MinIO__BucketName: "documents"
+      Elasticsearch__Url: "http://elasticsearch:9200"
+      TESSDATA_PREFIX: "/usr/share/tesseract-ocr/4.00/tessdata"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - paperless-network
+
+  postgres:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - paperless-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - paperless-network
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9090"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    networks:
+      - paperless-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    ports:
+      - "9200:9200"
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://127.0.0.1:9200/_cluster/health | grep -vq '\"status\":\"red\"'"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - paperless-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.0
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/kibana.yml:ro
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -s -I http://127.0.0.1:5601/api/status | grep -q 'HTTP/1.1 200 OK'" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - paperless-network
+
+volumes:
+  postgres-data:
+  rabbitmq-data:
+  minio-data:
+  elasticsearch-data:
+
+networks:
+  paperless-network:
+    driver: bridge

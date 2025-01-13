@@ -1,0 +1,12 @@
+C:\Users\anfh2\RiderProjects\Paperless\Contract\bin\Debug\net8.0\Contract.deps.json
+C:\Users\anfh2\RiderProjects\Paperless\Contract\bin\Debug\net8.0\Contract.dll
+C:\Users\anfh2\RiderProjects\Paperless\Contract\bin\Debug\net8.0\Contract.pdb
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\Contract.csproj.AssemblyReference.cache
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\Contract.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\Contract.AssemblyInfoInputs.cache
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\Contract.AssemblyInfo.cs
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\Contract.csproj.CoreCompileInputs.cache
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\Contract.dll
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\refint\Contract.dll
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\Contract.pdb
+C:\Users\anfh2\RiderProjects\Paperless\Contract\obj\Debug\net8.0\ref\Contract.dll

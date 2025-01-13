@@ -1,0 +1,12 @@
+server.name: "paperless-kibana"
+server.host: "0"
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+monitoring.ui.container.elasticsearch.enabled: true
+
+kibana.defaultAppId: "discover"
+
+logging.root.level: "info"
+logging.quiet: false
+
+ops.interval: 5000
+xpack.security.enabled: false
