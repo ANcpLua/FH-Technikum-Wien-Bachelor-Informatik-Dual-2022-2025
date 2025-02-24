@@ -6,7 +6,6 @@
     <title>TourPlanner</title>
     <base href="/"/>
 
-    <!-- CSS Files -->
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/app.css" rel="stylesheet"/>
     <link href="css/error.css" rel="stylesheet"/>
@@ -16,20 +15,17 @@
     <link href="css/leaflet.css" rel="stylesheet"/>
     <link href="UI.styles.css" rel="stylesheet"/>
 
-    <!-- Leaflet CSS -->
     <link crossorigin="anonymous" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" rel="stylesheet"/>
     <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" rel="stylesheet"/>
     <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" rel="stylesheet"/>
 
-    <!-- Favicon and App Icons -->
     <link href="BlazorIcons/logo.png" rel="icon" type="image/png"/>
     <link href="BlazorIcons/logo-512.png" rel="apple-touch-icon" sizes="512x512"/>
     <link href="BlazorIcons/logo-192.png" rel="apple-touch-icon" sizes="192x192"/>
     <link href="manifest.webmanifest" rel="manifest"/>
 
-    <!-- jQuery UI CSS -->
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
 </head>
 <body class="tour-planner-app">
@@ -44,7 +40,7 @@
     <a class="reload" href="">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
-<!-- JavaScript Files -->
+
 <script src="_framework/blazor.webassembly.js"></script>
 <script crossorigin="anonymous"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -53,7 +49,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 
-<!-- Leaflet JavaScript -->
 <script crossorigin="anonymous"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -61,18 +56,44 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
 <script src="js/tourplannermap.js"></script>
 
-<!-- Service Worker and Custom Scripts -->
 <script>
-    navigator.serviceWorker.register('js/service-worker.js');
+    navigator.serviceWorker.register('service-worker.published.js');
 
     function showModal(modalId) {
         var modal = new bootstrap.Modal(document.getElementById(modalId));
         modal.show();
     }
+    window.blazorDownloadFile = {
+        init: function () {
+            if (window.streamSaver) {
+                console.log('StreamSaver already initialized');
+                return;
+            }
 
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('js/service-worker.js');
-    });
+            console.log('Initializing BlazorDownloadFile...');
+            try {
+            } catch (error) {
+                console.error('Error initializing BlazorDownloadFile:', error);
+            }
+        },
+
+        download: function (options) {
+            console.log('Download requested:', options);
+            try {
+                const link = document.createElement('a');
+                link.href = options.url;
+                link.download = options.fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                console.log('Download completed');
+                return true;
+            } catch (error) {
+                console.error('Download failed:', error);
+                return false;
+            }
+        }
+    };
 </script>
 </body>
 </html>
