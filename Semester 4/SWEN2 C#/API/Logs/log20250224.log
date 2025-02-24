@@ -1,0 +1,93 @@
+2025-02-24 02:19:31.320 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:80'.
+2025-02-24 02:19:31.364 +00:00 [WRN] The WebRootPath was not found: /app/wwwroot. Static files may be unavailable.
+2025-02-24 02:19:31.387 +00:00 [INF] Now listening on: http://[::]:80
+2025-02-24 02:19:31.388 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-02-24 02:19:31.388 +00:00 [INF] Hosting environment: Production
+2025-02-24 02:19:31.388 +00:00 [INF] Content root path: /app
+2025-02-24 02:19:52.396 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:7102/api/tour - null null
+2025-02-24 02:19:52.420 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:52.425 +00:00 [INF] Executing endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:52.435 +00:00 [INF] Route matched with {action = "GetAllTours", controller = "Tour"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[UI.Model.Tour]] GetAllTours() on controller API.Controllers.TourController (API).
+2025-02-24 02:19:52.443 +00:00 [INF] Entering API.Controllers.TourController.GetAllTours with arguments: []
+2025-02-24 02:19:52.740 +00:00 [INF] Exiting API.Controllers.TourController.GetAllTours after 291ms
+2025-02-24 02:19:52.744 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[DAL.PersistenceModel.TourPersistence, DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[UI.Model.Tour, UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-24 02:19:52.773 +00:00 [INF] Executed action API.Controllers.TourController.GetAllTours (API) in 334.4499ms
+2025-02-24 02:19:52.775 +00:00 [INF] Executed endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:52.777 +00:00 [INF] HTTP GET /api/tour responded 200 in 352.0879 ms
+2025-02-24 02:19:52.784 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:7102/api/tour - 200 null application/json; charset=utf-8 388.7831ms
+2025-02-24 02:19:53.236 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:7102/api/tour - null null
+2025-02-24 02:19:53.237 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:53.238 +00:00 [INF] Executing endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:53.238 +00:00 [INF] Route matched with {action = "GetAllTours", controller = "Tour"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[UI.Model.Tour]] GetAllTours() on controller API.Controllers.TourController (API).
+2025-02-24 02:19:53.239 +00:00 [INF] Entering API.Controllers.TourController.GetAllTours with arguments: []
+2025-02-24 02:19:53.280 +00:00 [INF] Exiting API.Controllers.TourController.GetAllTours after 40ms
+2025-02-24 02:19:53.280 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[DAL.PersistenceModel.TourPersistence, DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[UI.Model.Tour, UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-24 02:19:53.281 +00:00 [INF] Executed action API.Controllers.TourController.GetAllTours (API) in 42.4002ms
+2025-02-24 02:19:53.281 +00:00 [INF] Executed endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:53.281 +00:00 [INF] HTTP GET /api/tour responded 200 in 43.5321 ms
+2025-02-24 02:19:53.282 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:7102/api/tour - 200 null application/json; charset=utf-8 45.961ms
+2025-02-24 02:19:57.061 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:7102/api/tour - null null
+2025-02-24 02:19:57.062 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:57.063 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:7102/api/tour - 204 null null 1.5273ms
+2025-02-24 02:19:57.064 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:7102/api/tour - application/json; charset=utf-8 488
+2025-02-24 02:19:57.065 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:57.065 +00:00 [INF] Executing endpoint 'API.Controllers.TourController.CreateTour (API)'
+2025-02-24 02:19:57.072 +00:00 [INF] Route matched with {action = "CreateTour", controller = "Tour"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[UI.Model.Tour]] CreateTour(UI.Model.Tour) on controller API.Controllers.TourController (API).
+2025-02-24 02:19:57.101 +00:00 [INF] Entering API.Controllers.TourController.CreateTour with arguments: [{"Id":"00000000-0000-0000-0000-000000000000","Name":"eq","Description":"eqe","From":"Paris","To":"Berlin","ImagePath":"Images/tours/ParisBerlin.png","RouteInformation":"{\"FromCoordinates\":{\"Latitude\":48.8566,\"Longitude\":2.3522},\"ToCoordinates\":{\"Latitude\":52.52,\"Longitude\":13.405},\"Distance\":1175385.4,\"Duration\":243576.1}","Distance":1175385.4,"EstimatedTime":243576.1,"TransportType":"Bike","TourLogs":[],"Popularity":"Not popular","AverageRating":0,"IsChildFriendly":false,"$type":"Tour"}]
+2025-02-24 02:19:57.259 +00:00 [INF] Exiting API.Controllers.TourController.CreateTour after 155ms
+2025-02-24 02:19:57.283 +00:00 [INF] Executing OkObjectResult, writing value of type 'UI.Model.Tour'.
+2025-02-24 02:19:57.286 +00:00 [INF] Executed action API.Controllers.TourController.CreateTour (API) in 213.6387ms
+2025-02-24 02:19:57.287 +00:00 [INF] Executed endpoint 'API.Controllers.TourController.CreateTour (API)'
+2025-02-24 02:19:57.287 +00:00 [INF] HTTP POST /api/tour responded 200 in 222.5500 ms
+2025-02-24 02:19:57.288 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:7102/api/tour - 200 null application/json; charset=utf-8 223.9828ms
+2025-02-24 02:19:57.330 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:7102/api/tour - null null
+2025-02-24 02:19:57.330 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:57.330 +00:00 [INF] Executing endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:57.331 +00:00 [INF] Route matched with {action = "GetAllTours", controller = "Tour"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[UI.Model.Tour]] GetAllTours() on controller API.Controllers.TourController (API).
+2025-02-24 02:19:57.331 +00:00 [INF] Entering API.Controllers.TourController.GetAllTours with arguments: []
+2025-02-24 02:19:57.343 +00:00 [INF] Exiting API.Controllers.TourController.GetAllTours after 11ms
+2025-02-24 02:19:57.343 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[DAL.PersistenceModel.TourPersistence, DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[UI.Model.Tour, UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-24 02:19:57.343 +00:00 [INF] Executed action API.Controllers.TourController.GetAllTours (API) in 12.2891ms
+2025-02-24 02:19:57.343 +00:00 [INF] Executed endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:57.344 +00:00 [INF] HTTP GET /api/tour responded 200 in 13.2897 ms
+2025-02-24 02:19:57.344 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:7102/api/tour - 200 null application/json; charset=utf-8 14.381ms
+2025-02-24 02:19:59.074 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:7102/api/tour - null null
+2025-02-24 02:19:59.075 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:59.075 +00:00 [INF] Executing endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:59.075 +00:00 [INF] Route matched with {action = "GetAllTours", controller = "Tour"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[UI.Model.Tour]] GetAllTours() on controller API.Controllers.TourController (API).
+2025-02-24 02:19:59.076 +00:00 [INF] Entering API.Controllers.TourController.GetAllTours with arguments: []
+2025-02-24 02:19:59.078 +00:00 [INF] Exiting API.Controllers.TourController.GetAllTours after 2ms
+2025-02-24 02:19:59.079 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[DAL.PersistenceModel.TourPersistence, DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[UI.Model.Tour, UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-24 02:19:59.079 +00:00 [INF] Executed action API.Controllers.TourController.GetAllTours (API) in 3.5751ms
+2025-02-24 02:19:59.079 +00:00 [INF] Executed endpoint 'API.Controllers.TourController.GetAllTours (API)'
+2025-02-24 02:19:59.080 +00:00 [INF] HTTP GET /api/tour responded 200 in 4.6408 ms
+2025-02-24 02:19:59.080 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:7102/api/tour - 200 null application/json; charset=utf-8 5.9107ms
+2025-02-24 02:19:59.794 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:7102/api/reports/summary - null null
+2025-02-24 02:19:59.795 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:59.795 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:7102/api/reports/summary - 204 null null 1.1597ms
+2025-02-24 02:19:59.797 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:7102/api/reports/summary - null null
+2025-02-24 02:19:59.798 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:19:59.798 +00:00 [INF] Executing endpoint 'API.Controllers.FileController.GetSummaryReport (API)'
+2025-02-24 02:19:59.799 +00:00 [INF] Route matched with {action = "GetSummaryReport", controller = "File"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.FileResult GetSummaryReport() on controller API.Controllers.FileController (API).
+2025-02-24 02:19:59.856 +00:00 [INF] Entering API.Controllers.FileController.GetSummaryReport with arguments: []
+2025-02-24 02:20:01.385 +00:00 [INF] Exiting API.Controllers.FileController.GetSummaryReport after 1528ms
+2025-02-24 02:20:01.386 +00:00 [INF] Executing FileContentResult, sending file with download name 'SummaryReport.pdf' ...
+2025-02-24 02:20:01.397 +00:00 [INF] Executed action API.Controllers.FileController.GetSummaryReport (API) in 1598.1527ms
+2025-02-24 02:20:01.398 +00:00 [INF] Executed endpoint 'API.Controllers.FileController.GetSummaryReport (API)'
+2025-02-24 02:20:01.398 +00:00 [INF] HTTP GET /api/reports/summary responded 200 in 1600.1342 ms
+2025-02-24 02:20:01.398 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:7102/api/reports/summary - 200 485973 application/pdf 1601.5475ms
+2025-02-24 02:21:13.991 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:7102/api/reports/summary - null null
+2025-02-24 02:21:13.992 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:21:13.993 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:7102/api/reports/summary - 204 null null 1.8199ms
+2025-02-24 02:21:13.994 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:7102/api/reports/summary - null null
+2025-02-24 02:21:13.995 +00:00 [INF] CORS policy execution successful.
+2025-02-24 02:21:13.995 +00:00 [INF] Executing endpoint 'API.Controllers.FileController.GetSummaryReport (API)'
+2025-02-24 02:21:13.996 +00:00 [INF] Route matched with {action = "GetSummaryReport", controller = "File"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.FileResult GetSummaryReport() on controller API.Controllers.FileController (API).
+2025-02-24 02:21:13.997 +00:00 [INF] Entering API.Controllers.FileController.GetSummaryReport with arguments: []
+2025-02-24 02:21:14.108 +00:00 [INF] Exiting API.Controllers.FileController.GetSummaryReport after 110ms
+2025-02-24 02:21:14.109 +00:00 [INF] Executing FileContentResult, sending file with download name 'SummaryReport.pdf' ...
+2025-02-24 02:21:14.111 +00:00 [INF] Executed action API.Controllers.FileController.GetSummaryReport (API) in 115.3816ms
+2025-02-24 02:21:14.112 +00:00 [INF] Executed endpoint 'API.Controllers.FileController.GetSummaryReport (API)'
+2025-02-24 02:21:14.112 +00:00 [INF] HTTP GET /api/reports/summary responded 200 in 116.7958 ms
+2025-02-24 02:21:14.113 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:7102/api/reports/summary - 200 485973 application/pdf 118.0423ms
+2025-02-24 02:21:31.676 +00:00 [INF] Application is shutting down...

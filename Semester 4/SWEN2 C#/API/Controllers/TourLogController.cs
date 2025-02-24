@@ -38,7 +38,7 @@ public class TourLogController : ControllerBase
     [ApiMethodDecorator]
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(TourLog), (int)HttpStatusCode.OK)]
-    public IActionResult GetTourLogById(Guid id)
+    public ActionResult GetTourLogById(Guid id)
     {
         var tourLog = _tourLogService.GetTourLogById(id);
         if (tourLog == null)
@@ -52,12 +52,11 @@ public class TourLogController : ControllerBase
     [ApiMethodDecorator]
     [HttpGet("bytour/{tourId:guid}")]
     [ProducesResponseType(typeof(IEnumerable<TourLog>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetTourLogsByTourId(
-        Guid tourId,
-        CancellationToken cancellationToken = default
+    public ActionResult GetTourLogsByTourId(
+        Guid tourId
     )
     {
-        var tourLogs = await _tourLogService.GetTourLogsByTourIdAsync(tourId, cancellationToken);
+        var tourLogs =  _tourLogService.GetTourLogsByTourId(tourId);
         var tourLogDtos = _mapper.Map<IEnumerable<TourLog>>(tourLogs);
         return Ok(tourLogDtos);
     }

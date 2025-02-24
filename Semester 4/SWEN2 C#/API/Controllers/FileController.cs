@@ -26,35 +26,35 @@ public class FileController : ControllerBase
     [ApiMethodDecorator]
     [HttpGet("summary")]
     [ProducesResponseType(typeof(FileResult), (int)HttpStatusCode.OK)]
-    public async Task<FileResult> GetSummaryReport()
+    public FileResult GetSummaryReport()
     {
-        var tours = await _tourService.GetAllToursAsync();
-        var report = await _fileService.GenerateSummaryReportAsync(tours);
+        var tours = _tourService.GetAllTours();
+        var report =  _fileService.GenerateSummaryReport(tours);
         return File(report, "application/pdf", "SummaryReport.pdf");
     }
-
+    
     [ApiMethodDecorator]
     [HttpGet("tour/{tourId:guid}")]
     [ProducesResponseType(typeof(FileResult), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult> GetTourReport(Guid tourId)
+    public FileResult GetTourReport(Guid tourId)
     {
-        var report = await _fileService.GenerateTourReportAsync(tourId);
+        var report = _fileService.GenerateTourReport(tourId);
         return File(report, "application/pdf", $"TourReport_{tourId}.pdf");
     }
 
     [ApiMethodDecorator]
     [HttpGet("export/{tourId:guid}")]
     [ProducesResponseType(typeof(Tour), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult> ExportTourToJson(Guid tourId)
+    public ActionResult ExportTourToJson(Guid tourId)
     {
-        var tourDomain = await _fileService.ExportTourToJsonAsync(tourId);
+        var tourDomain = _fileService.ExportTourToJson(tourId);
         var tourDto = _mapper.Map<Tour>(tourDomain);
         return new JsonResult(
-        tourDto,
-        new JsonSerializerOptions
-        {
-            WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        }
+            tourDto,
+            new JsonSerializerOptions
+            {
+                WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            }
         )
         {
             ContentType = "application/json", StatusCode = (int)HttpStatusCode.OK
@@ -64,7 +64,7 @@ public class FileController : ControllerBase
     [ApiMethodDecorator]
     [HttpPost("import")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> ImportTourFromJson([FromBody] string json)
+    public async Task<IActionResult> ImportTourFromJsonAsync([FromBody] string json)
     {
         await _fileService.ImportTourFromJsonAsync(json);
         return Ok("Tour imported successfully");

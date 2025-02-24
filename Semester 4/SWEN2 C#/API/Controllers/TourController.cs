@@ -34,9 +34,9 @@ public class TourController : ControllerBase
     [ApiMethodDecorator]
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<Tour>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<Tour>>> GetAllTours()
+    public ActionResult<IEnumerable<Tour>> GetAllTours()
     {
-        var tours = await _tourService.GetAllToursAsync();
+        var tours = _tourService.GetAllTours();
         return Ok(_mapper.Map<IEnumerable<Tour>>(tours));
     }
 
@@ -75,7 +75,7 @@ public class TourController : ControllerBase
     [ApiMethodDecorator]
     [HttpGet("search/{searchText}")]
     [ProducesResponseType(typeof(IEnumerable<Tour>), (int)HttpStatusCode.OK)]
-    public IActionResult SearchTours(string searchText)
+    public ActionResult SearchTours(string searchText)
     {
         var tours = _tourService.SearchTours(searchText);
         var tourDtos = _mapper.Map<IEnumerable<Tour>>(tours);

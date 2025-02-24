@@ -1,16 +1,15 @@
 ﻿{
-  "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
     "API": {
       "commandName": "Project",
       "launchBrowser": false,
-      "launchUrl": "https://localhost:7102",
-      "applicationUrl": "https://localhost:7102",
+      "launchUrl": "http://localhost:7102",
+      "applicationUrl": "http://localhost:7102",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7102",
+        "ASPNETCORE_URLS": "http://+:7102",
         "OpenRouteServiceApiKey": "5b3ce3597851110001cf624835cb6e705a6944e7b852577e107952ac",
-        "TourPlannerDatabase": "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=postgres"
+        "ConnectionStrings__TourPlannerDatabase": "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=postgres"
       }
     }
   }
