@@ -27,7 +27,7 @@ public class TourLogViewModel : BaseViewModel
         : base(httpService, toastServiceWrapper, logger)
     {
         _viewModelHelperService = viewModelHelperService;
-        TourLogs = new ObservableCollection<TourLog>();
+        TourLogs = [];
         _jsRuntime = jsRuntime;
     }
 
@@ -63,12 +63,10 @@ public class TourLogViewModel : BaseViewModel
         }
     }
 
-    public bool IsFormValid
-    {
-        get => !string.IsNullOrWhiteSpace(SelectedTourLog.Comment) &&
-               SelectedTourLog.Difficulty is >= 1 and <= 5 &&
-               SelectedTourLog is { TotalDistance: > 0, TotalTime: > 0, Rating: >= 1 and <= 5 };
-    }
+    public bool IsFormValid =>
+        !string.IsNullOrWhiteSpace(SelectedTourLog.Comment) &&
+        SelectedTourLog.Difficulty is >= 1 and <= 5 &&
+        SelectedTourLog is { TotalDistance: > 0, TotalTime: > 0, Rating: >= 1 and <= 5 };
 
     private Task HandleTourSelection() => HandleApiRequestAsync(
     async () => {
@@ -111,7 +109,7 @@ public class TourLogViewModel : BaseViewModel
         OnPropertyChanged(nameof(IsEditing));
     }
 
-    public void ResetForm()
+    private void ResetForm()
     {
         _viewModelHelperService.ResetForm(
         ref _selectedTourLog,

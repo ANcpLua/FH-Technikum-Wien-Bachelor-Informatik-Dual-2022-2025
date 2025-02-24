@@ -16,10 +16,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 var configuration = builder.Configuration;
 
 builder.Services.AddSingleton(
-new HttpClient
-{
-    BaseAddress = new Uri(configuration["AppSettings:ApiBaseUrl"] ?? "https://localhost:7102")
-}
+    new HttpClient
+    {
+        BaseAddress = new Uri(configuration["AppSettings:ApiBaseUrl"] ?? "https://localhost:7102")
+    }
 );
 
 builder.Services.AddBlazoredToast();

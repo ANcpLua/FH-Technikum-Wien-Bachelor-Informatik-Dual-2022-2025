@@ -1,4 +1,4 @@
-﻿@page "/report"
+﻿@page "/reports"
 @inject ReportViewModel ReportViewModel
 @using UI.ViewModel
 @implements IDisposable
@@ -10,8 +10,10 @@
                 <PageTitle>Report</PageTitle>
                 <h2>Summary Report</h2>
                 <p>Generate a comprehensive overview of all tours.</p>
-                <button class="btn btn-primary" @onclick="ReportViewModel.GenerateSummaryReportAsync">
-                    Generate Summary
+                <button class="btn btn-primary"
+                        @onclick="ReportViewModel.GenerateSummaryReportAsync"
+                        disabled="@ReportViewModel.IsProcessing">
+                    @(ReportViewModel.IsProcessing ? "Generating..." : "Generate Summary")
                 </button>
             </div>
 
@@ -24,7 +26,9 @@
                         <option value="@tour.Id">@tour.Name</option>
                     }
                 </select>
-                <button class="btn btn-primary" @onclick="ReportViewModel.GenerateDetailedReportAsync" disabled="@(ReportViewModel.SelectedDetailedTourId == Guid.Empty)">
+                <button class="btn btn-primary"
+                        @onclick="ReportViewModel.GenerateDetailedReportAsync"
+                        disabled="@(ReportViewModel.IsProcessing || ReportViewModel.SelectedDetailedTourId == Guid.Empty)">
                     Generate Detailed Report
                 </button>
             </div>

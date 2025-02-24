@@ -9,7 +9,7 @@ namespace UI.ViewModel;
 
 public class MapViewModel : BaseViewModel
 {
-    public static readonly Dictionary<string, (double Latitude, double Longitude)> _coordinates =
+    public static readonly Dictionary<string, (double Latitude, double Longitude)> Coordinates =
         new()
         {
             {
@@ -72,10 +72,7 @@ public class MapViewModel : BaseViewModel
         set => SetProperty(ref _toCity, value);
     }
 
-    public IEnumerable<string> FilteredToCities
-    {
-        get => CityNames.Where(city => city != FromCity);
-    }
+    public IEnumerable<string> FilteredToCities => CityNames.Where(city => city != FromCity);
 
     public async Task InitializeMapAsync(ElementReference mapElement)
     {
@@ -83,7 +80,7 @@ public class MapViewModel : BaseViewModel
         _isMapInitialized = true;
     }
 
-    public async Task ShowMapAsync()
+    public Task ShowMapAsync() => ProcessAsync(async () =>
     {
         if (!_isMapInitialized)
         {
@@ -102,16 +99,17 @@ public class MapViewModel : BaseViewModel
 
         if (fromCoords.HasValue && toCoords.HasValue)
         {
+            await Task.Delay(500);
             await _jsRuntime.InvokeVoidAsync(
-            "TourPlannerMap.setRoute",
-            fromCoords.Value.Latitude,
-            fromCoords.Value.Longitude,
-            toCoords.Value.Latitude,
-            toCoords.Value.Longitude
+                "TourPlannerMap.setRoute",
+                fromCoords.Value.Latitude,
+                fromCoords.Value.Longitude,
+                toCoords.Value.Latitude,
+                toCoords.Value.Longitude
             );
         }
-    }
-
+    });
+    
     public async Task ClearMapAsync()
     {
         await _jsRuntime.InvokeVoidAsync("TourPlannerMap.clearMap");
@@ -121,7 +119,7 @@ public class MapViewModel : BaseViewModel
         OnPropertyChanged(nameof(ToCity));
     }
 
-    public virtual (double Latitude, double Longitude)? GetCoordinates(string city) => _coordinates.TryGetValue(city, out var coords) ? coords : null;
+    public virtual (double Latitude, double Longitude)? GetCoordinates(string city) => Coordinates.TryGetValue(city, out var coords) ? coords : null;
 
-    private static List<string> GetCityNames() => _coordinates.Keys.ToList();
+    private static List<string> GetCityNames() => Coordinates.Keys.ToList();
 }

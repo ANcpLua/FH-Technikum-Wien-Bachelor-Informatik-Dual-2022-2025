@@ -1,6 +1,5 @@
-﻿@using UI.Service
-@using UI.ViewModel
-<EditForm Model="@ViewModel.SelectedTour" OnValidSubmit="@ThrottledSaveTourAsync">
+﻿@using UI.ViewModel
+<EditForm Model="@ViewModel.SelectedTour" OnSubmit="@ViewModel.SaveTourAsync">
     <DataAnnotationsValidator/>
 
     <div class="row">
@@ -50,16 +49,17 @@
     </div>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit" class="btn btn-primary me-md-2" disabled="@(!ViewModel.IsFormValid)">Save</button>
+        <button class="btn btn-primary"
+                @onclick="ViewModel.SaveTourAsync"
+                disabled="@(ViewModel.IsProcessing || !ViewModel.IsFormValid)">
+            @(ViewModel.IsProcessing ? "Saving..." : "Save Tour")
+        </button>
         <button type="button" class="btn btn-secondary" @onclick="ViewModel.ShowAddTourForm">Cancel</button>
     </div>
 </EditForm>
 
+
 @code {
     [Parameter] public required TourViewModel ViewModel { get; set; }
     [Parameter] public required MapViewModel MapViewModel { get; set; }
-
-    private IThrottle _saveThrottle = new Throttle(300);
-
-    private Task ThrottledSaveTourAsync() => _saveThrottle.RunAsync(ViewModel.SaveTourAsync);
 }

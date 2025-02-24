@@ -7,7 +7,7 @@ public class Tour
 {
     public Tour()
     {
-        TourLogs = new List<TourLog>();
+        TourLogs = [];
         Name = string.Empty;
         Description = string.Empty;
         From = string.Empty;
@@ -15,8 +15,7 @@ public class Tour
         TransportType = string.Empty;
     }
 
-    [JsonPropertyName("id")]
-    public Guid Id { get; set; }
+    [JsonPropertyName("id")] public Guid Id { get; set; }
 
     [Required(ErrorMessage = "Name is required")]
     [JsonPropertyName("name")]
@@ -34,17 +33,13 @@ public class Tour
     [JsonPropertyName("to")]
     public string To { get; set; }
 
-    [JsonPropertyName("imagePath")]
-    public string? ImagePath { get; set; }
+    [JsonPropertyName("imagePath")] public string? ImagePath { get; set; }
 
-    [JsonPropertyName("routeInformation")]
-    public string? RouteInformation { get; set; }
+    [JsonPropertyName("routeInformation")] public string? RouteInformation { get; set; }
 
-    [JsonPropertyName("distance")]
-    public double? Distance { get; set; }
+    [JsonPropertyName("distance")] public double? Distance { get; set; }
 
-    [JsonPropertyName("estimatedTime")]
-    public double? EstimatedTime { get; set; }
+    [JsonPropertyName("estimatedTime")] public double? EstimatedTime { get; set; }
 
     [Required(ErrorMessage = "Transport type is required")]
     [JsonPropertyName("transportType")]
@@ -53,9 +48,8 @@ public class Tour
     public List<TourLog> TourLogs { get; set; }
 
     [JsonIgnore]
-    public string Popularity
-    {
-        get => TourLogs.Count switch
+    public string Popularity =>
+        TourLogs.Count switch
         {
             0 => "Not popular",
             < 2 => "Less popular",
@@ -63,27 +57,24 @@ public class Tour
             < 4 => "Popular",
             _ => "Very popular"
         };
-    }
 
     [JsonIgnore]
-    public double AverageRating
-    {
-        get => TourLogs.Count > 0 && TourLogs.Any(x => x.Rating.HasValue)
+    public double AverageRating =>
+        TourLogs.Count > 0 && TourLogs.Any(x => x.Rating.HasValue)
             ? TourLogs
                 .Where(x => x.Rating.HasValue)
-                .Average(x => {
+                .Average(x =>
+                {
                     if (x.Rating != null)
                     {
                         return x.Rating.Value;
                     }
+
                     return 0;
                 })
             : 0;
-    }
 
     [JsonIgnore]
-    public bool IsChildFriendly
-    {
-        get => TourLogs.Count != 0 && TourLogs.All(x => x.Difficulty <= 2) && TourLogs.All(x => x.Rating >= 3);
-    }
+    public bool IsChildFriendly =>
+        TourLogs.Count != 0 && TourLogs.All(x => x.Difficulty <= 2) && TourLogs.All(x => x.Rating >= 3);
 }

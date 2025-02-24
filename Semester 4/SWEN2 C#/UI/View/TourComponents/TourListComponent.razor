@@ -44,7 +44,10 @@
                     <button class="btn btn-info" @onclick="@(() => NavigationManager.NavigateTo($"/log/list/{tour.Id}"))">TourLog</button>
                     @if (ReportViewModel != null)
                     {
-                        <button class="btn btn-info btn-export" @onclick="() => ReportViewModel.ExportTourToJsonAsync(tour.Id)">Export</button>
+                        <button class="btn btn-info btn-export" @onclick="() => ReportViewModel.ExportTourToJsonAsync(tour.Id)"
+                                disabled="@ReportViewModel.IsProcessing">
+                            @(ReportViewModel.IsProcessing ? "Exporting..." : "Export")
+                        </button>
                     }
                 </div>
             </div>

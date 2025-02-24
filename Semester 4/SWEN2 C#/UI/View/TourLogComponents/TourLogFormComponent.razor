@@ -1,6 +1,5 @@
-﻿@using UI.Service
-@using UI.ViewModel
-<EditForm Model="@ViewModel.SelectedTourLog" OnValidSubmit="@ThrottledSaveTourLogAsync">
+﻿@using UI.ViewModel
+<EditForm Model="@ViewModel.SelectedTourLog" OnValidSubmit="@ViewModel.SaveTourLogAsync">
     <DataAnnotationsValidator/>
 
     <div class="row">
@@ -43,8 +42,4 @@
 
 @code {
     [Parameter] public required TourLogViewModel ViewModel { get; set; }
-
-    private IThrottle _saveThrottle = new Throttle(300);
-
-    private Task ThrottledSaveTourLogAsync() => _saveThrottle.RunAsync(ViewModel.SaveTourLogAsync);
 }

@@ -26,7 +26,44 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    
+    private bool _isProcessing;
+    public bool IsProcessing
+    {
+        get => _isProcessing;
+        protected set => SetProperty(ref _isProcessing, value);
+    }
 
+    protected async Task ProcessAsync(Func<Task> action)
+    {
+        if (IsProcessing) return;
+        
+        try
+        {
+            IsProcessing = true;
+            await action();
+        }
+        finally
+        {
+            IsProcessing = false;
+        }
+    }
+
+    protected async Task<T> ProcessAsync<T>(Func<Task<T>> action)
+    {
+        if (IsProcessing) return default!;
+        
+        try
+        {
+            IsProcessing = true;
+            return await action();
+        }
+        finally
+        {
+            IsProcessing = false;
+        }
+    }
+    
     protected bool SetProperty<T>(
         ref T field,
         T value,
