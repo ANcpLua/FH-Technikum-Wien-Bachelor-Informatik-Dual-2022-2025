@@ -5,7 +5,7 @@ namespace DAL.Interface;
 public interface ITourRepository
 {
     Task<TourPersistence> CreateTourAsync(TourPersistence tour);
-    Task<IEnumerable<TourPersistence>> GetAllToursAsync();
+    IEnumerable<TourPersistence> GetAllTours();
     TourPersistence? GetTourById(Guid id);
     Task<TourPersistence> UpdateTourAsync(TourPersistence tour);
     Task DeleteTourAsync(Guid id);

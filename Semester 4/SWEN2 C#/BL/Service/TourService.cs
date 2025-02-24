@@ -24,9 +24,9 @@ public class TourService : ITourService
         return _mapper.Map<TourDomain>(createdTour);
     }
 
-    public async Task<IEnumerable<TourDomain>> GetAllToursAsync()
+    public IEnumerable<TourDomain> GetAllTours()
     {
-        var tours = await _tourRepository.GetAllToursAsync();
+        var tours = _tourRepository.GetAllTours();
         return _mapper.Map<IEnumerable<TourDomain>>(tours);
     }
 

@@ -4,8 +4,8 @@ namespace BL.Interface;
 
 public interface IFileService
 {
-    Task<byte[]> GenerateTourReportAsync(Guid tourId);
-    Task<TourDomain> ExportTourToJsonAsync(Guid tourId);
-    Task<byte[]> GenerateSummaryReportAsync(IEnumerable<TourDomain> tours);
+    byte[] GenerateTourReport(Guid tourId);
+    TourDomain ExportTourToJson(Guid tourId);
+    byte[] GenerateSummaryReport(IEnumerable<TourDomain> tours);
     Task ImportTourFromJsonAsync(string json);
 }

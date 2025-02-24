@@ -54,5 +54,17 @@ public class TourPlannerContext : DbContext
                 .WithMany(t => t.TourLogPersistence)
                 .HasForeignKey(tl => tl.TourPersistenceId);
         });
+        
+        modelBuilder.Entity<TourPersistence>().HasData(
+            new TourPersistence
+            {
+                Id = Guid.NewGuid(),
+                Name = "Sample Tour",
+                Description = "A sample tour for testing",
+                From = "Vienna",
+                To = "Salzburg",
+                TransportType = "DRIVING"
+            }
+        );
     }
 }

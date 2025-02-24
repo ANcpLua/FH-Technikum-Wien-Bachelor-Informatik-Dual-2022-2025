@@ -8,9 +8,8 @@ public interface ITourLogRepository
         TourLogPersistence newTourLogPersistence,
         CancellationToken cancellationToken = default
     );
-    Task<IEnumerable<TourLogPersistence>> GetTourLogsByTourIdAsync(
-        Guid tourId,
-        CancellationToken cancellationToken = default
+    IEnumerable<TourLogPersistence> GetTourLogsByTourId(
+        Guid tourId
     );
     TourLogPersistence? GetTourLogById(Guid id);
     Task<TourLogPersistence> UpdateTourLogAsync(

@@ -15,18 +15,18 @@ public class FileService : IFileService
         _pdfReportService = pdfReportService;
     }
 
-    public Task<byte[]> GenerateTourReportAsync(Guid tourId)
+    public byte[] GenerateTourReport(Guid tourId)
     {
         var tour = _tourService.GetTourById(tourId);
-        return Task.FromResult(_pdfReportService.GenerateTourReport(tour));
+        return _pdfReportService.GenerateTourReport(tour);
     }
 
-    public Task<byte[]> GenerateSummaryReportAsync(IEnumerable<TourDomain> tours) => Task.FromResult(_pdfReportService.GenerateSummaryReport(tours));
+    public byte[] GenerateSummaryReport(IEnumerable<TourDomain> tours) => _pdfReportService.GenerateSummaryReport(tours);
 
-    public Task<TourDomain> ExportTourToJsonAsync(Guid tourId)
+    public TourDomain ExportTourToJson(Guid tourId)
     {
         var tour = _tourService.GetTourById(tourId);
-        return Task.FromResult(tour);
+        return tour;
     }
 
     public async Task ImportTourFromJsonAsync(string json)

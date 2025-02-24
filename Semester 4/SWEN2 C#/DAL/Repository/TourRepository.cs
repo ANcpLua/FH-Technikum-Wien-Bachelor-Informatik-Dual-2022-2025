@@ -21,10 +21,10 @@ public class TourRepository : ITourRepository
         return tour;
     }
 
-    public async Task<IEnumerable<TourPersistence>> GetAllToursAsync() => await _dbContext
+    public IEnumerable<TourPersistence> GetAllTours() =>  _dbContext
         .Set<TourPersistence>()
         .Include(t => t.TourLogPersistence)
-        .ToListAsync();
+        .ToList();
 
     public TourPersistence? GetTourById(Guid id) => _dbContext
         .Set<TourPersistence>()

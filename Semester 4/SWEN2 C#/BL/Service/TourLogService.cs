@@ -36,16 +36,14 @@ public class TourLogService : ITourLogService
         return tourLogPersistence == null ? null : _mapper.Map<TourLogDomain>(tourLogPersistence);
     }
 
-    public async Task<IEnumerable<TourLogDomain>> GetTourLogsByTourIdAsync(
-        Guid tourId,
-        CancellationToken cancellationToken = default
+    public IEnumerable<TourLogDomain> GetTourLogsByTourId(
+        Guid tourId
     )
     {
-        var tourLogPersistences = await _tourLogRepository.GetTourLogsByTourIdAsync(
-        tourId,
-        cancellationToken
+        var tourLogPersistence =  _tourLogRepository.GetTourLogsByTourId(
+        tourId
         );
-        return _mapper.Map<IEnumerable<TourLogDomain>>(tourLogPersistences);
+        return _mapper.Map<IEnumerable<TourLogDomain>>(tourLogPersistence);
     }
 
     public async Task<TourLogDomain> UpdateTourLogAsync(

@@ -4,7 +4,7 @@ public class TourDomain
 {
     public TourDomain()
     {
-        Logs = new List<TourLogDomain>();
+        Logs = [];
         Name = string.Empty;
         Description = string.Empty;
         From = string.Empty;
