@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "/bUo0VFEkN4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\anfh2\\RiderProjects\\WarAndPeace\\WarAndPeace\\WarAndPeace.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\anfh2\\.nuget\\packages\\fsharp.core\\9.0.101\\fsharp.core.9.0.101.nupkg.sha512"
+  ],
+  "logs": []
+}
