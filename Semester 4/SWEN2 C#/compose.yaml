@@ -1,0 +1,77 @@
+services:
+  postgres:
+    container_name: tourplanner-postgres
+    image: postgres:17.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    networks:
+      - tourplanner-network
+
+  pgadmin:
+    container_name: tourplanner-pgadmin
+    image: dpage/pgadmin4:8.3
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+      PGADMIN_CONFIG_COOKIE_SAMESITE: "'Lax'"
+      PGADMIN_CONFIG_WTF_CSRF_CHECK_DEFAULT: "False"
+      GUNICORN_TIMEOUT: "300"
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - tourplanner-network
+
+  api:
+    container_name: tourplanner-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api
+    ports:
+      - "7102:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__TourPlannerDatabase=Host=tourplanner-postgres;Port=5432;Database=postgres;Username=postgres;Password=postgres;Include Error Detail=true
+      - OpenRouteServiceApiKey=5b3ce3597851110001cf624835cb6e705a6944e7b852577e107952ac
+    volumes:
+      - ./API/Images:/app/Images
+    restart: unless-stopped
+    networks:
+      - tourplanner-network
+
+  ui:
+    container_name: tourplanner-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ui
+    ports:
+      - "7226:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - AppSettings__ApiBaseUrl=http://localhost:7102
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+    networks:
+      - tourplanner-network
+
+volumes:
+  postgres_data:
+
+networks:
+  tourplanner-network:
+    driver: bridge

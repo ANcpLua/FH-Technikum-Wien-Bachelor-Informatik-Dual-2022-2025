@@ -20,7 +20,7 @@ public static class TestData
     public const string InvalidSearchText = "NonexistentTour";
     private const double TestTimeSpan = 60.0;
     public static readonly Guid TestGuid = new("11111111-1111-1111-1111-111111111111");
-    private static readonly DateTime _testDateTime = new(2023, 1, 1, 12, 0, 0, DateTimeKind.Utc);
+    private static readonly DateTime TestDateTime = new(2023, 1, 1, 12, 0, 0, DateTimeKind.Utc);
     public static readonly Guid NonexistentGuid = new("99999999-9999-9999-9999-999999999999");
 
     public static TourPersistence CreateSampleTourPersistence() => new()
@@ -55,11 +55,12 @@ public static class TestData
 
     public static List<Tour> CreateSampleTourList(int count = 5)
     {
-        List<Tour> tours = new();
+        List<Tour> tours = [];
         for (var i = 0; i < count; i++)
         {
             tours.Add(CreateSampleTour());
         }
+
         return tours;
     }
 
@@ -67,7 +68,7 @@ public static class TestData
     {
         Id = new Guid("00000000-0000-0000-0000-000000000001"),
         TourPersistenceId = TestGuid,
-        DateTime = _testDateTime,
+        DateTime = TestDateTime,
         Comment = "Sample tour log comment",
         Difficulty = 3,
         TotalDistance = 50.25,
@@ -78,7 +79,7 @@ public static class TestData
     public static List<TourPersistence> CreateSampleTourPersistenceList() =>
     [
         CreateSampleTourPersistence(),
-        new TourPersistence
+        new()
         {
             Id = new Guid("00000000-0000-0000-0000-000000000002"),
             Name = "Another Tour",
@@ -97,11 +98,11 @@ public static class TestData
     public static List<TourLogPersistence> CreateSampleTourLogPersistenceList() =>
     [
         CreateSampleTourLogPersistence(),
-        new TourLogPersistence
+        new()
         {
             Id = new Guid("00000000-0000-0000-0000-000000000003"),
             TourPersistenceId = TestGuid,
-            DateTime = _testDateTime.AddDays(1),
+            DateTime = TestDateTime.AddDays(1),
             Comment = "Another sample tour log comment",
             Difficulty = 2,
             TotalDistance = 30.5,
@@ -129,7 +130,7 @@ public static class TestData
     {
         Id = new Guid("00000000-0000-0000-0000-000000000001"),
         TourDomainId = TestGuid,
-        DateTime = _testDateTime,
+        DateTime = TestDateTime,
         Comment = "Sample tour log domain comment",
         Difficulty = 3,
         TotalDistance = 50.25,
@@ -140,7 +141,7 @@ public static class TestData
     public static List<TourDomain> CreateSampleTourDomainList() =>
     [
         CreateSampleTourDomain(),
-        new TourDomain
+        new()
         {
             Id = new Guid("00000000-0000-0000-0000-000000000002"),
             Name = "Another Tour Domain",
@@ -159,11 +160,11 @@ public static class TestData
     public static List<TourLogDomain> CreateSampleTourLogDomainList() =>
     [
         CreateSampleTourLogDomain(),
-        new TourLogDomain
+        new()
         {
             Id = new Guid("00000000-0000-0000-0000-000000000003"),
             TourDomainId = TestGuid,
-            DateTime = _testDateTime.AddDays(1),
+            DateTime = TestDateTime.AddDays(1),
             Comment = "Another sample tour log domain comment",
             Difficulty = 2,
             TotalDistance = 30.5,
@@ -191,7 +192,7 @@ public static class TestData
     {
         Id = new Guid("00000000-0000-0000-0000-000000000001"),
         TourId = TestGuid,
-        DateTime = _testDateTime,
+        DateTime = TestDateTime,
         Comment = "Sample tour log DTO comment",
         Difficulty = 3,
         TotalDistance = 50.25,
@@ -202,11 +203,11 @@ public static class TestData
     public static List<TourLog> CreateSampleTourLogDtoList() =>
     [
         CreateSampleTourLogDto(),
-        new TourLog
+        new()
         {
             Id = new Guid("00000000-0000-0000-0000-000000000003"),
             TourId = TestGuid,
-            DateTime = _testDateTime.AddDays(1),
+            DateTime = TestDateTime.AddDays(1),
             Comment = "Another sample tour log DTO comment",
             Difficulty = 2,
             TotalDistance = 30.5,
@@ -256,10 +257,10 @@ public static class TestData
     }
 
     public static Mock<MapViewModel> CreateMockMapViewModel() => new(
-    Mock.Of<IJSRuntime>(),
-    Mock.Of<IHttpService>(),
-    Mock.Of<IToastServiceWrapper>(),
-    Mock.Of<ILogger>()
+        Mock.Of<IJSRuntime>(),
+        Mock.Of<IHttpService>(),
+        Mock.Of<IToastServiceWrapper>(),
+        Mock.Of<ILogger>()
     )
     {
         CallBase = true
@@ -331,9 +332,9 @@ public static class TestData
         mockRouteApiService
             .Setup(r =>
                 r.FetchRouteDataAsync(
-                It.IsAny<(double, double)>(),
-                It.IsAny<(double, double)>(),
-                It.IsAny<string>()
+                    It.IsAny<(double, double)>(),
+                    It.IsAny<(double, double)>(),
+                    It.IsAny<string>()
                 )
             )
             .ReturnsAsync((100.5, 60.0));
@@ -346,6 +347,7 @@ public static class TestData
         Mock<IJSRuntime> mockJsRuntime = new();
         return mockJsRuntime;
     }
+
     public static Mock<IBlazorDownloadFileService> CreateMockBlazorDownloadFileService()
     {
         Mock<IBlazorDownloadFileService> mockBlazorDownloadFile = new();
