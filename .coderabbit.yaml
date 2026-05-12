@@ -1,0 +1,260 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+#
+# Canonical CodeRabbit baseline for ANcpLua + O-ANcppLua repos.
+# Synced into target repos by .github/workflows/enforce-repo-settings.yml.
+#
+# Posture: advisory, never blocking. CodeRabbit comments on every PR but
+# does NOT submit formal CHANGES_REQUESTED reviews and is NOT a required
+# reviewer at the branch-protection level. Merges go through GitHub native
+# auto-merge driven by Renovate's `platformAutomerge: true` (see
+# ANcpLua/renovate-config) plus per-PR opt-in for human-authored work.
+#
+# Why this shape:
+#   - Sticky CHANGES_REQUESTED reviews from CodeRabbit were the only reason
+#     the legacy destructive-auto-merge.yml workflow needed --admin bypass.
+#     Removing the formal-review path removes the need for the bypass.
+#   - Tools and slop detection stay on — the review value is in the
+#     comments, not in the gate.
+#
+# Per-repo overrides: drop a `.coderabbit.yaml` in the target repo to
+# override anything below. Repos with bespoke path_instructions (e.g. qyl)
+# carry their own file; this template is the default for everything else.
+
+language: en-US
+tone_instructions: >-
+  Principal-level stewardship. Architecture, maintainability, correctness only.
+  Flag duplication, spec drift, silent behavior changes. No praise. No nits.
+early_access: true
+enable_free_tier: false
+
+reviews:
+  profile: assertive
+
+  # Advisory, not blocking. The defining choice of this template.
+  request_changes_workflow: false
+
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  auto_title_instructions: >-
+    Use conventional commits format with area prefix. Keep under 72 characters.
+    No periods. Examples: feat(api): add endpoint, fix(build): pin SDK.
+  review_status: true
+  review_details: true
+  commit_status: true
+  fail_commit_status: false
+  collapse_walkthrough: true
+  changed_files_summary: true
+  sequence_diagrams: true
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: true
+  suggested_reviewers: true
+  auto_assign_reviewers: false
+  in_progress_fortune: false
+  poem: false
+  enable_prompt_for_ai_agents: true
+  abort_on_close: true
+  disable_cache: true
+
+  slop_detection:
+    enabled: true
+    label: 'review:slop'
+
+  path_filters:
+    - '!**/*.g.cs'
+    - '!**/*.g.ts'
+    - '!**/*.g.sql'
+    - '!**/*.g.tsp'
+    - '!**/*.Designer.cs'
+    - '!**/Generated/**'
+    - '!**/generated/**'
+    - '!**/bin/**'
+    - '!**/obj/**'
+    - '!**/dist/**'
+    - '!**/node_modules/**'
+    - '!**/*.min.js'
+    - '!**/*.min.css'
+    - '!**/package-lock.json'
+    - '!**/pnpm-lock.yaml'
+    - '!**/yarn.lock'
+    - '!Artifacts/**'
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    auto_pause_after_reviewed_commits: 0
+    drafts: true
+    ignore_title_keywords:
+      - '[skip review]'
+    ignore_usernames:
+      - 'renovate[bot]'
+
+  finishing_touches:
+    docstrings:
+      enabled: true
+    unit_tests:
+      enabled: true
+    simplify:
+      enabled: true
+
+  # Hard gates are off in the baseline — they are repo-specific. qyl keeps
+  # its own pre_merge_checks block in qyl/.coderabbit.yaml.
+  pre_merge_checks:
+    docstrings:
+      mode: 'off'
+    title:
+      mode: warning
+    description:
+      mode: warning
+    issue_assessment:
+      mode: 'off'
+
+  tools:
+    ast-grep:
+      essential_rules: true
+    markdownlint:
+      enabled: true
+    hadolint:
+      enabled: true
+    shellcheck:
+      enabled: true
+    gitleaks:
+      enabled: true
+    actionlint:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 900000
+    presidio:
+      enabled: true
+    biome:
+      enabled: true
+    languagetool:
+      enabled: false
+    ruff:
+      enabled: false
+    golangci-lint:
+      enabled: false
+    phpstan:
+      enabled: false
+    phpmd:
+      enabled: false
+    phpcs:
+      enabled: false
+    swiftlint:
+      enabled: false
+    detekt:
+      enabled: false
+    pmd:
+      enabled: false
+    semgrep:
+      enabled: false
+    opengrep:
+      enabled: false
+    trufflehog:
+      enabled: false
+    checkov:
+      enabled: false
+    tflint:
+      enabled: false
+    eslint:
+      enabled: false
+    flake8:
+      enabled: false
+    rubocop:
+      enabled: false
+    buf:
+      enabled: false
+    regal:
+      enabled: false
+    clang:
+      enabled: false
+    cppcheck:
+      enabled: false
+    circleci:
+      enabled: false
+    clippy:
+      enabled: false
+    sqlfluff:
+      enabled: false
+    trivy:
+      enabled: false
+    prismaLint:
+      enabled: false
+    pylint:
+      enabled: false
+    oxc:
+      enabled: false
+    shopifyThemeCheck:
+      enabled: false
+    luacheck:
+      enabled: false
+    brakeman:
+      enabled: false
+    dotenvLint:
+      enabled: false
+    htmlhint:
+      enabled: false
+    stylelint:
+      enabled: false
+    checkmake:
+      enabled: false
+    osvScanner:
+      enabled: false
+    blinter:
+      enabled: false
+    yamllint:
+      enabled: false
+    psscriptanalyzer:
+      enabled: false
+
+chat:
+  auto_reply: true
+  art: false
+  allow_non_org_members: false
+  integrations:
+    jira:
+      usage: disabled
+    linear:
+      usage: disabled
+
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  pull_requests:
+    scope: auto
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - 'CLAUDE.md'
+      - 'AGENTS.md'
+      - '**/CLAUDE.md'
+      - '**/AGENTS.md'
+      - '.editorconfig'
+  jira:
+    usage: disabled
+  linear:
+    usage: disabled
+  mcp:
+    usage: enabled
+
+issue_enrichment:
+  auto_enrich:
+    enabled: true
+  planning:
+    enabled: true
+    auto_planning:
+      enabled: true
+      labels:
+        - 'plan:auto'
+        - 'good-first-issue'
+        - 'help-wanted'
+  labeling:
+    auto_apply_labels: true
