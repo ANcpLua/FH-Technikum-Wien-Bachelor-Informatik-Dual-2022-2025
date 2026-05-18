@@ -1,0 +1,54 @@
+# Template: copy this file into a target repo at .github/workflows/coderabbit-autofix.yml
+#
+# Seeded by .github/workflows/enforce-repo-settings.yml fleet-wide.
+#
+# Auto-comments `@coderabbitai autofix` on every PR open/sync from a
+# non-bot author. CodeRabbit's Autofix (Beta, Pro plan, GitHub only) then
+# pushes a commit to the PR branch with fixes for every unresolved CR
+# review thread that carries a structured `Prompt for AI Agents` block.
+# See https://docs.coderabbit.ai/finishing-touches/autofix.
+#
+# This template specifically requests the "Push a commit to this branch"
+# path (default `@coderabbitai autofix` semantics — not `autofix stacked
+# pr`) so the fix lands on the same branch and native auto-merge can
+# carry the PR forward without human intervention.
+#
+# Skip conditions:
+#   - PRs opened by CodeRabbit itself (its own follow-up PRs).
+#   - PRs from Dependabot / Renovate / Copilot agent (already AI-shaped;
+#     no human review block to autofix).
+#   - PRs carrying the `skip-autofix` label (explicit opt-out).
+
+name: CodeRabbit Autofix Trigger
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  trigger:
+    if: |
+      github.actor != 'coderabbitai[bot]' &&
+      github.actor != 'dependabot[bot]' &&
+      github.actor != 'renovate[bot]' &&
+      github.actor != 'copilot[bot]' &&
+      !contains(github.event.pull_request.labels.*.name, 'skip-autofix')
+    concurrency:
+      group: coderabbit-autofix-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment "@coderabbitai autofix"
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '@coderabbitai autofix'
+            });
