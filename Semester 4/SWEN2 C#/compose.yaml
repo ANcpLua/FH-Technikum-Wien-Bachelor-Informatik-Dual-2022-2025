@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: tourplanner-postgres
-    image: postgres:17.2
+    image: postgres:17.2@sha256:3267c505060a0052e5aa6e5175a7b41ab6b04da2f8c4540fc6e98a37210aa2d3
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -17,7 +17,7 @@ services:
 
   pgadmin:
     container_name: tourplanner-pgadmin
-    image: dpage/pgadmin4:8.3
+    image: dpage/pgadmin4:8.3@sha256:f1460b121383a5d61c20867ecd42535d4aabb385d32685b0e0845367ab9b86c4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
