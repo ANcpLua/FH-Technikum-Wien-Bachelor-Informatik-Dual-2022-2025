@@ -1,10 +1,10 @@
 ﻿# .NET 8.0 ASP.NET runtime as the base image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0@sha256:93b366e510c6cd01cee608447014f7d349cb7ff8809fd0f554aa3772e8587b7e AS base
 WORKDIR /app
 EXPOSE 8081
 
 # .NET 8.0 SDK for building the application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0@sha256:d80fdd84f7e18eea12f8e45c52914f1353395009c95c41197178ea19944e6d48 AS build
 WORKDIR /src
 
 # Copy the project files and restore dependencies
