@@ -118,7 +118,7 @@ services:
       - paperless-network
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0@sha256:577b382dda5d05385aea8c7b60dad97e02ff41ca0da54f723151c2aed9ac8f54
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.29@sha256:3f55a7f6f29b95345dc33808d6e914f81d125d4ca90a414e26c81a3521400980
     ports:
       - "9200:9200"
     environment:
