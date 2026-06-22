@@ -136,7 +136,7 @@ services:
       - paperless-network
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.0@sha256:2673a3599185f4ebf363077580064daa817903ccf9fda3ccf6f4fc0abdf0a6eb
+    image: docker.elastic.co/kibana/kibana:7.17.29@sha256:7260d867c2513154817d1709bdb17e8bc6bfe5e00c85e10556d2be0f71309bcf
     ports:
       - "5601:5601"
     environment:
