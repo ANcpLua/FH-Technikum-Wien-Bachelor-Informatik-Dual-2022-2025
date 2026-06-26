@@ -15,7 +15,7 @@
     <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.19.23" />
     <PackageReference Include="FluentValidation" Version="11.12.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.12.0" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.2.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.14.0" />
     <PackageReference Include="Magick.NET.Core" Version="14.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.28">
       <PrivateAssets>all</PrivateAssets>
