@@ -1,48 +1,41 @@
-# Auto-merge — native GitHub auto-merge via GITHUB_TOKEN. No custom App, no
-# AUTOMERGE_* secrets, no reusable workflow. The 2026 pattern.
+# Auto-merge — enables GitHub native auto-merge (squash) via GITHUB_TOKEN.
 #
 # Synced from github-settings-automation/templates/auto-merge.yml by the
 # weekly enforce-repo-settings sweep. Do not hand-edit per-repo.
 #
-# Tier separation (this file vs. github-settings-automation/pr-heal.yml):
+# Event-driven and per-repo: enables native auto-merge only for trusted
+# automation branches (prefix policy below). Renovate PRs don't need this
+# workflow — the shared preset (github>ANcpLua/github-settings-automation)
+# sets `platformAutomerge: true`.
 #
-# - THIS FILE (per-repo, event-driven):
-#     Fires immediately on PR open/sync/review-submit. Handles BOT and
-#     AI-AGENT PRs that should auto-merge with no human latency, plus
-#     CodeRabbit-approved manual PRs.
+# Prereqs (one-time per repo): "Allow auto-merge" enabled in repo settings,
+# and branch protection on `main` listing the required status checks native
+# auto-merge waits for. enforce-repo-settings.yml flips allow_auto_merge
+# automatically across the fleet.
 #
-# - pr-heal.yml Job 0 (central cron, 15-min sweep):
-#     Handles OWNER-authored PRs (incl. agents acting via gh CLI auth as
-#     ANcpLua) with a 5-min cooldown so reviewer tiers (CodeRabbit, Codex,
-#     Claude PR review) land their advisory comments before merge-on-green
-#     fires. See PR#170 incident (2026-05-18) for the precedent: owner PR
-#     merged before CodeRabbit could submit its 5 actionable comments.
+# delete-merged-branch: repo-level delete_branch_on_merge reliably fires for
+# user-initiated merges but not for merges landed by the github-actions app
+# via native auto-merge (observed fleet-wide, e.g. qyl #452–#456, #477–#479
+# survived; user-merged #476 was deleted). This job closes that gap for the
+# automation prefixes. HEAD_REF is passed via env, never interpolated into
+# the script, so a crafted branch name cannot inject into the shell under
+# pull_request_target's write token.
 #
-# The owner-clause that USED to live in this file's `if:` was removed in
-# the same change. Routing owner PRs through the cron tier gives them the
-# cooldown they need without blocking the bot tier.
+# Branch-prefix policy:
+#   - claude/  — Claude Code agents
 #
-# Renovate bot PRs do not need this workflow: Renovate enables native
-# auto-merge itself via `platformAutomerge: true` in the shared preset
-# (github>ANcpLua/renovate-config).
-#
-# Prereqs (one-time per repo): Settings → General → "Allow auto-merge"
-# enabled. Branch protection on `main` lists the required status checks;
-# native auto-merge waits for them. enforce-repo-settings.yml flips
-# allow_auto_merge automatically across the fleet.
-#
-# Background: the AUTOMERGE_APP_ID GitHub App was deleted on 2026-05-12
-# as an antipattern (single point of failure across N repos, maintenance
-# overhead, and Renovate's platformAutomerge already does the bot tier
-# natively without it).
+# Both jobs require head.repo.full_name == github.repository. A branch prefix
+# is chosen by whoever opens the PR, so under pull_request_target — which runs
+# with the base repo's write token even for fork PRs — the prefix alone gates
+# nothing. Without the same-repo check any fork can push a `claude/…` branch
+# and land it on main unreviewed (ancplua-claude-plugins#345, merged 10s after
+# open by an outside contributor while the policy trusted `codex/`).
 
 name: Auto-merge
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
-  pull_request_review:
-    types: [submitted]
+    types: [opened, synchronize, reopened, ready_for_review, closed]
 
 permissions:
   contents: write
@@ -52,16 +45,28 @@ jobs:
   enable-auto-merge:
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.draft == false && (
-        startsWith(github.event.pull_request.head.ref, 'claude/') ||
-        startsWith(github.event.pull_request.head.ref, 'copilot/') ||
-        startsWith(github.event.pull_request.head.ref, 'jules/') ||
-        (github.event_name == 'pull_request_review'
-         && github.event.review.state == 'approved'
-         && github.event.review.user.login == 'coderabbitai[bot]')
-      )
+      github.event.action != 'closed' &&
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.head.ref, 'claude/')
     steps:
       - name: Enable native auto-merge (squash)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr merge ${{ github.event.pull_request.number }} --auto --squash --repo ${{ github.repository }}
+
+  delete-merged-branch:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.head.ref, 'claude/')
+    steps:
+      - name: Delete merged head branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          gh api -X DELETE "repos/${{ github.repository }}/git/refs/heads/$HEAD_REF" \
+            || echo "head branch already deleted"
