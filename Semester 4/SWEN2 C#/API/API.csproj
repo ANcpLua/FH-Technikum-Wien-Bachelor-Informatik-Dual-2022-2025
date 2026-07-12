@@ -10,7 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.4.0"/>
         <PackageReference Include="AutofacSerilogIntegration" Version="5.0.0"/>
-        <PackageReference Include="Fody" Version="6.8.2">
+        <PackageReference Include="Fody" Version="6.9.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>

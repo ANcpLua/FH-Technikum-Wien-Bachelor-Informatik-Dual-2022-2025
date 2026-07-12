@@ -12,7 +12,7 @@
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
         <PackageReference Include="BlazorDownloadFile" Version="2.4.0.2"/>
         <PackageReference Include="Blazored.Toast" Version="4.2.1"/>
-        <PackageReference Include="Fody" Version="6.8.2">
+        <PackageReference Include="Fody" Version="6.9.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
